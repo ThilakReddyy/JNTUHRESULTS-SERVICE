@@ -1,0 +1,48 @@
+{% for inde,val in deta.items %}
+        <table style="width:100%" id='1'>
+            <th>{{inde}} RESULTS</th>
+        </table>
+
+
+        <table style="width:100%" id='2'></table>
+            {% for ind,valu in val.items %}
+                {% if "NAME" in valu %}
+                    <table style="width:100%" id='3'>
+                    {% for indi,vali in valu.items %}
+                        <th>
+                            {{ indi }}
+                        </th>
+                        <th>
+                            {{ vali}}
+                        </th>
+                    {% endfor %}
+                    </table>
+                    <table style="width:100%" id='4'>
+                        <tr>
+                            <th>SUBJECT_NAME</th>
+                            <th>SUBJECT_CODE</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                    {% else %}
+                    <tr>
+                        {% for indi,vali in valu.items %}
+                            <th>
+                                {{ vali}}
+                            </th>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+        </table>
+        <table style="width:100%" id='5'>
+            <tr>
+                <th style="width:75%">CGPA</th>
+                <th>{{val.TOTAL}}</th>
+            
+            </tr>
+        </table>
+        
+        <br>
+{% endfor %}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
+    <title>JNTUH_RESULTS</title>
+    <link rel="icon" href="https://img.icons8.com/external-justicon-flat-justicon/50/000000/external-results-voting-justicon-flat-justicon-1.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        
+        $(document).ready(function(){
+            {% for i in dict %}
+            
+            
+            $('#{{roll}}{{i}}').load("/gettingurl/{{roll}}{{i}}/{{code}}");
+            {% endfor %}
+        });
+    </script>
+     <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+
+        }
+
+        .print {
+            left: 50%;
+            margin: 0;
+            margin-bottom: 10px;
+            position: absolute;
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+        div
+        {
+            text-align: center;
+
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>JNTUH_RESULTS</h1>
+    
+    <hr style="text-align:center ;width:75%">
+    <br>
+    {% for i in dict %}
+        <div id='{{roll}}{{i}}'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
+    {% endfor %}
+    <button class="print" onclick="window.print()">Print PDF</button>
+</body>
+</html>

@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <title>JNTUH_RESULTS</title>
-    <link rel="icon" href="https://img.icons8.com/external-justicon-flat-justicon/50/000000/external-results-voting-justicon-flat-justicon-1.png">
+    <link rel="icon" href="https://jntuwing.in/wp-content/uploads/2022/02/71B14E20-F721-4482-B367-C06C9CF82633-e1645463061154.png">
     <style>
         .center {
             text-align: center;
+
         }
 
         input {
@@ -47,15 +48,23 @@
 
         input {
             margin: 0px;
-            padding: 0px;
-
+            padding: 0px
             outline: none;
             height: 30px;
-            border-radius: 7px;
+            border-bottom-left-radius:7px;
+            border-top-left-radius:7px;
 
         }
-
-
+        .dropdown
+        {
+            margin: 0px;
+            padding: 0px;
+            outline: none;
+            height: 35px;
+            border-bottom-right-radius:7px;
+            border-top-right-radius:7px;
+            margin-left:-4px;
+        }
         .button1 {
             display: inline-block;
             padding: 0.35em 1.2em;
@@ -73,7 +82,31 @@
             width: 100px;
             height: auto;
         }
-
+        .formsi
+        {
+            border:3px; 
+            border-style:solid; 
+            border-color:black; 
+            padding: 1em; 
+            border-radius:7px;
+            width: 74%;
+            align-items:center;
+            margin-left:12%;
+        }
+        .footerwords
+        {
+            margin-top: 0.25rem;
+            display: block;
+            text-align:center;
+            box-sizing: border-box;
+            
+        }
+        .footerwarning
+        {
+            width: 74%;
+            margin-left:12%;
+            color:grey;
+        }
         .button1:hover {
             color: #000000;
             background-color: burlywood;
@@ -85,7 +118,13 @@
                 margin: 0.4em auto;
             }
         }
-
+        nav
+        {
+            width: 75%;
+            margin-left:12%;
+            
+        }
+      
         .contain {
             display: flex;
             flex-direction: row;
@@ -97,6 +136,10 @@
         td {
             border: 1px solid black;
 
+        }
+        a
+        {
+            text-decoration:none; 
         }
     </style>
 
@@ -126,17 +169,35 @@ function validateForm1() {
 </head>
 
 <body>
-    <h1 class="center" ;>JNTUH_RESULTS_EXTRACTOR</h1>
+    <br>
+    <nav>
+        <a href="/">
+            <img src="https://jntuwing.in/wp-content/uploads/2022/02/71B14E20-F721-4482-B367-C06C9CF82633-e1645463061154.png" style="width:100px;" align="left">    
+        </a>  
+        <a>
+            <img src="https://img.favpng.com/1/21/3/primary-election-voting-result-vote-counting-png-favpng-1t9nrk8EJjVT8ndE2aMEYZh4g.jpg" style="width:200px;" style="display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;">    
+        </a>    
+        <a href="https://github.com/ThilakReddyy/JNTUH_RESULTS" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="github_logo" style="width:40px;height:40px;" align="right">
+        </a>
+    </nav>
+    <br>
+
     <hr style="text-align:center ;width:75%">
     <div class="container">
-        
+        <div class="formsi">
+            <h2 class="center">Grades of All Classmates of Particular Semester</h2>
+            <br>
+            <br>
             <form method="post" name="Fname" action="/results" id="form1" onsubmit="return validateForm1()">
                 {% csrf_token %}
-                <p class="center">Enter the First 8 digits of Roll Number</p>
                 <div style="text-align: center;">
                     <input name="firsti" id="n1"  maxlength="8" placeholder="18***A0*" onkeyup=sync()
                         oninput="this.value=this.value.toUpperCase()">
-                    <select name="first" id="first" style="margin-right:50px">
+                    <select name="first" id="first" class="dropdown" >
 
                         {% for i,val in a_dic.items %}
                         {{i}}
@@ -145,7 +206,7 @@ function validateForm1() {
                         {% endfor %}
                     </select>
                     <input name="lasti" id="n2" maxlength="8" placeholder="18***A0*" readonly style="margin-left:50px">
-                    <select name="last" id="last" >
+                    <select name="last" id="last" class="dropdown" >
 
                         {% for i,val in a_dic.items %}
                         {{i}}
@@ -171,17 +232,42 @@ function validateForm1() {
                 <div style="text-align: center;">
                     <button type="submit" class="button1" Value="Submit" form="form1">Results</button>
                 </div>
-
             </form>
-            <p style="text-align: center;">OR</p>
-            <form method="post" name="myForm" action="/oneroll" id="form2" style="text-align: center;" onsubmit="return validateForm()">
-                {% csrf_token %}
-                <input name="roll" id="roll" maxlength="10" placeholder="Enter Your Roll Number" style="width:15%;text-align: center;">
-                <div style="text-align: center;">
-                    <button type="submit" class="button1" Value="Submit" form="form2">Results</button>
-                </div>
-            </form>
+        </div>
+            
+        <p style="text-align: center;">OR</p>
+        <div class="formsi">
+            <h2 class="center">Grades of All Semester  of Particular Student</h2>    
+            <br>
+            <br>        
+                <form method="post" name="myForm" action="/oneroll" id="form2" style="text-align: center;" onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    <input name="roll" id="roll" maxlength="10" placeholder="Enter Your Roll Number" style="width:15%;text-align: center;border-top-right-radius:7px;border-bottom-right-radius:7px">
+                    <br>
+                    <br>
+                    <div style="text-align: center;">
+                        <button type="submit" class="button1" Value="Submit" form="form2">Results</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <small class="footerwarning">
+            It does not consider the RCRV Results
+            <br>
+        </small>
+        <small class="footerwarning">
+            It only works above R18 Regulation
+        </small>
+        <br>
+        <hr style="text-align:center ;width:75%">
+        <br>
+        <hr style="text-align:center ;width:75%">
     </div>
+    <h4 class="footerwords">
+        Made with &#128150; by 
+        <a href="https://github.com/ThilakReddyy/">Thilak Reddy</a>
+    <h4>
 </body>
 
 </html>

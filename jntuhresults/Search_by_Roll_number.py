@@ -78,6 +78,7 @@ class Extracter:
         return "{0:.2f}".format(round(total/credits,2))
 
 def the_loaderi(roll,code):
+    roll=roll.upper()
     extract=Extracter()
     extract.deta[code]={}
     if(code=='1-1'):

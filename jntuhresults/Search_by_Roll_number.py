@@ -26,14 +26,14 @@ class Extracter:
     #Getting the data from jntuh website--------------------------------
     def writter(self,payload,roll):
         try:
-            print(payload)
             r = requests.request("POST", url, headers=headers, data=payload)
             soup = BeautifulSoup(r.content, "html.parser")
             table = soup.find_all("table")
             table1 = table[0].find_all("tr")
             Roll_NO = table1[0].find_all("td")[1].find_all("b")[0].contents[0]
             NAME = table1[0].find_all("td")[3].find_all("b")[0].contents[0]
-            
+            print(Roll_NO,end=" - ")
+            print(NAME)
             FATHER_NAME = table1[1].find_all("td")[1].find_all("b")[0].contents[0]
             COLLEGE_CODE = table1[1].find_all("td")[3].find_all("b")[0].contents[0]
             table2 = table[1].find_all("tr")

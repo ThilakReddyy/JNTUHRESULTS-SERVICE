@@ -20,7 +20,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index),
-    path('oneroll',views.oneroll),
+    path('SingleRollNumber',views.SingleRollNumber),
     path('gettingurl/<htno>/<code>',views.gettingurl),
-    path('results',views.results),
+    path('MultiRollNumber',views.MultiRollNumber),
 ]

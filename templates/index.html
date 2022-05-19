@@ -194,7 +194,7 @@ function validateForm1() {
             <h2 class="center">Grades of All Classmates of Particular Semester</h2>
             <br>
             <br>
-            <form method="post" name="Fname" action="/results" id="form1" onsubmit="return validateForm1()">
+            <form method="post" name="Fname" action="/MultiRollNumber" id="form1" onsubmit="return validateForm1()">
                 {% csrf_token %}
                 <div style="text-align: center;">
                     <input name="firsti" id="n1"  maxlength="8" placeholder="18***A0*" onkeyup=sync()
@@ -243,7 +243,7 @@ function validateForm1() {
             <h2 class="center">Grades of All Semesters  of Particular Student</h2>    
             <br>
             <br>        
-                <form method="post" name="myForm" action="/oneroll" id="form2" style="text-align: center;" onsubmit="return validateForm()">
+                <form method="post" name="myForm" action="/SingleRollNumber" id="form2" style="text-align: center;" onsubmit="return validateForm()">
                     {% csrf_token %}
                     <input name="roll" id="roll" maxlength="10" placeholder="Enter Your Roll Number" style="width:200px;text-align: center;border-top-right-radius:7px;border-bottom-right-radius:7px">
                     <br>

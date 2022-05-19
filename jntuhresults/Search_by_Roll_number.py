@@ -19,12 +19,12 @@ arr41=[1545]
 arr42=[]
 #-----------------------------------------------------------------------
 
-class Extracter:
+class Results_Extracter:
     def __init__(self):
         self.deta={}
         self.deta.clear()
     #Getting the data from jntuh website--------------------------------
-    def writter(self,payload,roll):
+    def getting_the_grades(self,payload,roll):
         try:
             r = requests.request("POST", url, headers=headers, data=payload)
             soup = BeautifulSoup(r.content, "html.parser")
@@ -78,40 +78,40 @@ class Extracter:
 
 def the_loaderi(roll,code):
     roll=roll.upper()
-    extract=Extracter()
+    extract=Results_Extracter()
     extract.deta[code]={}
     if(code=='1-1'):
         for i in arr11:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='1-2'):
         for i in arr12:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='2-1'):
         for i in arr21:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='2-2'):
         for i in arr22:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='3-1'):
         for i in arr31:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='3-2'):
         for i in arr32:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='4-1'):
         for i in arr41:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='4-2'):
         for i in arr42:
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.writter("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     value=extract.deta[code]
     try:
         extract.deta[code]['TOTAL']=extract.gradeCalculator(value)

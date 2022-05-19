@@ -21,10 +21,8 @@ lolli=list(a_dic.keys())
 #index request
 def index(request):
     return render(request,'index.html',{'a_dic':a_dic})
-
-
-def results(request):
     
+def MultiRollNumber(request):
     if(request.method == 'GET'):
         return redirect('/')
     deta={}
@@ -41,16 +39,15 @@ def results(request):
     print(dict)
     if(last<=first):
             return HttpResponse("Enter the valid details")
-    return render(request,'manyroll.html',{'roll':roll,'dict':dict,'code':code})
+    return render(request,'MultiRollNumber.html',{'roll':roll,'dict':dict,'code':code})
 
 # getting the one roll details
-def oneroll(request):
-    
+def SingleRollNumber(request):
     if(request.method == 'GET'):
         return redirect('/')
     air=request.POST.dict()
     roll=air["roll"]
-    return render(request,'oneroll.html',{'roll':roll})
+    return render(request,'SingleRollNumber.html',{'roll':roll})
 
 #snippet of code
 def gettingurl(request,htno,code):

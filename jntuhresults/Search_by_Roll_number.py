@@ -27,7 +27,6 @@ class Extracter:
     def writter(self,payload,roll):
         try:
             print(payload)
-            print(headers)
             r = requests.request("POST", url, headers=headers, data=payload)
             soup = BeautifulSoup(r.content, "html.parser")
             table = soup.find_all("table")

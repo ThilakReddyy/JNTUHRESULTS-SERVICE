@@ -35,9 +35,9 @@ def MultiRollNumber(request):
     print(code)
     firsti=lolli.index(first)
     lasti=lolli.index(last)
-    dict=lolli[firsti:lasti]
+    dict=lolli[firsti:lasti+1]
     print(dict)
-    if(last<=first):
+    if(last<first):
             return HttpResponse("Enter the valid details")
     return render(request,'MultiRollNumber.html',{'roll':roll,'dict':dict,'code':code})
 

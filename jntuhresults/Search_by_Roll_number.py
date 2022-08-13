@@ -16,7 +16,7 @@ arr22=[1437,1447,1476,1501,1565]
 arr31=[1454,1491,1550]
 arr32=[1502,1555]
 arr41=[1545]
-arr42=[]
+arr42=[1580]
 #-----------------------------------------------------------------------
 
 class Results_Extracter:
@@ -62,7 +62,7 @@ class Results_Extracter:
                 self.deta[roll][subject_code]["subject_credits"]=subject_credits
             return self.deta   
         except:
-            pass
+            return ""
     #-----------------------------------------------------------------------
     def gradeCalculator(self,value):
         total,credits=0,0
@@ -107,7 +107,10 @@ def the_loaderi(roll,code):
     if(code=='4-1'):
         for i in arr41:
             extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            print('yes')
+            vokey=extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
+            print(vokey)
+            print('4-1')
     if(code=='4-2'):
         for i in arr42:
             extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)

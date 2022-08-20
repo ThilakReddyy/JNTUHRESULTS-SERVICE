@@ -32,8 +32,6 @@ class Results_Extracter:
             table1 = table[0].find_all("tr")
             Roll_NO = table1[0].find_all("td")[1].find_all("b")[0].contents[0]
             NAME = table1[0].find_all("td")[3].find_all("b")[0].contents[0]
-            print(Roll_NO,end=" - ")
-            print(NAME)
             FATHER_NAME = table1[1].find_all("td")[1].find_all("b")[0].contents[0]
             COLLEGE_CODE = table1[1].find_all("td")[3].find_all("b")[0].contents[0]
             table2 = table[1].find_all("tr")
@@ -107,10 +105,7 @@ def the_loaderi(roll,code):
     if(code=='4-1'):
         for i in arr41:
             extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)
-            print('yes')
-            vokey=extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
-            print(vokey)
-            print('4-1')
+            extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=gradercrv&type=rcrvintgrade&htno="+roll,code)
     if(code=='4-2'):
         for i in arr42:
             extract.getting_the_grades("degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll,code)

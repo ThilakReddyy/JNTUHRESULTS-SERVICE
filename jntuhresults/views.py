@@ -32,11 +32,12 @@ def MultiRollNumber(request):
     last=air["last"]
     roll=air["firsti"]
     code=air["code"]
-    print(code)
     firsti=lolli.index(first)
     lasti=lolli.index(last)
     dict=lolli[firsti:lasti+1]
-    print(dict)
+    roll_first=roll+first
+    roll_last=roll+last
+    print("Results from",roll_first," to",roll_last)
     if(last<first):
             return HttpResponse("Enter the valid details")
     return render(request,'MultiRollNumber.html',{'roll':roll,'dict':dict,'code':code})
@@ -47,6 +48,7 @@ def SingleRollNumber(request):
         return redirect('/')
     air=request.POST.dict()
     roll=air["roll"]
+    print(roll)
     return render(request,'SingleRollNumber.html',{'roll':roll})
 
 #snippet of code

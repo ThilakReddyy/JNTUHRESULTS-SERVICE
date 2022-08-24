@@ -58,6 +58,7 @@ def single(request,htno):
 #snippet of code
 def gettingurl(request,htno,code):
     deta={}
+    htno=htno.upper()
     deta=Search_by_Roll_number.get_grade_start(htno,code)
     b=bool(deta[code])
     if(b==False):

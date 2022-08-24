@@ -22,25 +22,24 @@ arr42=[1580]
 #-----------------------------------------------------------------------
 
 def exam_codes(code):
-     match code:
-        case "1-1":
-            return arr11
-        case "1-2":
-            return arr12
-        case "2-1":
-            return arr21
-        case "2-2":
-            return arr22
-        case "3-1":
-            return arr31
-        case "3-2":
-            return arr32
-        case "4-1":
-            return arr41
-        case "4-2":
-            return arr42
-        case default:
-            return []
+    if (code =="1-1"):
+        return arr11
+    elif(code =="1-2"):
+        return arr12
+    elif(code =="2-1"):
+        return arr21
+    elif(code =="2-2"):
+        return arr22
+    elif(code =="3-1"):
+        return arr31
+    elif(code =="3-2"):
+        return arr32
+    elif(code =="4-1"):
+        return arr41
+    elif(code =="4-2"):
+        return arr42
+    else:
+        return []
 
 
 

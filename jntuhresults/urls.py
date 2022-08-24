@@ -22,5 +22,6 @@ urlpatterns = [
     path('',views.index),
     path('SingleRollNumber',views.SingleRollNumber),
     path('gettingurl/<htno>/<code>',views.gettingurl),
+    path('api/<htno>',views.single),
     path('MultiRollNumber',views.MultiRollNumber),
 ]

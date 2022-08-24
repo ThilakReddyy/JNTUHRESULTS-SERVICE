@@ -50,11 +50,15 @@ def SingleRollNumber(request):
     roll=air["roll"]
     print(roll)
     return render(request,'SingleRollNumber.html',{'roll':roll})
+    
+def single(request,htno):
+    return render(request,'SingleRollNumber.html',{'roll':htno} )
+    
 
 #snippet of code
 def gettingurl(request,htno,code):
     deta={}
-    deta=Search_by_Roll_number.the_loaderi(htno,code)
+    deta=Search_by_Roll_number.get_grade_start(htno,code)
     b=bool(deta[code])
     if(b==False):
         return HttpResponse("")

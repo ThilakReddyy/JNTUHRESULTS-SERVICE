@@ -54,7 +54,7 @@ def SingleRollNumber(request):
 #snippet of code
 def gettingurl(request,htno,code):
     deta={}
-    deta=Search_by_Roll_number.get_grade_start(htno,code)
+    deta=Search_by_Roll_number.the_loaderi(htno,code)
     b=bool(deta[code])
     if(b==False):
         return HttpResponse("")

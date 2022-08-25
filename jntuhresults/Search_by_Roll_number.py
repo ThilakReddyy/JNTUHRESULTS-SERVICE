@@ -15,7 +15,7 @@ grades_to_gpa={'O':10,'A+':9,'A':8,'B+':7,'B':6,'C':5,'F':0,'Ab':0}
 
 #R18 Semester codes
 arr11=[1323,1358,1404,1430,1467,1504]
-arr12=[1356,1381,1435,1448,1481,1503]
+arr12=[1356,1363,1381,1435,1448,1481,1503]
 arr21=[1391,1425,1449,1496,1560]
 arr22=[1437,1447,1476,1501,1565]
 arr31=[1454,1491,1550]
@@ -94,13 +94,16 @@ class Results:
             table2 = table2[1:]
             self.deta[code]["DETAILS"] = {"NAME": NAME, "Roll_No": Roll_NO, "COLLEGE_CODE": COLLEGE_CODE}
             
-            
             for row in table2:
                 subject_name = row.find_all("td")[subject_name_index].find("b").contents[0]
                 subject_code = row.find_all("td")[subject_code_index].find("b").contents[0]
                 subject_grade = row.find_all("td")[grade_index].find("b").contents[0]
                 subject_credits = row.find_all("td")[subject_credits_index].find("b").contents[0]
-                        
+                try:
+                    if(self.deta[code][subject_code]["subject_grade"]!="F"):
+                        continue    
+                except:
+                    pass
                 self.deta[code][subject_code]={}
                 self.deta[code][subject_code]["subject_name"]=subject_name
                 self.deta[code][subject_code]["subject_code"]=subject_code

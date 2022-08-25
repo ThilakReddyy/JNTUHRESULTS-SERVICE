@@ -43,6 +43,8 @@ def exam_codes(code):
         return arr42
     else:
         return []
+
+payloads=["&etype=r17&result=null&grad=null&type=null&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
 #-----------------------------------------------------------------------
 
 
@@ -53,11 +55,10 @@ class Results:
         self.tasks=[]
 
     def get_tasks(self,session,arr,roll):
-        for i in arr:
-            payload="degree=btech&examCode="+str(i)+"&etype=r17&result=null&grad=null&type=null&htno="+roll
-            self.tasks.append(session.post(url, data=payload,headers=headers,ssl=False))
-            payload="degree=btech&examCode="+str(i)+"&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="+roll
-            self.tasks.append(session.post(url, data=payload,headers=headers,ssl=False))
+        for payload in payloads:
+            for i in arr:
+                payloaddata="degree=btech&examCode="+str(i)+payload+roll
+                self.tasks.append(session.post(url, data=payloaddata,headers=headers,ssl=False))
         return self.tasks  
 
     def total_grade_Calculator(self,code,value):

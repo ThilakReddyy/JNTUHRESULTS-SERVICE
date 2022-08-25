@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from requests.sessions import Request
 import string
+from asgiref.sync import sync_to_async
 from . import Search_by_Roll_number
 
 
@@ -22,7 +23,7 @@ lolli=list(a_dic.keys())
 def index(request):
     return render(request,'index.html',{'a_dic':a_dic})
     
-def MultiRollNumber(request):
+async def MultiRollNumber(request):
     if(request.method == 'GET'):
         return redirect('/')
     deta={}
@@ -56,6 +57,7 @@ def single(request,htno):
     
 
 #snippet of code
+@sync_to_async
 def gettingurl(request,htno,code):
     deta={}
     htno=htno.upper()

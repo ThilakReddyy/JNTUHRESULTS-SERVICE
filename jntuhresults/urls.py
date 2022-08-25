@@ -20,8 +20,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index),
-    path('SingleRollNumber',views.SingleRollNumber),
-    path('gettingurl/<htno>/<code>',views.gettingurl),
+    path('SingleRoll',views.SingleRollNumber),
+    path('api/results/<htno>/<code>',views.gettingurl),
     path('api/<htno>',views.single),
-    path('MultiRollNumber',views.MultiRollNumber),
+    path('MultiRoll',views.MultiRollNumber),
 ]

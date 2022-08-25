@@ -22,7 +22,7 @@
             {% for i in dict %}
             
             
-            $('#{{roll}}{{i}}').load("/gettingurl/{{roll}}{{i}}/{{code}}");
+            $('#{{roll}}{{i}}').load("api/results/{{roll}}{{i}}/{{code}}");
             {% endfor %}
         });
     </script>
@@ -84,7 +84,7 @@
     {% for i in dict %}
         <div id='{{roll}}{{i}}'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
     {% endfor %}
-    <button class="print" onclick="window.print()">Print PDF</button>
+    <button class="print" onclick="window.print()">Generate PDF</button>
     <br>
     <br>
 </body>

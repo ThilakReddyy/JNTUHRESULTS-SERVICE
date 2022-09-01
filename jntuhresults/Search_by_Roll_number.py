@@ -111,12 +111,16 @@ class Results:
                 self.deta[code][subject_code]["subject_credits"]=subject_credits
         except:
             pass
-
+    
+    
     async def getting_the_grades(self,code,roll):
         arr=exam_codes(code)
         async with aiohttp.ClientSession() as session:
+            starting =time.time()
             tasks=self.get_tasks(session,arr,roll)
             responses =await asyncio.gather(*tasks)
+            stoping=time.time()
+            print(stoping-starting)
             self.deta[code]={}
             for response in responses:
                 r=await response.text()
@@ -127,6 +131,7 @@ class Results:
         
         return self.deta
 
+#Function called from views
 def get_grade_start(roll,code):
     start =time.time()
     grade=Results()

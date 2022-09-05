@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SM37HBH0FR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SM37HBH0FR');
+</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
+    <title>JNTUH_RESULTS | Multi Roll One Semester</title>
+    <link rel="icon" href="https://jntuwing.in/wp-content/uploads/2022/02/71B14E20-F721-4482-B367-C06C9CF82633-e1645463061154.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        
+        $(document).ready(function(){
+            {% for i in dict %}
+            
+            
+            $('#{{roll}}{{i}}').load("api/results/{{roll}}{{i}}/{{code}}");
+            $('#{{lateral_roll}}{{i}}').load("api/results/{{lateral_roll}}{{i}}/{{code}}");
+            {% endfor %}
+        });
+    </script>
+     <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+
+        }
+
+        .print {
+            left: 50%;
+            margin: 0;
+            margin-bottom: 10px;
+            position: absolute;
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+        div
+        {
+            text-align: center;
+
+        }
+        nav
+        {
+            width: 75%;
+            margin-left:12%;
+            
+        }
+        a
+        {
+            text-decoration:none; 
+        }
+        @media screen and (max-width: 600px) {
+            img.results_icon {
+              display: none;
+            }
+          }
+    </style>
+    
+</head>
+<body>
+    <br>
+    <nav>
+        <a href="/">
+            <img src="https://jntuwing.in/wp-content/uploads/2022/02/71B14E20-F721-4482-B367-C06C9CF82633-e1645463061154.png" style="width:100px;" align="left">    
+        </a>  
+        <a href="https://ibb.co/19Br3X3"><img class="results_icon" src="https://i.ibb.co/P5JcRWR/133-1336637-one-of-areas-top-agents-selling-over-10-removebg-preview.png" alt="133-1336637-one-of-areas-top-agents-selling-over-10-removebg-preview" border="0" style="width:200px;" style="display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;">    
+        </a>     
+        <a href="https://github.com/ThilakReddyy/JNTUH_RESULTS" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="github_logo" style="width:40px;height:40px;" align="right">
+        </a>
+    </nav>
+    <br>
+    <hr style="text-align:center ;width:75%">
+    <br>
+    {% for i in dict %}
+        <div id='{{roll}}{{i}}'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
+    {% endfor %}
+    {% for i in dict %}
+        <div id='{{lateral_roll}}{{i}}'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
+    {% endfor %}
+    <button class="print" onclick="window.print()">Generate PDF</button>
+    <br>
+    <br>
+</body>
+</html>

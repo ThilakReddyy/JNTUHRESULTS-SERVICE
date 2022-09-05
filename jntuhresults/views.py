@@ -1,68 +1,100 @@
-from django import http
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from requests.sessions import Request
-import string
+from django.http import HttpResponse,JsonResponse
 from asgiref.sync import sync_to_async
-from . import Search_by_Roll_number
+from jntuhresults.Executables import Search_by_Roll_number
+from jntuhresults.Executables.constants import a_dic,Index_Keys
+import json
 
-
+#Page Not Found Redirect
 def page_not_found_view(request, exception):
     return redirect('/')
 
-a_dic={'0'+str(i):'0'+str(i) for i in range(1,10)}
-for i in range(10,100):
-    a_dic[str(i)]=str(i) 
- 
-for letter in string.ascii_uppercase:
-    for i in range(0,10):
-        a_dic[letter+str(i)]=letter+str(i)
-lolli=list(a_dic.keys())
-
-#index request
-def index(request):
+#Home Page request
+async def index(request):
     return render(request,'index.html',{'a_dic':a_dic})
-    
+
+
+#Multi Results of One semester
 async def MultiRollNumber(request):
-    if(request.method == 'GET'):
-        return redirect('/')
-    deta={}
-    deta.clear()
-    air=request.POST.dict()
-    first=air["first"]
-    last=air["last"]
-    roll=air["firsti"]
-    code=air["code"]
-    firsti=lolli.index(first)
-    lasti=lolli.index(last)
-    dict=lolli[firsti:lasti+1]
-    roll_first=roll+first
-    roll_last=roll+last
-    print("Results from",roll_first," to",roll_last)
-    if(last<first):
-            return HttpResponse("Enter the valid details")
-    return render(request,'MultiRollNumber.html',{'roll':roll,'dict':dict,'code':code})
+    Params=request.GET.dict() if(request.method=='GET') else request.POST.dict()
+    first,last,roll,code=Params["First_Roll_Last_Digits"],Params["Last_Roll_Last_Digits"],Params["First_Roll"],Params["code"]
+    First_Index,Last_Index=Index_Keys.index(first),Index_Keys.index(last)
+    Index_List=Index_Keys[First_Index:Last_Index+1]
+    return render(request,'MultiRollNumber.html',{'roll':roll.upper(),'dict':Index_List,'code':code}) if(last>=first) else HttpResponse("Enter the valid details") 
 
-# getting the one roll details
-def SingleRollNumber(request):
-    if(request.method == 'GET'):
-        return redirect('/')
-    air=request.POST.dict()
-    roll=air["roll"]
-    print(roll)
-    return render(request,'SingleRollNumber.html',{'roll':roll})
+
+#Results of All semester of One Roll Number
+async def SingleRollNumber(request):
+    Roll=request.GET.get('Roll') if(request.method=='GET') else request.POST.get('Roll')
+    return render(request,'SingleRollNumber.html',{'roll':Roll})
     
-def single(request,htno):
-    return render(request,'SingleRollNumber.html',{'roll':htno} )
     
 
-#snippet of code
+#Actual Snippet Which Returns Results
 @sync_to_async
 def gettingurl(request,htno,code):
+    Results=Search_by_Roll_number.Results()
+    deta=Results.get_grade_start(htno.upper(),code)
+    del Results
+    return render(request,'snippet.html',{'deta':deta}) if(bool(deta['Results'][code])) else HttpResponse("")
+
+
+
+#API for getting all Results
+def allResults(request):
+    htno=request.GET.get('htno').upper()
+    Results=Search_by_Roll_number.Results()
+    Results.get_grade_start(htno,'1-1')
+    Results.get_grade_start(htno,'1-2')
+    Results.get_grade_start(htno,'2-1')
+    Results.get_grade_start(htno,'2-2')
+    Results.get_grade_start(htno,'3-1')
+    Results.get_grade_start(htno,'3-2')
+    Results.get_grade_start(htno,'4-1')
+    Results.get_grade_start(htno,'4-2')
+    ret=Results.deta
+    
+    del Results
+    return JsonResponse(ret)
+
+
+
+
+
+
+
+
+
+
+
+#Temp code..........................................................................................................................
+async def TempMultiRollNumber(request):
     deta={}
-    htno=htno.upper()
-    deta=Search_by_Roll_number.get_grade_start(htno,code)
-    b=bool(deta[code])
-    if(b==False):
-        return HttpResponse("")
-    return render(request,'snippet.html',{'deta':deta})
+    deta.clear()
+    CollegeCode=request.GET.get('CollegeCode')
+    print(CollegeCode)
+    BranchCode=request.GET.get('Branch')
+    print(BranchCode)
+    Regulation=request.GET.get('Regulation')
+    print(Regulation)
+    roll=Regulation+CollegeCode+'1A'+BranchCode
+    lateral_roll=str(int(Regulation)+1)+CollegeCode+'5A'+BranchCode
+    print(lateral_roll)
+    code='2-1'
+    firsti=Index_Keys.index("01")
+    lasti=Index_Keys.index("Z0")
+    dict=Index_Keys[firsti:lasti+1]
+    # roll_first=roll+first
+    # roll_last=roll+last
+    # print("Results from",roll_first," to",roll_last)
+    return render(request,'tempMultiRollNumber.html',{'roll':roll,'dict':dict,'code':code,'lateral_roll':lateral_roll})
+
+
+def temp(request):
+    print("yes")
+    with open('jntuhresults/Json/college_codes.json') as fp:
+        College_codes = json.load(fp)
+    with open('jntuhresults/Json/Branch_codes.json') as fp:
+        Branch_codes = json.load(fp)
+    return render(request,'temp.html',{'College_codes':College_codes,'Branch_Codes':Branch_codes})
+#..........................................................................................................................

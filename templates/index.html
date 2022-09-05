@@ -168,14 +168,15 @@
         }
         
         function validateForm() {
-  let x = document.forms["myForm"]["roll"].value;
+  let x = document.forms["Single"]["roll"].value;
   if (x.length<10) {
+    console.log(roll)
     alert("Enter the Correct Roll No");
     return false;
   }
 }
 function validateForm1() {
-  let x = document.forms["Fname"]["firsti"].value;
+  let x = document.forms["Fname"]["First_Roll"].value;
   if (x.length<8) {
     alert("Enter the first Eight digits of Roll Number");
     return false;
@@ -212,9 +213,9 @@ function validateForm1() {
             <form method="post" name="Fname" action="/MultiRoll" id="form1" onsubmit="return validateForm1()">
                 {% csrf_token %}
                 <div style="text-align: center;">
-                    <input name="firsti" id="n1"  maxlength="8" placeholder="18***A0*" onkeyup=sync()
+                    <input name="First_Roll" id="n1"  maxlength="8" placeholder="18***A0*" onkeyup=sync()
                         oninput="this.value=this.value.toUpperCase()">
-                    <select name="first" id="first" class="dropdown" >
+                    <select name="First_Roll_Last_Digits" id="first" class="dropdown" >
 
                         {% for i,val in a_dic.items %}
                         {{i}}
@@ -222,8 +223,8 @@ function validateForm1() {
 
                         {% endfor %}
                     </select>
-                    <input name="lasti" id="n2" maxlength="8" placeholder="18***A0*" readonly style="margin-left:50px">
-                    <select name="last" id="last" class="dropdown" >
+                    <input name="Last_Roll" id="n2" maxlength="8" placeholder="18***A0*" readonly style="margin-left:50px">
+                    <select name="Last_Roll_Last_Digits" id="last" class="dropdown" >
 
                         {% for i,val in a_dic.items %}
                         {{i}}
@@ -258,9 +259,9 @@ function validateForm1() {
             <h2 class="center">Grades of All Semesters  of Particular Student</h2>    
             <br>
             <br>        
-                <form method="post" name="myForm" action="/SingleRoll" id="form2" style="text-align: center;" onsubmit="return validateForm()">
+                <form method="post" name="Single" action="/SingleRoll" id="form2" style="text-align: center;" onsubmit="return validateForm()">
                     {% csrf_token %}
-                    <input name="roll" id="roll" maxlength="10" placeholder="Enter Your Roll Number" style="width:200px;text-align: center;border-top-right-radius:7px;border-bottom-right-radius:7px">
+                    <input name="Roll" id="roll" maxlength="10" placeholder="Enter Your Roll Number" style="width:200px;text-align: center;border-top-right-radius:7px;border-bottom-right-radius:7px" oninput="this.value=this.value.toUpperCase()">
                     <br>
                     <br>
                     <div style="text-align: center;">

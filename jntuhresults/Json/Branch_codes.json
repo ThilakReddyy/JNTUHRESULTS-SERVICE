@@ -1,0 +1,75 @@
+[
+    {
+        "Branch": "Civil Engineering",
+        "Code": "01"
+    },
+    {
+        "Branch": "Electrical & Electronics Engineering",
+        "Code": "02"
+    },
+    {
+        "Branch": "Mechanical Engineering",
+        "Code": "03"
+    },
+    {
+        "Branch": "Electronics & Communication Engineering",
+        "Code": "04"
+    },
+    {
+        "Branch": "Computer Science & Engineering",
+        "Code": "05"
+    },
+    {
+        "Branch": "Chemical Engineering",
+        "Code": "08"
+    },
+    {
+        "Branch": "Electronics & Instrumentation Engineering",
+        "Code": "10"
+    },
+    {
+        "Branch": "BioMedical Engineering",
+        "Code": "11"
+    },
+    {
+        "Branch": "Information Technology",
+        "Code": "12"
+    },
+    {
+        "Branch": "Electronics & Control Engineering",
+        "Code": "13"
+    },
+    {
+        "Branch": "Electronics & Computer Engineering",
+        "Code": "19"
+    },
+    {
+        "Branch": "Aeronautical Engineering",
+        "Code": "21"
+    },
+    {
+        "Branch": "Instrumentation & Control Engineering",
+        "Code": "22"
+    },
+    {
+        "Branch": "Computer Engineering (Software Engineering)  Technology",
+        "Code": "56"
+    },
+    {
+        "Branch": "Computer Science and Engineering (Cyber Security) Technology",
+        "Code": "62"
+    },
+    {
+        "Branch": "Computer Science and Engineering (Artificial Intelligence and Machine Learning)",
+        "Code": "66"
+    },
+    {
+        "Branch": "Computer Science and Engineering (Datascience)",
+        "Code": "67"
+    },
+    {
+        "Branch": " Computer Science and Engineering (IoT)",
+        "Code": "69"
+    }
+    
+]

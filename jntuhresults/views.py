@@ -37,25 +37,22 @@ def gettingurl(request,htno,code):
     deta=Results.get_grade_start(htno.upper(),code)
     del Results
     return render(request,'snippet.html',{'deta':deta}) if(bool(deta['Results'][code])) else HttpResponse("")
+listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
 
-
-
-#API for getting all Results
-def allResults(request):
-    htno=request.GET.get('htno').upper()
+def allResults_extend(htno):
     Results=Search_by_Roll_number.Results()
-    Results.get_grade_start(htno,'1-1')
-    Results.get_grade_start(htno,'1-2')
-    Results.get_grade_start(htno,'2-1')
-    Results.get_grade_start(htno,'2-2')
-    Results.get_grade_start(htno,'3-1')
-    Results.get_grade_start(htno,'3-2')
-    Results.get_grade_start(htno,'4-1')
-    Results.get_grade_start(htno,'4-2')
-    ret=Results.deta
-    
+    deta={}
+    deta['Results']={}
+    print(deta)
+    for i in listi:
+        deta['Results'][i]=Results.get_grade_start(htno,i)['Results'][i]
     del Results
-    return JsonResponse(ret)
+    return deta
+#API for getting all Results
+async def allResults(request):
+    htno=request.GET.get('htno').upper()
+    deta=allResults_extend(htno)
+    return JsonResponse(deta)
 
 
 

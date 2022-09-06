@@ -1,21 +1,25 @@
+from re import S
 from bs4 import BeautifulSoup
 import asyncio
 import aiohttp
 from jntuhresults.Executables.constants import *
+import time
+import requests
+
 
 class Results:
     def __init__(self):
         self.deta={}
         self.deta.clear()
         self.deta["Results"]={}
-        self.tasks=[]
+        self.url=''
 
     #Running all the links asynchronously
     def get_tasks(self,session,arr,roll):
         for payload in payloads:
             for i in arr:
                 payloaddata="degree=btech&examCode="+str(i)+payload+roll
-                self.tasks.append(session.post(url, data=payloaddata,headers=headers,ssl=False))
+                self.tasks.append(session.post(self.url, data=payloaddata,headers=headers,ssl=False))
         return self.tasks  
 
     #SGPA Calculator
@@ -54,7 +58,10 @@ class Results:
             self.deta["DETAILS"] = {"NAME": NAME, "Roll_No": Roll_NO, "COLLEGE_CODE": COLLEGE_CODE}
             
             for row in table2:
-                subject_name = row.find_all("td")[subject_name_index].find("b").contents[0]
+                try:
+                    subject_name = row.find_all("td")[subject_name_index].find("b").contents[0]
+                except:
+                    subject_name=""
                 subject_code = row.find_all("td")[subject_code_index].find("b").contents[0]
                 subject_grade = row.find_all("td")[grade_index].find("b").contents[0]
                 subject_credits = row.find_all("td")[subject_credits_index].find("b").contents[0]
@@ -73,30 +80,45 @@ class Results:
     
     
     async def getting_the_grades(self,code,roll):
+        starting =time.time()
         exam_Codes=exam_codes(code)
         async with aiohttp.ClientSession() as session:
             tasks=self.get_tasks(session,exam_Codes,roll)
             
             ###########################################################
             responses =await asyncio.gather(*tasks)
+            stoping=time.time()
+            print(stoping-starting)
             ###########################################################
             self.deta["Results"][code]={}
             
             for response in responses:
                 r=await response.text()
                 soup = BeautifulSoup(r, "html.parser")
+                
                 self.scraping_the_grades(code,soup)
          
         self.total_grade_Calculator(code,self.deta["Results"][code])
-        
         return self.deta
 
     #Function called from views
     def get_grade_start(self,roll,code):
         self.tasks=[]
+        self.url=checktheurl()
         return asyncio.run(self.getting_the_grades(code,roll))
 
-        
+def checktheurl():
+    payload='degree=btech&etype=r17&examCode=1580&grad=null&htno=18E51A0479&result=null&type=intgrade'
+
+    response = requests.request("POST", url2, headers=headers, data=payload)
+    soup = BeautifulSoup(response.content, "html.parser")
+    try:
+            table = soup.find_all("table")
+            table1 = table[0].find_all("tr")
+            Roll_NO = table1[0].find_all("td")[1].find_all("b")[0].contents[0]   
+            return url2  
+    except:
+        return url1
 
         
                 

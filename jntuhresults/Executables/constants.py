@@ -5,7 +5,8 @@ headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
 }
-url = "http://results.jntuh.ac.in/resultAction"
+url1 = "http://results.jntuh.ac.in/resultAction"
+url2="http://202.63.105.184/results/resultAction"
 
 grades_to_gpa={'O':10,'A+':9,'A':8,'B+':7,'B':6,'C':5,'F':0,'Ab':0}
 
@@ -19,7 +20,7 @@ arr32=[1502,1555]
 arr41=[1545]
 arr42=[1580]
 
-payloads=["&etype=r17&result=null&grad=null&type=null&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
+payloads=["&etype=r17&result=null&grad=null&type=intgrade&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
 
 #Exam Codes-----------------------------------------------------------
 def exam_codes(code):

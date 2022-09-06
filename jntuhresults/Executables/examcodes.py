@@ -1,12 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
-# url = "http://results.jntuh.ac.in/jsp/home.jsp"
-url="http://202.63.105.184/results/"
+urll = "http://results.jntuh.ac.in/jsp/home.jsp"
 
 
 arr11,arr12,arr21,arr22,arr31,arr32,arr41,arr42=set(),set(),set(),set(),set(),set(),set(),set()
 
-response = requests.request("GET", url)
+response = requests.request("GET", urll)
 soup = BeautifulSoup(response.content, "html.parser")
 tr= soup.find_all("table")[0].find_all("tr")
 for i in tr:

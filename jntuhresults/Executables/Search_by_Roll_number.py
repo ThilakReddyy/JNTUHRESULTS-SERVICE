@@ -1,10 +1,8 @@
-from re import S
 from bs4 import BeautifulSoup
 import asyncio
 import aiohttp
 from jntuhresults.Executables.constants import *
 import time
-import requests
 
 
 class Results:
@@ -12,14 +10,13 @@ class Results:
         self.deta={}
         self.deta.clear()
         self.deta["Results"]={}
-        self.url=''
 
     #Running all the links asynchronously
     def get_tasks(self,session,arr,roll):
         for payload in payloads:
             for i in arr:
                 payloaddata="degree=btech&examCode="+str(i)+payload+roll
-                self.tasks.append(session.post(self.url, data=payloaddata,headers=headers,ssl=False))
+                self.tasks.append(session.post(url[0], data=payloaddata,headers=headers,ssl=False))
         return self.tasks  
 
     #SGPA Calculator
@@ -104,21 +101,9 @@ class Results:
     #Function called from views
     def get_grade_start(self,roll,code):
         self.tasks=[]
-        self.url=checktheurl()
         return asyncio.run(self.getting_the_grades(code,roll))
 
-def checktheurl():
-    payload='degree=btech&etype=r17&examCode=1580&grad=null&htno=18E51A0479&result=null&type=intgrade'
-
-    response = requests.request("POST", url2, headers=headers, data=payload)
-    soup = BeautifulSoup(response.content, "html.parser")
-    try:
-            table = soup.find_all("table")
-            table1 = table[0].find_all("tr")
-            Roll_NO = table1[0].find_all("td")[1].find_all("b")[0].contents[0]   
-            return url2  
-    except:
-        return url1
+        
 
         
                 

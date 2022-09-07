@@ -50,7 +50,7 @@ def allResults_extend(htno):
     del Results
     return deta
 #API for getting all Results
-def allResults(request):
+async def allResults(request):
     htno=request.GET.get('htno').upper()
     deta=allResults_extend(htno)
     return JsonResponse(deta)

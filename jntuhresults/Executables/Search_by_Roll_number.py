@@ -13,11 +13,10 @@ class Results:
 
     #Running all the links asynchronously
     def get_tasks(self,session,arr,roll):
-        for i in arr:
-            for payload in payloads:  
+        for payload in payloads:
+            for i in arr:
                 payloaddata="degree=btech&examCode="+str(i)+payload+roll
                 self.tasks.append(session.post(url[0], data=payloaddata,headers=headers,ssl=False))
-                print(i)
         return self.tasks  
 
     #SGPA Calculator

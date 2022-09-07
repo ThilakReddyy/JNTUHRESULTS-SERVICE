@@ -10,13 +10,14 @@ class Results:
         self.deta={}
         self.deta.clear()
         self.deta["Results"]={}
+        self.tasks=[]
 
     #Running all the links asynchronously
     def get_tasks(self,session,arr,roll):
         for payload in payloads:
             for i in arr:
                 payloaddata="degree=btech&examCode="+str(i)+payload+roll
-                self.tasks.append(session.post(url[0], data=payloaddata,headers=headers,ssl=False))
+                self.tasks.append(session.post(url[1], data=payloaddata,headers=headers,ssl=False))
         return self.tasks  
 
     #SGPA Calculator
@@ -100,7 +101,6 @@ class Results:
 
     #Function called from views
     def get_grade_start(self,roll,code):
-        self.tasks=[]
         return asyncio.run(self.getting_the_grades(code,roll))
 
         

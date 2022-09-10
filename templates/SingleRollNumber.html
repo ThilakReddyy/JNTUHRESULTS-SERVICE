@@ -19,8 +19,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+            
+        {% if regular %}
            $('#1-1').load("api/results/{{roll}}/1-1");
            $('#1-2').load("api/results/{{roll}}/1-2");
+        {% endif %}
            $('#2-1').load("api/results/{{roll}}/2-1");
            $('#2-2').load("api/results/{{roll}}/2-2");
            $('#3-1').load("api/results/{{roll}}/3-1");
@@ -87,9 +90,10 @@
     </nav>
     <br>
     <hr style="text-align:center ;width:75%">
-    
+    {% if regular %}
     <div id='1-1'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
     <div id='1-2'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
+    {% endif %}
     <div id='2-1'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
     <div id='2-2'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>
     <div id='3-1'><img src="https://s10.gifyu.com/images/loadingi.gif" alt="loading.gif"></div>

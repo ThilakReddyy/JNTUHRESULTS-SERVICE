@@ -32,7 +32,7 @@ class Results:
                         return ""
                     total=total+int(grades_to_gpa[value[data]['subject_grade']])*float(value[data]['subject_credits'])
                     credits=credits+float(value[data]['subject_credits'])
-            self.deta["Results"][code]["TOTAL"]="{0:.2f}".format(round(total/credits,2)) 
+            self.deta["Results"][code]["CGPA"]="{0:.2f}".format(round(total/credits,2)) 
         except:
             pass
     
@@ -79,32 +79,53 @@ class Results:
     
     
     async def getting_the_grades(self,code,roll):
-        starting =time.time()
+
         exam_Codes=exam_codes(code)
         async with aiohttp.ClientSession() as session:
             tasks=self.get_tasks(session,exam_Codes,roll)
             
             ###########################################################
             responses =await asyncio.gather(*tasks)
-            stoping=time.time()
-            print(stoping-starting)
             ###########################################################
+
             self.deta["Results"][code]={}
-            
             for response in responses:
                 r=await response.text()
                 soup = BeautifulSoup(r, "html.parser")
                 
                 self.scraping_the_grades(code,soup)
-         
+        await session.close()
         self.total_grade_Calculator(code,self.deta["Results"][code])
         return self.deta
 
     #Function called from views
     def get_grade_start(self,roll,code):
         return asyncio.run(self.getting_the_grades(code,roll))
+    
+    #Function to call from all-R18  
+    async def getting_faster_Grades(self,roll,code):
+        return asyncio.run(self.getting_the_grades(code,roll))
 
-        
+def get_cgpa(result):
+    total,credits=0
+    for ind in result:
+        semesters=result[ind]
+        for semester in semesters:
+            print(semesters)
+            subjects=semesters[semester]
+            
+            try:
+                
+                total=total+int(grades_to_gpa[subjects['subject_grade']])*float(subjects['subject_credits'])
+                credits=credits+float(subjects['subject_credits'])
+                print(total, credits)
+            except:
+                pass
+    # if(value[data]['subject_grade']=='F' or value[data]['subject_grade']=='Ab'): 
+    #                     return ""
+    #                 total=total+int(grades_to_gpa[value[data]['subject_grade']])*float(value[data]['subject_credits'])
+    #                 credits=credits+float(value[data]['subject_credits'])
+    return 0   
 
         
                 

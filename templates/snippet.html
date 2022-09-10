@@ -21,7 +21,7 @@
     {% for ind,val in deta.Results.items %}
         
         {% for index,value in val.items %} 
-            {% if "TOTAL" not in index %}
+            {% if "CGPA" not in index %}
                 <tr>
                     <th>{{value.subject_name}}</th>
                     <th>{{value.subject_code}}</th>
@@ -33,7 +33,7 @@
         <table style="width:100%" id='5'>
             <tr>
                 <th style="width:75%">CGPA</th>
-                <th>{{val.TOTAL}}</th>
+                <th>{{val.CGPA}}</th>
             </tr>
         </table>
     {% endfor %}   

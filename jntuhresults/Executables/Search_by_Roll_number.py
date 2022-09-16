@@ -78,7 +78,6 @@ class Results:
     
     
     async def getting_the_grades(self,code,roll):
-
         exam_Codes=exam_codes(code)
         async with aiohttp.ClientSession() as session:
             tasks=self.get_tasks(session,exam_Codes,roll)

@@ -114,12 +114,24 @@
             display: block;
             text-align:center;
             box-sizing: border-box;
+            border:3px; 
+            border-radius:7px;
+            width: 74%;
+            align-items:center;
+            margin-left:12%;
             
         }
         .footerwarning
         {
+            margin-top: 0.25rem;
+            display: block;
+            text-align:left;
+            box-sizing: border-box;
+            border:3px; 
+            border-radius:7px;
             width: 74%;
-            margin-left:12%;
+            align-items:center;
+            margin-left:12.5%;
             color:grey;
         }
         .button1:hover {
@@ -160,6 +172,7 @@
             img.results_icon {
               display: none;
             }
+            
           }
     </style>
 
@@ -274,23 +287,27 @@ function validateForm1() {
             </div>
         </div>
         <br>
-        <small class="footerwarning">
+        <small class="footerwarning ">
             It does consider the RCRV Results
             <br>
         </small>
         <small class="footerwarning">
             It only works above R18 Regulation
         </small>
-        <br>
         <hr style="text-align:center ;width:75%">
-        {% comment %} <br> {% endcomment %}
-        <p><center>This website will be migrated <a href="https://jntuh-results-stats.vercel.app/">here</a></center></p>
+        
+        {% comment %} <p class=><center>Alternate Website <a href="https://jntuh-results-stats.vercel.app/">here</a></center></p> {% endcomment %}
         <hr style="text-align:center ;width:75%">
     </div>
+    
     <h4 class="footerwords">
-        Made with &#128150; by 
+            Made with &#128150; by 
         <a href="https://github.com/ThilakReddyy/">Thilak Reddy</a>
     <h4>
+    
+    <h4 class="footerwords">
+        If you found this app helpful, you can support me by <a href="https://www.buymeacoffee.com/thilakreddy"> buying me a pizza here.</a>
+    </h4>
 </body>
 
 </html>

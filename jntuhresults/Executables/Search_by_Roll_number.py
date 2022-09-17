@@ -35,7 +35,8 @@ class Results:
             self.deta["Results"][code]["CGPA"]="{0:.2f}".format(round(total/credits,2)) 
         except:
             pass
-    
+
+
     #Scraping the grades from the html page
     def scraping_the_grades(self,code,soup):
         try:

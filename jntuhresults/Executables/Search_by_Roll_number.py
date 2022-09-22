@@ -36,7 +36,7 @@ class Results:
         except:
             pass
 
-
+            
     #Scraping the grades from the html page
     def scraping_the_grades(self,code,soup):
         try:

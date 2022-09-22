@@ -13,6 +13,7 @@ def page_not_found_view(request, exception):
 
 #Home Page request
 async def index(request):
+    # return redirect("https://www.djangoproject.com")
     return render(request,'index.html',{'a_dic':a_dic})
 
 
@@ -64,10 +65,14 @@ async def allResults(request):
     Results={}
     Results['Details']={}
     Results['Results']={}
-    for i in json_object:     
-        for ind in i['Results']:
-            Results['Results'][ind]=i['Results'][ind]
-        Results['Details']=i['DETAILS']
+    for i in json_object:   
+        try:
+            for ind in i['Results']:
+                Results['Results'][ind]=i['Results'][ind]
+                Results['Details']=i['DETAILS']
+        
+        except:
+            del Results['Results'][ind]
     # calculate_cgpa=Search_by_Roll_number.get_cgpa(Results['Results'])
     stopping=time.time()
     print(stopping-starting)

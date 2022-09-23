@@ -18,7 +18,7 @@ arr21=[1391,1425,1449,1496,1560]
 arr22=[1437,1447,1476,1501,1565]
 arr31=[1454,1491,1550]
 arr32=[1502,1555]
-arr41=[1545]
+arr41=[1545,1585]
 arr42=[1580]
 
 # payloads=["&etype=r17&result=null&grad=null&type=null&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]

@@ -19,9 +19,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index),
-    path('SingleRoll',views.SingleRollNumber),
     path('api/results/<htno>/<code>',views.gettingurl),
-    path('MultiRoll',views.MultiRollNumber),
     path('allResults',views.allResults),
 ]

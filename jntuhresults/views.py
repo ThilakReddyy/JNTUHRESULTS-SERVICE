@@ -13,8 +13,7 @@ def page_not_found_view(request, exception):
     return redirect('/allResults?htno=18E51A0479')
     
 
-#Actual Snippet Which Returns Results
-
+#Multi-----------------------------------------------------------------------------------------------------
 async def gettingurl(htno,fro,to,code):
     tasksi=[]
     First_Index,Last_Index=Index_Keys.index(fro),Index_Keys.index(to)
@@ -24,8 +23,6 @@ async def gettingurl(htno,fro,to,code):
         tasksi.append(asyncio.create_task(Results.getting_faster_Grades(htno+i,code)))
     responses = asyncio.gather(*tasksi)
     return await responses
-
-
 
 async def multi(request):
     global listi
@@ -51,8 +48,11 @@ async def multi(request):
         else:
             response.append(i)
     return JsonResponse(res,safe=False)
+#----------------------------------------------------------------------------------------------------------------
 
 
+
+#single------------------------------------------------------------------------------------------------------------
 async def allResults_extend(htno):
     global listi
     if(htno[4]=='5'):
@@ -88,3 +88,4 @@ async def allResults(request):
     stopping=time.time()
     print(stopping-starting)
     return JsonResponse(Results,safe=False)
+#------------------------------------------------------------------------------------------------------------------

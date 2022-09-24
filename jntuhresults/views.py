@@ -6,25 +6,55 @@ from jntuhresults.Executables.constants import a_dic,Index_Keys
 import json
 import asyncio
 import time
+listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
 
 #Page Not Found Redirect
 def page_not_found_view(request, exception):
     return redirect('/allResults?htno=18E51A0479')
-
-#Home Page request
     
 
 #Actual Snippet Which Returns Results
 
-async def gettingurl(request,htno,code):
-    Results=Search_by_Roll_number.Results()
-    deta=Results.get_grade_start(htno.upper(),code)
-    del Results
-    return render(request,'snippet.html',{'deta':deta}) if(bool(deta['Results'][code])) else HttpResponse("")
+async def gettingurl(htno,fro,to,code):
+    tasksi=[]
+    First_Index,Last_Index=Index_Keys.index(fro),Index_Keys.index(to)
+    Index_List=Index_Keys[First_Index:Last_Index+1]
+    for i in Index_List:
+        Results=Search_by_Roll_number.Results()
+        tasksi.append(asyncio.create_task(Results.getting_faster_Grades(htno+i,code)))
+    responses = asyncio.gather(*tasksi)
+    return await responses
+
+
+
+async def multi(request):
+    global listi
+    try:
+        htno1=request.GET.get('from').upper()
+        htno2=request.GET.get('to').upper()
+        code=request.GET.get('code').upper()
+    except:
+        return HttpResponse("Pass from and to roll number as query")
+    if(code not in listi):
+        return HttpResponse("Please put down the correct code")
+    if(htno1[:8]!=htno2[:8]):
+        return HttpResponse("Please Maintain from roll number first and last numbers as same")
+    elif(htno1[8:]>htno2[8:]):
+        return HttpResponse("First Hall ticket should be greater")
+    elif(len(htno1)!=10 or len(htno2)!=10):
+        return HttpResponse("Please Enter the Roll Numbers correctly")
+    res=asyncio.run(gettingurl(htno1[:8],htno1[8:],htno2[8:],code))
+    response=list()
+    for i in res:
+        if(len(i['Results'][code])==0):
+            del i
+        else:
+            response.append(i)
+    return JsonResponse(res,safe=False)
 
 
 async def allResults_extend(htno):
-    listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
+    global listi
     if(htno[4]=='5'):
         listi=listi[2:]
     tasksi=[]
@@ -38,7 +68,11 @@ async def allResults_extend(htno):
 #API for getting all Results
 async def allResults(request):
     starting =time.time()
-    htno=request.GET.get('htno').upper()
+    try:
+        htno=request.GET.get('htno').upper()
+        print(htno)
+    except:
+        return HttpResponse('Enter hallticket number correctly')
     json_object = asyncio.run(allResults_extend(htno))
     Results={}
     Results['Details']={}
@@ -51,7 +85,6 @@ async def allResults(request):
         
         except:
             del Results['Results'][ind]
-    # calculate_cgpa=Search_by_Roll_number.get_cgpa(Results['Results'])
     stopping=time.time()
     print(stopping-starting)
     return JsonResponse(Results,safe=False)

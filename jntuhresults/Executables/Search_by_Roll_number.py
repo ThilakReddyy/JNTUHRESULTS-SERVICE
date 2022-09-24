@@ -97,34 +97,10 @@ class Results:
         self.total_grade_Calculator(code,self.deta["Results"][code])
         return self.deta
 
-    #Function called from views
-    def get_grade_start(self,roll,code):
-        return asyncio.run(self.getting_the_grades(code,roll))
     
-    #Function to call from all-R18  
+    #Function to call from views
     async def getting_faster_Grades(self,roll,code):
         return asyncio.run(self.getting_the_grades(code,roll))
-
-def get_cgpa(result):
-    total,credits=0
-    for ind in result:
-        semesters=result[ind]
-        for semester in semesters:
-            print(semesters)
-            subjects=semesters[semester]
-            
-            try:
-                
-                total=total+int(grades_to_gpa[subjects['subject_grade']])*float(subjects['subject_credits'])
-                credits=credits+float(subjects['subject_credits'])
-                print(total, credits)
-            except:
-                pass
-    # if(value[data]['subject_grade']=='F' or value[data]['subject_grade']=='Ab'): 
-    #                     return ""
-    #                 total=total+int(grades_to_gpa[value[data]['subject_grade']])*float(value[data]['subject_credits'])
-    #                 credits=credits+float(value[data]['subject_credits'])
-    return 0   
 
         
                 

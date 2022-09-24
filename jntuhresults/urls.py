@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/results/<htno>/<code>',views.gettingurl),
+    path('api/multi',views.multi),
     path('allResults',views.allResults),
 ]
+handler404 = views.page_not_found_view

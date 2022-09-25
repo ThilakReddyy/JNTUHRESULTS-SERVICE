@@ -45,10 +45,10 @@ async def multi(request):
     response=list()
     for i in res:
         if(len(i['Results'][code])==0):
-            del i
+            del i   
         else:
             response.append(i)
-    return JsonResponse(res,safe=False)
+    return JsonResponse(response,safe=False)
 #----------------------------------------------------------------------------------------------------------------
 
 

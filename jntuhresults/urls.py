@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/multi',views.multi),
     path('api/single',views.allResults),
+    path('cors',views.cors),
 ]
 handler404 = views.page_not_found_view

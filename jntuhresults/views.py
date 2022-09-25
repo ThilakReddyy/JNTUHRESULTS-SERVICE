@@ -12,7 +12,8 @@ listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
 def page_not_found_view(request, exception):
     return redirect('/allResults?htno=18E51A0479')
     
-
+def cors(request):
+    return HttpResponse("hello")
 #Multi-----------------------------------------------------------------------------------------------------
 async def gettingurl(htno,fro,to,code):
     tasksi=[]

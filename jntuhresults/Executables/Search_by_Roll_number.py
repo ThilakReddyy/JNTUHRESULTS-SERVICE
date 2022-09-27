@@ -40,7 +40,6 @@ class Results:
     #Scraping the grades from the html page
     def scraping_the_grades(self,code,soup):
         try:
-            print(code)
             table = soup.find_all("table")
             table1 = table[0].find_all("tr")
             Roll_NO = table1[0].find_all("td")[1].find_all("b")[0].contents[0]
@@ -75,7 +74,6 @@ class Results:
                 self.deta["Results"][code][subject_code]["subject_code"]=subject_code
                 self.deta["Results"][code][subject_code]["subject_grade"]=subject_grade
                 self.deta["Results"][code][subject_code]["subject_credits"]=subject_credits
-                print(code,"success")
         except:
             pass
     

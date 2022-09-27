@@ -2,6 +2,7 @@
   <img src="https://raw.githubusercontent.com/ThilakReddyy/JNTUHRESULTS-WEB/main/public/favicon-black.png#gh-dark-mode-only" alt="JNTUH B.TECH RESULTS" width="100">
   <img src="https://raw.githubusercontent.com/ThilakReddyy/JNTUHRESULTS-WEB/main/public/favicon-light.png#gh-light-mode-only" alt="JNTUH B.TECH RESULTS" width="100">
   <br>
+  django | python | BeautifulSoup 
 </p>
 
 The website displays the results of all the classmates and also display the results of all semesters of a particular student

@@ -9,12 +9,23 @@ The website displays the results of all the classmates and also display the resu
 
 
 
-# RUNNING
+## Running locally in development mode
 
-<ul>
- <li>TRY IT NOW: <a href="https://jntuhresults.herokuapp.com/">here</a></li>
-</ul>
+To get started, just clone the repository and run `npm install && npm run dev`:
 
+    git clone https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE.git
+    pip install -r requirements.txt
+    python manage.py runserver
+
+Open [http://localhost:3000](http://localhost:8000) with your browser to see the result.
+
+## Questions? Need Help? Found a bug?
+
+If you've got questions about setup, deploying, special feature implementation, or just want to chat with the developer, please feel free to contact me on <a href="mailto:thilakreddypothuganti@gmail.com">mail</a>
+
+Found a bug with upstream Slate? Go ahead and [submit an issue](https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE/issues). And, of course, feel free to submit pull requests with bug fixes or changes to the `dev` branch.
+
+Also feel free to message me if you have any ideas for small website tools that you can't yet find online. Thanks!
 # HOW IT WORKS
 
 <ul>

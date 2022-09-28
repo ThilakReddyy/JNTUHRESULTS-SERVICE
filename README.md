@@ -17,7 +17,7 @@ To get started, just clone the repository and run `pip install and python manage
     pip install -r requirements.txt
     python manage.py runserver
 
-Open [http://localhost:3000](http://localhost:8000) with your browser to see the result.
+Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
 
 ## Questions? Need Help? Found a bug?
 

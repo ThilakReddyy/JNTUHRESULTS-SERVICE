@@ -25,10 +25,26 @@ arr42=[1580]
 payloads=["&etype=r17&result=null&grad=null&type=intgrade&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
 
 #Exam Codes-----------------------------------------------------------
-def exam_codes(code):
+def exam_codes(code,htno):
     if (code =="1-1"):
+        if(htno[4]==5):
+            return []
+        if(htno[:2]=='19'):
+            pass
+        if(htno[:2]=='20'):
+            pass
+        if(htno[:2]=='21'):
+            pass
         return arr11
     elif(code =="1-2"):
+        if(htno[4]==5):
+            return []
+        if(htno[:2]=='19'):
+            pass
+        if(htno[:2]=='20'):
+            pass
+        if(htno[:2]=='21'):
+            pass
         return arr12
     elif(code =="2-1"):
         return arr21

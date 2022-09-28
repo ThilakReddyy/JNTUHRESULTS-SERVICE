@@ -5,8 +5,16 @@
   django | python | BeautifulSoup 
 </p>
 
-The website displays the results of all the classmates and also display the results of all semesters of a particular student
+The Backbone of JNTUHRESULTS-WEB where all the semester results of a student and the results of all the classmates are fetched
 
+## HOW IT WORKS
+
+* Jntuh website doesn't have any api and it does not authenticate when a request is made it just sends back the response of that request
+* I made a request and i got a response and using beautiful soup i have parse the html and i got my results
+
+## API
+* https://jntuhresults.up.railway.app/api/single?htno={Roll_NO}
+* https://jntuhresults.up.railway.app/api/multi?from={from_roll_no}&to={To_roll_no}&code={code}
 
 
 ## Running locally in development mode
@@ -14,6 +22,7 @@ The website displays the results of all the classmates and also display the resu
 To get started, just clone the repository and run `pip install and python manage.py runserver`:
 
     git clone https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE.git
+    cd JNTUHRESULTS-SERVICE
     pip install -r requirements.txt
     python manage.py runserver
 
@@ -26,26 +35,10 @@ If you've got questions about setup, deploying, special feature implementation, 
 Found a bug with upstream Slate? Go ahead and [submit an issue](https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE/issues). And, of course, feel free to submit pull requests with bug fixes or changes to the `dev` branch.
 
 Also feel free to message me if you have any ideas for small website tools that you can't yet find online. Thanks!
-# HOW IT WORKS
 
-<ul>
-<li>Jntuh website doesn't have any api and it does not authenticate when a request is made it just sends back the response of that request</li>
-<li>I made a request and i got a response and using beautiful soup i have parse the html and i got my results</li>
- </ul>
+## Thanks
+
+- [▲ Vercel](https://vercel.com/) for fast deployments served from the edge, hosting our website, downloads, and updates.
+- [Next.js](https://nextjs.org/) for development framework created by Vercel enabling React-based web applications with server-side rendering and generating static websites
+
  
- 
-# DEMO
-
-<h3 align="Center">Home Page</h3>
-
-![Home_Page](https://user-images.githubusercontent.com/64121161/168486734-5d799aed-6110-47aa-8338-a0aa3c70e963.png)
-
-
-<h3 align="Center">Results of All the classmates of a Particular Semester</h3>
-
-![Untitled design (1)](https://user-images.githubusercontent.com/64121161/156638075-54743f23-1256-4593-9c70-5166319570e2.png)
-
-<h3 align="Center">Results of All the Semesters of a Particular Student</h3>
-
-![Untitled design (3)](https://user-images.githubusercontent.com/64121161/156640026-73acabfe-f8d6-4b61-bb4e-bdba73d00cdd.png)
-

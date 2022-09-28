@@ -38,7 +38,8 @@ Also feel free to message me if you have any ideas for small website tools that 
 
 ## Thanks
 
-- [▲ Vercel](https://vercel.com/) for fast deployments served from the edge, hosting our website, downloads, and updates.
-- [Next.js](https://nextjs.org/) for development framework created by Vercel enabling React-based web applications with server-side rendering and generating static websites
+- [django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design
+- [python](https://www.python.org/) is a programming language that lets you work quickly
+and integrate systems more effectively.
 
  

@@ -11,7 +11,7 @@ The website displays the results of all the classmates and also display the resu
 
 ## Running locally in development mode
 
-To get started, just clone the repository and run `npm install && npm run dev`:
+To get started, just clone the repository and run `pip install and python manage.py runserver`:
 
     git clone https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE.git
     pip install -r requirements.txt

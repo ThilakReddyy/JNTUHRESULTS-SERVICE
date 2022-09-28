@@ -29,12 +29,12 @@ def exam_codes(code,htno):
     if (code =="1-1"):
         if(htno[4]==5):
             return []
-        if(htno[:2]=='19'):
-            pass
-        if(htno[:2]=='20'):
-            pass
-        if(htno[:2]=='21'):
-            pass
+        # if(htno[:2]=='19'):
+        #     return arr11[2:]
+        # if(htno[:2]=='20'):
+        #     return arr11[4:]
+        # if(htno[:2]=='21'):
+        #     return arr11[6:]
         return arr11
     elif(code =="1-2"):
         if(htno[4]==5):

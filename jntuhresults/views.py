@@ -20,7 +20,7 @@ async def gettingurl(htno,fro,to,code):
     First_Index,Last_Index=Index_Keys.index(fro),Index_Keys.index(to)
     Index_List=Index_Keys[First_Index:Last_Index+1]
     for i in Index_List:
-        tasksi.append(asyncio.create_task(Search_by_Roll_number.getting_faster_Grades(htno,i)))
+        tasksi.append(asyncio.create_task(Search_by_Roll_number.getting_faster_Grades(htno+i,code)))
     responses = asyncio.gather(*tasksi)
     return await responses
 

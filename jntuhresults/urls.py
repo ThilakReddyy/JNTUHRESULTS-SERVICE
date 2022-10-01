@@ -23,4 +23,4 @@ urlpatterns = [
     path('api/single',views.allResults),
     path('cors',views.cors),
 ]
-handler404 = views.page_not_found_view
+# handler404 = views.page_not_found_view

@@ -80,6 +80,7 @@ class Results:
     
     async def getting_the_grades(self,code,roll):
         exam_Codes=exam_codes(code,roll)
+        
         async with aiohttp.ClientSession() as session:
             tasks=self.get_tasks(session,exam_Codes,roll)
             
@@ -91,16 +92,19 @@ class Results:
             for response in responses:
                 r=await response.text()
                 soup = BeautifulSoup(r, "html.parser")
-                
                 self.scraping_the_grades(code,soup)
         await session.close()
         self.total_grade_Calculator(code,self.deta["Results"][code])
         return self.deta
 
     
-    #Function to call from views
-    async def getting_faster_Grades(self,roll,code):
-        return asyncio.run(self.getting_the_grades(code,roll))
+#Function to call from views
+async def getting_faster_Grades(roll,code):
+    Result=Results()
+
+    a=asyncio.run(Result.getting_the_grades(code,roll))
+    del Result
+    return a
 
         
                 

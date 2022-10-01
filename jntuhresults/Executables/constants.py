@@ -43,8 +43,7 @@ def exam_codes(code,htno):
         return arr41
     elif(code =="4-2"):
         return arr42
-    else:
-        return []
+
 
 a_dic={'0'+str(i):'0'+str(i) for i in range(1,10)}
 for i in range(10,100):

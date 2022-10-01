@@ -60,8 +60,7 @@ async def allResults_extend(htno):
         listi=listi[2:]
     tasksi=[]
     for i in listi:
-        Results=Search_by_Roll_number.Results()
-        tasksi.append(asyncio.create_task(Results.getting_faster_Grades(htno,i)))
+        tasksi.append(asyncio.create_task(Search_by_Roll_number.getting_faster_Grades(htno,i)))
     responses = asyncio.gather(*tasksi)
     return await responses
 

@@ -101,10 +101,9 @@ class Results:
 #Function to call from views
 async def getting_faster_Grades(roll,code):
     Result=Results()
-
-    a=asyncio.run(Result.getting_the_grades(code,roll))
+    result=asyncio.run(Result.getting_the_grades(code,roll))
     del Result
-    return a
+    return result
 
         
                 

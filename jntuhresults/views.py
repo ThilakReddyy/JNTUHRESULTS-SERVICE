@@ -77,14 +77,23 @@ async def allResults(request):
     Results={}
     Results['Details']={}
     Results['Results']={}
+    total=0
+    credits=0
+    all_pass=True
     for i in json_object:   
         try:
             for ind in i['Results']:
                 Results['Results'][ind]=i['Results'][ind]
                 Results['Details']=i['DETAILS']
-        
+                try:
+                    total=total+i['Results'][ind]['total']
+                    credits=credits+i['Results'][ind]['credits']
+                except:
+                    all_pass=False
         except:
             del Results['Results'][ind]
+    if(all_pass):
+        Results['Results']['Total']="{0:.2f}".format(round(total/credits,2))
     stopping=time.time()
     print(stopping-starting)
     return JsonResponse(Results,safe=False)

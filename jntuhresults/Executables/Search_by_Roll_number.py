@@ -32,6 +32,8 @@ class Results:
                         return ""
                     total=total+int(grades_to_gpa[value[data]['subject_grade']])*float(value[data]['subject_credits'])
                     credits=credits+float(value[data]['subject_credits'])
+            self.deta["Results"][code]["total"]=total
+            self.deta["Results"][code]["credits"]=credits
             self.deta["Results"][code]["CGPA"]="{0:.2f}".format(round(total/credits,2)) 
         except:
             pass

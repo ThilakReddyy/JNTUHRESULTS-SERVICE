@@ -92,6 +92,10 @@ async def allResults(request):
                     all_pass=False
         except:
             del Results['Results'][ind]
+    try:
+        print(Results['Details']['NAME'])
+    except:
+        pass
     if(all_pass):
         Results['Results']['Total']="{0:.2f}".format(round(total/credits,2))
     stopping=time.time()

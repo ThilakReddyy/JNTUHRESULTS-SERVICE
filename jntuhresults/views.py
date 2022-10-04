@@ -75,16 +75,14 @@ async def allResults(request):
     except:
         return HttpResponse('Enter hallticket number correctly')
     try:
-        myobj = datetime.now()
-        if( myobj.minute==0):
-            JNTUH_Results.clear()
         return JsonResponse(JNTUH_Results[htno],safe=False)
     except:
-        print("error")
+        print("Not loaded from cache")
     try:
         json_object = asyncio.run(allResults_extend(htno))
     except:
-        return HttpResponse("Error")
+        print("Failed")
+        return HttpResponse("Not working correctly",status=400)
     Results={}
     Results['Details']={}
     Results['Results']={}

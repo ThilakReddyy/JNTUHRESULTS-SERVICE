@@ -20,8 +20,7 @@ async def gettingurl(htno,fro,to,code):
     First_Index,Last_Index=Index_Keys.index(fro),Index_Keys.index(to)
     Index_List=Index_Keys[First_Index:Last_Index+1]
     for i in Index_List:
-        Results=Search_by_Roll_number.Results()
-        tasksi.append(asyncio.create_task(Results.getting_faster_Grades(htno+i,code)))
+        tasksi.append(asyncio.create_task(Search_by_Roll_number.getting_faster_Grades(htno+i,code)))
     responses = asyncio.gather(*tasksi)
     return await responses
 
@@ -56,12 +55,12 @@ async def multi(request):
 #single------------------------------------------------------------------------------------------------------------
 async def allResults_extend(htno):
     global listi
+    listE=listi
     if(htno[4]=='5'):
-        listi=listi[2:]
+        listE=listi[2:]
     tasksi=[]
-    for i in listi:
-        Results=Search_by_Roll_number.Results()
-        tasksi.append(asyncio.create_task(Results.getting_faster_Grades(htno,i)))
+    for i in listE:
+        tasksi.append(asyncio.create_task(Search_by_Roll_number.getting_faster_Grades(htno,i)))
     responses = asyncio.gather(*tasksi)
     return await responses
 
@@ -78,14 +77,27 @@ async def allResults(request):
     Results={}
     Results['Details']={}
     Results['Results']={}
+    total=0
+    credits=0
+    all_pass=True
     for i in json_object:   
         try:
             for ind in i['Results']:
                 Results['Results'][ind]=i['Results'][ind]
                 Results['Details']=i['DETAILS']
-        
+                try:
+                    total=total+i['Results'][ind]['total']
+                    credits=credits+i['Results'][ind]['credits']
+                except:
+                    all_pass=False
         except:
             del Results['Results'][ind]
+    try:
+        print(Results['Details']['NAME'])
+    except:
+        pass
+    if(all_pass):
+        Results['Results']['Total']="{0:.2f}".format(round(total/credits,2))
     stopping=time.time()
     print(stopping-starting)
     return JsonResponse(Results,safe=False)

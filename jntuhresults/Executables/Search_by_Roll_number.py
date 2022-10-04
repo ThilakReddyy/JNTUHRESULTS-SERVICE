@@ -32,6 +32,8 @@ class Results:
                         return ""
                     total=total+int(grades_to_gpa[value[data]['subject_grade']])*float(value[data]['subject_credits'])
                     credits=credits+float(value[data]['subject_credits'])
+            self.deta["Results"][code]["total"]=total
+            self.deta["Results"][code]["credits"]=credits
             self.deta["Results"][code]["CGPA"]="{0:.2f}".format(round(total/credits,2)) 
         except:
             pass
@@ -80,6 +82,7 @@ class Results:
     
     async def getting_the_grades(self,code,roll):
         exam_Codes=exam_codes(code,roll)
+        
         async with aiohttp.ClientSession() as session:
             tasks=self.get_tasks(session,exam_Codes,roll)
             
@@ -91,16 +94,18 @@ class Results:
             for response in responses:
                 r=await response.text()
                 soup = BeautifulSoup(r, "html.parser")
-                
                 self.scraping_the_grades(code,soup)
         await session.close()
         self.total_grade_Calculator(code,self.deta["Results"][code])
         return self.deta
 
     
-    #Function to call from views
-    async def getting_faster_Grades(self,roll,code):
-        return asyncio.run(self.getting_the_grades(code,roll))
+#Function to call from views
+async def getting_faster_Grades(roll,code):
+    Result=Results()
+    result=asyncio.run(Result.getting_the_grades(code,roll))
+    del Result
+    return result
 
         
                 

@@ -24,27 +24,12 @@ arr42=[1580]
 # payloads=["&etype=r17&result=null&grad=null&type=null&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
 payloads=["&etype=r17&result=null&grad=null&type=intgrade&htno=","&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
 
+
 #Exam Codes-----------------------------------------------------------
 def exam_codes(code,htno):
     if (code =="1-1"):
-        if(htno[4]==5):
-            return []
-        # if(htno[:2]=='19'):
-        #     return arr11[2:]
-        # if(htno[:2]=='20'):
-        #     return arr11[4:]
-        # if(htno[:2]=='21'):
-        #     return arr11[6:]
         return arr11
     elif(code =="1-2"):
-        if(htno[4]==5):
-            return []
-        if(htno[:2]=='19'):
-            pass
-        if(htno[:2]=='20'):
-            pass
-        if(htno[:2]=='21'):
-            pass
         return arr12
     elif(code =="2-1"):
         return arr21
@@ -58,8 +43,7 @@ def exam_codes(code,htno):
         return arr41
     elif(code =="4-2"):
         return arr42
-    else:
-        return []
+
 
 a_dic={'0'+str(i):'0'+str(i) for i in range(1,10)}
 for i in range(10,100):

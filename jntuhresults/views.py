@@ -75,6 +75,7 @@ async def allResults(request):
     except:
         return HttpResponse('Enter hallticket number correctly')
     try:
+        print("Loaded from cache")
         return JsonResponse(JNTUH_Results[htno],safe=False)
     except:
         print("Not loaded from cache")

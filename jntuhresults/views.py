@@ -6,8 +6,9 @@ from jntuhresults.Executables.constants import a_dic,Index_Keys
 import json
 import asyncio
 import time
+from datetime import datetime
 listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
-
+JNTUH_Results={}
 #Page Not Found Redirect
 def page_not_found_view(request, exception):
     return redirect('/api/single?htno=18E51A0479')
@@ -73,7 +74,17 @@ async def allResults(request):
         print(htno)
     except:
         return HttpResponse('Enter hallticket number correctly')
-    json_object = asyncio.run(allResults_extend(htno))
+    try:
+        myobj = datetime.now()
+        if( myobj.minute==0):
+            JNTUH_Results.clear()
+        return JsonResponse(JNTUH_Results[htno],safe=False)
+    except:
+        print("error")
+    try:
+        json_object = asyncio.run(allResults_extend(htno))
+    except:
+        return HttpResponse("Error")
     Results={}
     Results['Details']={}
     Results['Results']={}
@@ -100,5 +111,6 @@ async def allResults(request):
         Results['Results']['Total']="{0:.2f}".format(round(total/credits,2))
     stopping=time.time()
     print(stopping-starting)
+    JNTUH_Results[htno]=Results
     return JsonResponse(Results,safe=False)
 #------------------------------------------------------------------------------------------------------------------

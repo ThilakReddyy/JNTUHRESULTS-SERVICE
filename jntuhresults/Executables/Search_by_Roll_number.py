@@ -100,12 +100,12 @@ class Results:
         return self.deta
 
     
-#Function to call from views
-async def getting_faster_Grades(roll,code):
-    Result=Results()
-    result=asyncio.run(Result.getting_the_grades(code,roll))
-    del Result
-    return result
+    #Function to call from views
+    async def getting_faster_Grades(self,roll,code):
+        Result=Results()
+        result=asyncio.run(self.getting_the_grades(code,roll))
+        del Result
+        return result
 
         
                 

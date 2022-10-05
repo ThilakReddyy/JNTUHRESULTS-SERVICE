@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/multi',views.multi),
-    path('api/single',views.allResults),
-    path('cors',views.cors),
+    path('api/multi',multi.as_view()),
+    path('api/single',allResults.as_view()),
+    path('cors',cors),
 ]
 # handler404 = views.page_not_found_view

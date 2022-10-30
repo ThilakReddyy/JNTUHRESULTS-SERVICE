@@ -39,7 +39,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'jntuhresults.urls'
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL=False
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:8000',
+  'https://jntuhresults.vercel.app/',
+  'https://jntuh-results.vercel.app/',
+  'https://jntuh-result.vercel.app/',
+  'https://jntuhbtechresults.vercel.app/',
+  'https://jntuhbtechresult.vercel.app/',
+  'https://jnturesults.vercel.app/',
+  'https://jntuh-btech-results.vercel.app/',
+  'https://resultsjntu.vercel.app/',
+  'https://jntuhresults.up.railway.app/',
+)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

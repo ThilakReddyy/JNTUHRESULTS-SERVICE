@@ -50,7 +50,6 @@ CORS_ORIGIN_WHITELIST = (
   'https://jnturesults.vercel.app/',
   'https://jntuh-btech-results.vercel.app/',
   'https://resultsjntu.vercel.app/',
-  'https://jntuhresults.up.railway.app/',
 )
 TEMPLATES = [
     {

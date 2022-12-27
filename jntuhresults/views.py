@@ -117,6 +117,6 @@ class allResults(View):
             Results['Results']['Total']="{0:.2f}".format(round(total/credits,2))
         stopping=time.time()
         print(stopping-starting)
-        JNTUH_Results[htno]=Results
+        #JNTUH_Results[htno]=Results
         return JsonResponse(Results,safe=False)
 #------------------------------------------------------------------------------------------------------------------

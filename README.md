@@ -9,8 +9,8 @@ The Backbone of JNTUHRESULTS-WEB where all the semester results of a student and
 
 ## HOW IT WORKS
 
-* Jntuh website doesn't have any api and it does not authenticate when a request is made it just sends back the response of that request
-* I made a request and i got a response and using beautiful soup i have parse the html and i got my results
+* The JNTUH website does not have an API, and it does not authenticate requests. Instead, it sends back the response of each request made
+* I made a request and received a response. Using Beautiful Soup, I parsed the HTML and obtained the results.
 
 ## API
 * https://jntuhresults.up.railway.app/api/single?htno={Roll_NO}

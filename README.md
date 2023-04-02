@@ -5,7 +5,7 @@
   django | python | BeautifulSoup 
 </p>
 
-The Backbone of JNTUHRESULTS-WEB where all the semester results of a student and the results of all the classmates are fetched
+The Backbone of <a href="https://github.com/ThilakReddyy/JNTUHRESULTS-WEB">JNTUHRESULTS-WEB</a> where all the semester results of a student and the results of all the classmates are fetched
 
 ## HOW IT WORKS
 

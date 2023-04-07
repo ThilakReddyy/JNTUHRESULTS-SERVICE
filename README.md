@@ -13,22 +13,23 @@ The Backbone of <a href="https://github.com/ThilakReddyy/JNTUHRESULTS-WEB">JNTUH
 * I made a request and received a response. Using Beautiful Soup, I parsed the HTML and obtained the results.
 
 ## API
-* https://jntuhresults.up.railway.app/api/single?htno={Roll_NO}
-* https://jntuhresults.up.railway.app/api/multi?from={from_roll_no}&to={To_roll_no}&code={code}
+Two API endpoints are available for fetching results:
+
+* https://jntuhresults.up.railway.app/api/single?htno={Roll_NO} - Fetches results for a single student using their roll number.
+* https://jntuhresults.up.railway.app/api/multi?from={from_roll_no}&to={To_roll_no}&code={code} - Fetches results for multiple students within a given range of roll numbers and code.
 
 
-## Running locally in development mode
+## Running Locally
 
-To get started, just clone the repository and run `pip install and python manage.py runserver`:
+To run the code locally in development mode, follow these steps:
 
-    git clone https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE.git
-    cd JNTUHRESULTS-SERVICE
-    pip install -r requirements.txt
-    python manage.py runserver
+* Clone the repository: `git clone https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE.git`
+* Navigate to the repository: `cd JNTUHRESULTS-SERVICE`
+* Install the requirements: `pip install -r requirements.txt`
+* Run the server: `python manage.py runserver`
+* Open [http://localhost:8000](http://localhost:8000) in your browser to view the results.
 
-Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
-
-## Questions? Need Help? Found a bug?
+## Need Help or Found a bug?
 
 If you've got questions about setup, deploying, special feature implementation, or just want to chat with the developer, please feel free to contact me on <a href="mailto:thilakreddypothuganti@gmail.com">mail</a>
 
@@ -38,8 +39,7 @@ Also feel free to message me if you have any ideas for small website tools that 
 
 ## Thanks
 
-- [django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design
-- [python](https://www.python.org/) is a programming language that lets you work quickly
-and integrate systems more effectively.
+- [django](https://www.djangoproject.com/) a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+- [python](https://www.python.org/)  a powerful and versatile programming language that is widely used in many fields.
 
  

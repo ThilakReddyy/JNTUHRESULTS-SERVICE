@@ -56,7 +56,7 @@ class Results:
             subject_code_index = table2_column_names.index("SUBJECT CODE")
             subject_credits_index = table2_column_names.index("CREDITS(C)")
             table2 = table2[1:]
-            self.deta["DETAILS"] = {"NAME": NAME, "Roll_No": Roll_NO, "COLLEGE_CODE": COLLEGE_CODE}
+            self.deta["DETAILS"] = {"NAME": NAME, "Roll_No": Roll_NO, "COLLEGE_CODE": COLLEGE_CODE,"FATHER_NAME":FATHER_NAME}
             
             for row in table2:
                 try:
@@ -72,8 +72,8 @@ class Results:
                 except:
                     pass
                 self.deta["Results"][code][subject_code]={}
-                self.deta["Results"][code][subject_code]["subject_name"]=subject_name
                 self.deta["Results"][code][subject_code]["subject_code"]=subject_code
+                self.deta["Results"][code][subject_code]["subject_name"]=subject_name
                 self.deta["Results"][code][subject_code]["subject_grade"]=subject_grade
                 self.deta["Results"][code][subject_code]["subject_credits"]=subject_credits
         except:

@@ -42,15 +42,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = "jntuhresults.urls"
 CORS_ALLOWED_ORIGINS = [
     "https://jntuhresults.vercel.app",
-    "http://127.0.0.1:8000",
     "https://jntuh-results.vercel.app",
     "https://jntuh-result.vercel.app",
     "https://jntuhbtechresults.vercel.app",
     "https://jntuhbtechresult.vercel.app",
     "https://jnturesults.vercel.app",
     "https://jntuh-btech-results.vercel.app",
-    "http://127.0.0.1:3000",
-    "https://ngrok-free.app",
 ]
 TEMPLATES = [
     {

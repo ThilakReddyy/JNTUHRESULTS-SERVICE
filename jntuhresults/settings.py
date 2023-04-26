@@ -50,6 +50,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://jnturesults.vercel.app",
     "https://jntuh-btech-results.vercel.app",
     "http://127.0.0.1:3000",
+    "https://ngrok.com,
 ]
 TEMPLATES = [
     {

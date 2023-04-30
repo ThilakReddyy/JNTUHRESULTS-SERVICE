@@ -66,11 +66,10 @@ class Results:
                 subject_code = row.find_all("td")[subject_code_index].find("b").contents[0]
                 subject_grade = row.find_all("td")[grade_index].find("b").contents[0]
                 subject_credits = row.find_all("td")[subject_credits_index].find("b").contents[0]
-                try:
-                    if(subject_code in self.deta["Results"][code] and self.deta["Results"][code][subject_code]["subject_grade"]!="F" and self.deta["Results"][code][subject_code]["subject_grade"]!="Ab" and self.deta["Results"][code][subject_code]["subject_grade"]<subject_grade):
+               
+                if(subject_code in self.deta["Results"][code] and self.deta["Results"][code][subject_code]["subject_grade"]!="F" and self.deta["Results"][code][subject_code]["subject_grade"]!="Ab" and self.deta["Results"][code][subject_code]["subject_grade"]<subject_grade):
                         continue    
-                except:
-                    pass
+               
                 self.deta["Results"][code][subject_code]={}
                 self.deta["Results"][code][subject_code]["subject_code"]=subject_code
                 self.deta["Results"][code][subject_code]["subject_name"]=subject_name

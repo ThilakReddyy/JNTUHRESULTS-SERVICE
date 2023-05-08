@@ -72,6 +72,7 @@ class allResults(View):
 
     #API for getting all Results
     def get(self,request):
+        print(request.META.get("HTTP_USER_AGENT"))
         starting =time.time()
         try:
             htno=request.GET.get('htno').upper()

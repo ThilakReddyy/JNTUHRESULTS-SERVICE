@@ -67,7 +67,7 @@ class Results:
                 subject_grade = row.find_all("td")[grade_index].find("b").contents[0]
                 subject_credits = row.find_all("td")[subject_credits_index].find("b").contents[0]
                
-                if(subject_code in self.deta["Results"][code] and self.deta["Results"][code][subject_code]["subject_grade"]!="F" and self.deta["Results"][code][subject_code]["subject_grade"]!="Ab" and self.deta["Results"][code][subject_code]["subject_grade"]<subject_grade):
+                if(subject_code in self.deta["Results"][code] and self.deta["Results"][code][subject_code]["subject_grade"]!="F" and self.deta["Results"][code][subject_code]["subject_grade"]!="Ab" and self.deta["Results"][code][subject_code]["subject_grade"]!="-" and self.deta["Results"][code][subject_code]["subject_grade"]<subject_grade):
                         continue    
                
                 self.deta["Results"][code][subject_code]={}

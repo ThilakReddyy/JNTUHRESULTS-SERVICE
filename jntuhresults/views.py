@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse,JsonResponse
 from asgiref.sync import sync_to_async
 from jntuhresults.Executables import Search_by_Roll_number
+from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from jntuhresults.Executables.constants import a_dic,Index_Keys
 import json
 import asyncio
@@ -11,11 +12,10 @@ from django.views.generic import View
 listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
 JNTUH_Results={}
 #Page Not Found Redirect
+
 def page_not_found_view(request, exception):
     return redirect('/api/single?htno=18E51A0479')
     
-def cors(request):
-    return HttpResponse("hello")
 #Multi-----------------------------------------------------------------------------------------------------
 class multi(View):
     async def gettingurl(self,htno,fro,to,code):
@@ -120,4 +120,42 @@ class allResults(View):
         print(stopping-starting)
         #JNTUH_Results[htno]=Results
         return JsonResponse(Results,safe=False)
+    
+class academicResult(View):
+    def get(self,request):
+        # Check if the university code is 'jntuh'
+        htno=request.GET.get('htno').upper()
+        # Check if the hall ticket number is valid
+        if len(htno) != 10:
+            return HttpResponse("Invalid hall ticket number")
+
+            # Create an instance of ResultScraper
+        jntuhresult = ResultScraper(htno.upper())
+
+        try:
+                # Run the scraper and return the result
+                result = jntuhresult.run()
+
+                # Calculate the total marks and credits
+                total = sum(
+                    i.get("total", 0)
+                    for i in result["Results"].values()
+                    if i.get("credits", 0) != 0
+                )
+                total_credits = sum(
+                    i["credits"]
+                    for i in result["Results"].values()
+                    if i.get("credits", 0) != 0
+                )
+
+                # Calculate the CGPA if there are non-zero credits
+                if total_credits != 0:
+                    result["CGPA"] = total / total_credits
+
+                # Return the result
+                return JsonResponse(result,safe=False)
+        except Exception as e:
+            # Catch any exceptions raised during scraping
+            return HttpResponse("500 Internal Server Error")
+           
 #------------------------------------------------------------------------------------------------------------------

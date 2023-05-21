@@ -147,6 +147,8 @@ class ResultScraper:
 
                     if bool(self.results["Results"][exam_code]):
                         self.total_grade_calculator(exam_code, self.results["Results"][exam_code])
+                    else:
+                        del self.results["Results"][exam_code]
                 except Exception as e:
                     print(self.roll_number,e)
 

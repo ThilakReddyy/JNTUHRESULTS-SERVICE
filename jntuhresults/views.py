@@ -1,10 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse,JsonResponse
-from asgiref.sync import sync_to_async
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from jntuhresults.Executables import Search_by_Roll_number
-from jntuhresults.Executables.constants import a_dic,Index_Keys
-import json
+from jntuhresults.Executables.constants import Index_Keys
 import asyncio
 import time
 from django.views.generic import View
@@ -34,6 +32,7 @@ class multi(View):
             htno1=request.GET.get('from').upper()
             htno2=request.GET.get('to').upper()
             code=request.GET.get('code').upper()
+            return HttpResponse("currently this feature is not available")
         except:
             return HttpResponse("Pass from and to roll number as query")
         if(code not in listi):
@@ -56,71 +55,8 @@ class multi(View):
 
 
 
-#single------------------------------------------------------------------------------------------------------------
-class allResults(View):
-    async def allResults_extend(self,htno):
-            global listi
-            listE=listi
-            if(htno[4]=='5'):
-                listE=listi[2:]
-            tasksi=[]
-            for i in listE:
-                Result=Search_by_Roll_number.Results()
-                tasksi.append(asyncio.create_task(Result.getting_faster_Grades(htno,i)))
-            responses = asyncio.gather(*tasksi)
-            return await responses
+#academicresult------------------------------------------------------------------------------------------------------------
 
-    #API for getting all Results
-    def get(self,request):
-        print(request.META.get("HTTP_USER_AGENT"))
-        starting =time.time()
-        try:
-            htno=request.GET.get('htno').upper()
-            print(htno)
-        except:
-            return HttpResponse('Enter hallticket number correctly')
-        try:
-            Result=JNTUH_Results[htno]
-            stopping=time.time()
-            print(stopping-starting)
-            print("Loaded from cache")
-            return JsonResponse(Result,safe=False)
-        except:
-            print("Not loaded from cache")
-        try:
-            json_object = asyncio.run(self.allResults_extend(htno))
-        except:
-            print("Failed")
-            return HttpResponse("Not working correctly",status=400)
-        Results={}
-        Results['Details']={}
-        Results['Results']={}
-        total=0
-        credits=0
-        all_pass=True
-        for i in json_object:   
-            try:
-                for ind in i['Results']:
-                    Results['Results'][ind]=i['Results'][ind]
-                    Results['Details']=i['DETAILS']
-                    try:
-                        total=total+i['Results'][ind]['total']
-                        credits=credits+i['Results'][ind]['credits']
-                    except:
-                        all_pass=False
-            except:
-                del Results['Results'][ind]
-        try:
-            print(Results['Details']['NAME'])
-        except:
-            pass
-        if(all_pass):
-            Results['Results']['Total']="{0:.2f}".format(round(total/credits,2))
-        stopping=time.time()
-        print(stopping-starting)
-        #JNTUH_Results[htno]=Results
-        return JsonResponse(Results,safe=False)
-    
 class academicResult(View):
     def get(self,request):
         starting =time.time()    
@@ -129,11 +65,11 @@ class academicResult(View):
         # Check if the hall ticket number is valid
         if len(htno) != 10:
             return HttpResponse(htno+" Invalid hall ticket number")
-
-            # Create an instance of ResultScraper
-        jntuhresult = ResultScraper(htno.upper())
-        
         try:
+                # Create an instance of ResultScraper
+                jntuhresult = ResultScraper(htno.upper())
+        
+
                 # Run the scraper and return the result
                 result = jntuhresult.run()
                 

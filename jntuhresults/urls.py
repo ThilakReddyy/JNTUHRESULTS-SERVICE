@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import multi,allResults,academicResult
+from .views import multi,academicResult
 
 urlpatterns = [
     path('api/multi',multi.as_view()),

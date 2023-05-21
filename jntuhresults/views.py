@@ -90,10 +90,13 @@ class academicResult(View):
                     result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
                 stopping=time.time()
                 print(htno,result['Details']['NAME']," ",stopping-starting)
+
+                del jntuhresult
                 # Return the result
                 return JsonResponse(result,safe=False)
         
         except Exception as e:
+            print(htno,e)
             # Catch any exceptions raised during scraping
             return HttpResponse(htno+" - 500 Internal Server Error")
            

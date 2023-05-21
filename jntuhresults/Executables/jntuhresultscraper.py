@@ -131,19 +131,24 @@ class ResultScraper:
 
                 for code in exam_codes[exam_code]:
                     for payload in self.payloads:
-                        task = asyncio.ensure_future(self.fetch_result(session, code, payload))
-                        tasks[exam_code].append(task)
+                        try:
+                            task = asyncio.ensure_future(self.fetch_result(session, code, payload))
+                            tasks[exam_code].append(task)
+                        except Exception as e:
+                            print(self.roll_number,e)
 
             # Wait for all the tasks to complete
             for exam_code, exam_tasks in tasks.items():
                 self.results["Results"][exam_code] = {}
+                try:
+                    for result in await asyncio.gather(*exam_tasks):
+                        if "Enter HallTicket Number" not in result:
+                            self.scrape_results(exam_code, result)
 
-                for result in await asyncio.gather(*exam_tasks):
-                    if "Enter HallTicket Number" not in result:
-                        self.scrape_results(exam_code, result)
-
-                if bool(self.results["Results"][exam_code]):
-                    self.total_grade_calculator(exam_code, self.results["Results"][exam_code])
+                    if bool(self.results["Results"][exam_code]):
+                        self.total_grade_calculator(exam_code, self.results["Results"][exam_code])
+                except Exception as e:
+                    print(self.roll_number,e)
 
         return self.results
 

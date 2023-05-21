@@ -151,7 +151,7 @@ class academicResult(View):
 
                 # Calculate the CGPA if there are non-zero credits
                 if total_credits != 0:
-                    result["Results"]["Total"] = total / total_credits
+                    result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
                 stopping=time.time()
                 print(htno,result['Details']['NAME']," ",stopping-starting)
                 # Return the result

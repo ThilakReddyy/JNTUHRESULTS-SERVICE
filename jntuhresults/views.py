@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse,JsonResponse
 from asgiref.sync import sync_to_async
-from jntuhresults.Executables import Search_by_Roll_number
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
+from jntuhresults.Executables import Search_by_Roll_number
 from jntuhresults.Executables.constants import a_dic,Index_Keys
 import json
 import asyncio
@@ -123,19 +123,20 @@ class allResults(View):
     
 class academicResult(View):
     def get(self,request):
-        # Check if the university code is 'jntuh'
+        starting =time.time()    
+
         htno=request.GET.get('htno').upper()
         # Check if the hall ticket number is valid
         if len(htno) != 10:
-            return HttpResponse("Invalid hall ticket number")
+            return HttpResponse(htno+" Invalid hall ticket number")
 
             # Create an instance of ResultScraper
         jntuhresult = ResultScraper(htno.upper())
-
+        
         try:
                 # Run the scraper and return the result
                 result = jntuhresult.run()
-
+                
                 # Calculate the total marks and credits
                 total = sum(
                     i.get("total", 0)
@@ -150,12 +151,14 @@ class academicResult(View):
 
                 # Calculate the CGPA if there are non-zero credits
                 if total_credits != 0:
-                    result["CGPA"] = total / total_credits
-
+                    result["Total"] = total / total_credits
+                stopping=time.time()
+                print(htno,result['Details']['NAME']," ",stopping-starting)
                 # Return the result
                 return JsonResponse(result,safe=False)
+        
         except Exception as e:
             # Catch any exceptions raised during scraping
-            return HttpResponse("500 Internal Server Error")
+            return HttpResponse(htno+" - 500 Internal Server Error")
            
 #------------------------------------------------------------------------------------------------------------------

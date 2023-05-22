@@ -73,20 +73,25 @@ class academicResult(View):
                 # Run the scraper and return the result
                 result = jntuhresult.run()
                 
-                # Calculate the total marks and credits
-                total = sum(
-                    i.get("total", 0)
-                    for i in result["Results"].values()
-                    if i.get("credits", 0) != 0
-                )
-                total_credits = sum(
-                    i["credits"]
-                    for i in result["Results"].values()
-                    if i.get("credits", 0) != 0
-                )
+ # Calculate the total marks and credits
+                total_credits = 0  # Variable to store the total credits
+                total = 0  # Variable to store the total marks
+                failed = False  # Flag to indicate if any value is missing 'total' key
 
+                # Iterate over the values in result["Results"] dictionary
+                for value in result["Results"].values():
+                    if 'total' in value.keys():  # Check if the current value has 'total' key
+                        total += value['total']  # Add the 'total' value to the total marks
+                        total_credits += value['credits']  # Add the 'credits' value to the total credits
+                    else:
+                        failed = True  # Set the flag to indicate missing 'total' key
+
+
+
+                
                 # Calculate the CGPA if there are non-zero credits
-                if total_credits != 0:
+                if not failed:
+                        
                     result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
                 stopping=time.time()
                 print(htno,result['Details']['NAME']," ",stopping-starting)

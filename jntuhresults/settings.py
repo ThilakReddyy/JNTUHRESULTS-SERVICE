@@ -48,7 +48,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://jntuhbtechresult.vercel.app",
     "https://jnturesults.vercel.app",
     "https://jntuh-btech-results.vercel.app",
-    "http://localhost:8080",
+    "http://localhost:3000",
 ]
 TEMPLATES = [
     {

@@ -68,12 +68,11 @@ class academicResult(View):
         try:
                 # Create an instance of ResultScraper
                 jntuhresult = ResultScraper(htno.upper())
-        
 
                 # Run the scraper and return the result
                 result = jntuhresult.run()
                 
- # Calculate the total marks and credits
+                # Calculate the total marks and credits
                 total_credits = 0  # Variable to store the total credits
                 total = 0  # Variable to store the total marks
                 failed = False  # Flag to indicate if any value is missing 'total' key
@@ -86,15 +85,12 @@ class academicResult(View):
                     else:
                         failed = True  # Set the flag to indicate missing 'total' key
 
-
-
-                
                 # Calculate the CGPA if there are non-zero credits
                 if not failed:
-                        
                     result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
+
                 stopping=time.time()
-                print(htno,result['Details']['NAME']," ",stopping-starting)
+                print(htno,result['Details']['NAME'],",",result['Details']['FATHER NAME'],stopping-starting)
 
                 del jntuhresult
                 # Return the result

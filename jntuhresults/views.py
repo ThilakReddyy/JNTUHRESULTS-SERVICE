@@ -90,7 +90,7 @@ class academicResult(View):
                     result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
 
                 stopping=time.time()
-                print(htno,result['Details']['NAME'],",",result['Details']['FATHER NAME'],stopping-starting)
+                print(htno,result['Details']['NAME'],stopping-starting)
 
                 del jntuhresult
                 # Return the result

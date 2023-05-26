@@ -61,9 +61,9 @@ class ResultScraper:
         
         # Store student details in the results dictionary
         self.results["Details"]["NAME"]=Name
-        self.results["Details"]["Roll No"]=Htno
-        self.results["Details"]["COLLEGE CODE"]=College_Code
-        self.results["Details"]["FATHER NAME"]=Father_Name
+        self.results["Details"]["Roll_No"]=Htno
+        self.results["Details"]["COLLEGE_CODE"]=College_Code
+        self.results["Details"]["FATHER_NAME"]=Father_Name
         
         Results = soup.find_all("table")[1].find_all("tr")
 

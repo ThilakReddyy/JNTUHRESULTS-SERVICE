@@ -17,7 +17,7 @@ class ResultScraper:
         self.results = {"Details": {}, "Results": {}}
         
         # Exam codes for different semesters
-        self.exam_codes = {
+        self.r18_exam_codes = {
             "1-1": ["1323", "1358", "1404", "1430", "1467", "1504", "1572", "1615", "1658"],
             "1-2": ["1356", "1363", "1381", "1435", "1448", "1481", "1503", "1570", "1620", "1622", "1656"],
             "2-1": ["1391", "1425", "1449", "1496", "1560", "1610", "1628"],
@@ -28,7 +28,9 @@ class ResultScraper:
             "4-2": ["1580", "1600", "1623"]
         }
 
-
+        self.r22_exam_codes={
+                "1-1":["1662"]
+                }
         #To be implemented after implementing redis server
         # self.examcodes=jntuhresultscraper.exam_codes()
 
@@ -120,11 +122,14 @@ class ResultScraper:
             tasks = {}
 
             if exam_codes == "all":
-                exam_codes = self.exam_codes
+                if(self.roll_number[:2]=="22"):
+                    exam_codes =self.r22_exam_codes
+                else:
+                    exam_codes = self.r18_exam_codes
                 if self.roll_number[4] == "5":
                     del exam_codes["1-1"], exam_codes["1-2"]
             else:
-                exam_codes = self.exam_codes
+                exam_codes = self.r18_exam_codes
 
             for exam_code in exam_codes.keys():
                 # Create a task for each exam code

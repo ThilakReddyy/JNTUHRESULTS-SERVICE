@@ -18,22 +18,43 @@ class ResultScraper:
         
         self.results = {"Details": {}, "Results": {}}
         
-        # Exam codes for R18 different semesters
-        self.r18_exam_codes = {
-            "1-1": ["1323", "1358", "1404", "1430", "1467", "1504", "1572", "1615", "1658"],
-            "1-2": ["1356", "1363", "1381", "1435", "1448", "1481", "1503", "1570", "1620", "1622", "1656"],
-            "2-1": ["1391", "1425", "1449", "1496", "1560", "1610", "1628"],
-            "2-2": ["1437", "1447", "1476", "1501", "1565", "1605", "1627"],
-            "3-1": ["1454", "1491", "1550", "1590", "1626", "1639", "1645", "1655"],
-            "3-2": ["1502", "1555", "1595", "1625", "1638", "1649", "1654"],
-            "4-1": ["1545", "1585", "1624", "1640", "1644", "1653"],
-            "4-2": ["1580", "1600", "1623"]
-        }
+        # Exam codes for different regulations and semesters
+        self.exam_codes={
+                "btech":
+                {
+                    "R18":
+                    {
+                        "1-1": ["1323", "1358", "1404", "1430", "1467", "1504", "1572", "1615", "1658"],
+                        "1-2": ["1356", "1363", "1381", "1435", "1448", "1481", "1503", "1570", "1620", "1622", "1656"],
+                        "2-1": ["1391", "1425", "1449", "1496", "1560", "1610", "1628"],
+                        "2-2": ["1437", "1447", "1476", "1501", "1565", "1605", "1627"],
+                        "3-1": ["1454", "1491", "1550", "1590", "1626", "1639", "1645", "1655"],
+                        "3-2": ["1502", "1555", "1595", "1625", "1638", "1649", "1654"],
+                        "4-1": ["1545", "1585", "1624", "1640", "1644", "1653"],
+                        "4-2": ["1580", "1600", "1623"]
+                     },
+                    "R22":
+                    {
+                        "1-1":["1662"]
+                    }
+                },
+                "bpharmacy":
+                {
+                    "R17":
+                    {
+                        '1-1': ['519', '537', '577', '616', '643', '683', '722', '781', '824', '832'],
+                        '1-2': ['517', '549', '575', '591', '648', '662', '698', '727', '779', '829', '831'],
+                        '2-1': ['532', '570', '638', '673', '717', '769', '819'],
+                        '2-2': ['558', '611', '650', '661', '693', '711', '774', '814'],
+                        '3-1': ['597', '633', '668', '712', '759', '799', '837'],
+                        '3-2': ['655', '660', '688', '710', '764', '804', '841'],
+                        '4-1': ['663', '705', '754', '794', '832', '836'],
+                        '4-2': ['678', '700', '789', '809']
 
-        # Exam codes for R22 different semesters
-        self.r22_exam_codes={
-                "1-1":["1662"]
+                    }
+
                 }
+            }
 
         #To be implemented after implementing redis server
         # self.examcodes=jntuhresultscraper.exam_codes()
@@ -42,13 +63,16 @@ class ResultScraper:
         self.grades_to_gpa = {'O': 10, 'A+': 9, 'A': 8, 'B+': 7, 'B': 6, 'C': 5, 'F': 0, 'Ab': 0, '-': 0}
         
         # Payloads for different types of result requests
-        self.payloads = ["&etype=r17&result=null&grad=null&type=intgrade&htno=", "&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="]
+        self.payloads={
+                "btech":["&degree=btech&etype=r17&result=null&grad=null&type=intgrade&htno=","&degree=btech&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="],
+                "bpharmacy":["&degree=bpharmacy&etype=r17&grad=null&result=null&type=regular&htno=","&degree=bpharmacy&etype=r17&grad=null&result=gradercrv&type=rcrvintgrade&htno="]
+                }
 
     async def fetch_result(self, session, exam_code, payload):
         
         # Prepare the payload for the HTTP POST request
-        payloaddata="?degree=btech&examCode="+exam_code+payload+self.roll_number
-
+        payloaddata="?&examCode="+exam_code+payload+self.roll_number
+ 
         # Make the HTTP POST request and print the response text
         async with session.get(self.url+payloaddata) as response:
             return await response.text()
@@ -104,7 +128,8 @@ class ResultScraper:
             self.results["Results"][semester_code][subject_code][
                 "subject_credits"
             ] = subject_credits
-
+    
+    # Calculate the total cgpa of each semester
     def total_grade_calculator(self, code, value):
         total = 0
         credits = 0
@@ -116,6 +141,7 @@ class ResultScraper:
             if value[data]['subject_grade'] in ('F', 'Ab','-'):
                 return ""
 
+            #important formulae
             total += int(self.grades_to_gpa[value[data]['subject_grade']]) * float(value[data]['subject_credits'])
             credits += float(value[data]['subject_credits'])
 
@@ -127,23 +153,34 @@ class ResultScraper:
     async def scrape_all_results(self, exam_codes="all"):
         async with aiohttp.ClientSession() as session:
             tasks = {}
-
+            # Check if exam_codes should include all codes
             if exam_codes == "all":
-                if(self.roll_number[:2]=="22"):
-                    exam_codes =self.r22_exam_codes
-                else:
-                    exam_codes = self.r18_exam_codes
-                if self.roll_number[4] == "5":
-                    del exam_codes["1-1"], exam_codes["1-2"]
-            else:
-                exam_codes = self.r18_exam_codes
+                # Check the roll number's fifth character to identify the degree
+                if self.roll_number[5] == "A":
+                    # Set payloads to btech
+                    payloads = self.payloads["btech"]
+                    # Determine the exam codes based on the roll number prefix
+                    exam_codes = self.exam_codes["btech"]["R22" if self.roll_number[:2] == "22" else "R18"]
+                
+                elif self.roll_number[5] == "R":
+                    # Set payloads to bpharmacy
+                    payloads = self.payloads["bpharmacy"]
+                    # Set the exam codes for bpharmacy
+                    exam_codes = self.exam_codes["bpharmacy"]["R17"]
 
+            # Check if the fourth character of the roll number is '5'
+            if self.roll_number[4] == "5":
+                # Remove specific exam codes from the exam_codes dictionary
+                exam_codes.pop("1-1", None)
+                exam_codes.pop("1-2", None)
+
+          
             for exam_code in exam_codes.keys():
                 # Create a task for each exam code
                 tasks[exam_code] = []
 
                 for code in exam_codes[exam_code]:
-                    for payload in self.payloads:
+                    for payload in payloads:
                         try:
                             task = asyncio.ensure_future(self.fetch_result(session, code, payload))
                             tasks[exam_code].append(task)

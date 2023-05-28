@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def extract_exam_code(result_link):
     exam_code_index = result_link.find("examCode")
-    exam_code = result_link[exam_code_index + 9:exam_code_index + 13]
+    exam_code = result_link[exam_code_index + 9:exam_code_index + 12]
     return exam_code
 
 
@@ -19,7 +19,7 @@ def categorize_exam_code(result_text, exam_code):
         return "2-2"
     elif " III Year I " in result_text:
         return "3-1"
-    elif " III Year II " in result_text
+    elif " III Year II " in result_text:
         return "3-2"
     elif " IV Year I " in result_text:
         return "4-1"
@@ -33,7 +33,7 @@ def get_exam_codes():
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
-    btech_results = soup.find_all("table")[0].find_all("tr")
+    btech_results = soup.find_all("table")[1].find_all("tr")
 
     exam_codes = {
         "1-1": set(),
@@ -50,7 +50,7 @@ def get_exam_codes():
         result_link = result.find_all("td")[0].find_all("a")[0]["href"]
         result_text = result.get_text()
 
-        if "R18" in result_text:
+        if "R17" in result_text:
             exam_code = extract_exam_code(result_link)
             category = categorize_exam_code(result_text, exam_code)
 

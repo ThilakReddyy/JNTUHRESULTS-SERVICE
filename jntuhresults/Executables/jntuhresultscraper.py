@@ -13,10 +13,12 @@ class ResultScraper:
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
         # self.url="http://202.63.105.184/results/resultAction"
+        
         self.roll_number = roll_number
+        
         self.results = {"Details": {}, "Results": {}}
         
-        # Exam codes for different semesters
+        # Exam codes for R18 different semesters
         self.r18_exam_codes = {
             "1-1": ["1323", "1358", "1404", "1430", "1467", "1504", "1572", "1615", "1658"],
             "1-2": ["1356", "1363", "1381", "1435", "1448", "1481", "1503", "1570", "1620", "1622", "1656"],
@@ -28,9 +30,11 @@ class ResultScraper:
             "4-2": ["1580", "1600", "1623"]
         }
 
+        # Exam codes for R22 different semesters
         self.r22_exam_codes={
                 "1-1":["1662"]
                 }
+
         #To be implemented after implementing redis server
         # self.examcodes=jntuhresultscraper.exam_codes()
 
@@ -83,13 +87,16 @@ class ResultScraper:
             subject_credits = result_subject.find_all("td")[
                 subject_credits_index
             ].get_text()
+
+            # Skip subjects with lower grades if already stored
             if(subject_code in self.results["Results"][semester_code] and 
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='F' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='Ab' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='-' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]<subject_grade):
                 continue
-            
+           
+            # Store Subject details in results dictionary
             self.results["Results"][semester_code][subject_code] = {}
             self.results["Results"][semester_code][subject_code]["subject_code"] = subject_code
             self.results["Results"][semester_code][subject_code]["subject_name"] = subject_name
@@ -163,3 +170,4 @@ class ResultScraper:
 
     def run(self):
         return asyncio.run(self.scrape_all_results())
+

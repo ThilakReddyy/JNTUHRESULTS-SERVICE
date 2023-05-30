@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import multi,academicResult
+from .views import ClassResult,AcademicResult
 
 urlpatterns = [
-    path('api/multi',multi.as_view()),
-    path('api/single',academicResult.as_view()),
-    path('api/academicresult',academicResult.as_view())
+    path('api/classresult',ClassResult.as_view()),
+    path('api/academicresult',AcademicResult.as_view())
 ]

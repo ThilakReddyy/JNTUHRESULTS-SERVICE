@@ -12,7 +12,7 @@ class ResultScraper:
         
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
-        self.url="http://202.63.105.184/results/resultAction"
+        # self.url="http://202.63.105.184/results/resultAction"
         
         self.roll_number = roll_number
         
@@ -150,23 +150,22 @@ class ResultScraper:
         self.results["Results"][code]["CGPA"] = "{0:.2f}".format(round(total / credits, 2))
 
 
-    async def scrape_all_results(self, exam_codes="all"):
+    async def scrape_all_results(self, exam_code="all"):
         async with aiohttp.ClientSession() as session:
             tasks = {}
-            # Check if exam_codes should include all codes
-            if exam_codes == "all":
-                # Check the roll number's fifth character to identify the degree
-                if self.roll_number[5] == "A":
-                    # Set payloads to btech
-                    payloads = self.payloads["btech"]
-                    # Determine the exam codes based on the roll number prefix
-                    exam_codes = self.exam_codes["btech"]["R22" if self.roll_number[:2] == "22" else "R18"]
-                
-                elif self.roll_number[5] == "R":
-                    # Set payloads to bpharmacy
-                    payloads = self.payloads["bpharmacy"]
-                    # Set the exam codes for bpharmacy
-                    exam_codes = self.exam_codes["bpharmacy"]["R17"]
+
+            # Check the roll number's fifth character to identify the degree
+            if self.roll_number[5] == "A":
+                # Set payloads to btech
+                payloads = self.payloads["btech"]
+                # Determine the exam codes based on the roll number prefix
+                exam_codes = self.exam_codes["btech"]["R22" if self.roll_number[:2] == "22" else "R18"]
+
+            elif self.roll_number[5] == "R":
+                # Set payloads to bpharmacy
+                payloads = self.payloads["bpharmacy"]
+                # Set the exam codes for bpharmacy
+                exam_codes = self.exam_codes["bpharmacy"]["R17"]
 
             # Check if the fourth character of the roll number is '5'
             if self.roll_number[4] == "5":
@@ -174,7 +173,10 @@ class ResultScraper:
                 exam_codes.pop("1-1", None)
                 exam_codes.pop("1-2", None)
 
-          
+            # Check if exam_codes should include all codes
+            if exam_code != "all":
+                exam_codes={exam_code : exam_codes[exam_code]}
+
             for exam_code in exam_codes.keys():
                 # Create a task for each exam code
                 tasks[exam_code] = []
@@ -201,7 +203,6 @@ class ResultScraper:
                         del self.results["Results"][exam_code]
                 except Exception as e:
                     print(self.roll_number,e)
-
         return self.results
 
 

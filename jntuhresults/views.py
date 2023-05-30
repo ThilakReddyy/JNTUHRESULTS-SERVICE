@@ -1,63 +1,54 @@
+import asyncio
+import time
 from django.shortcuts import redirect, render
 from django.http import HttpResponse,JsonResponse
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
-from jntuhresults.Executables import Search_by_Roll_number
-from jntuhresults.Executables.constants import Index_Keys
-import asyncio
-import time
 from django.views.generic import View
 
-listi=['1-1','1-2','2-1','2-2','3-1','3-2','4-1','4-2']
-JNTUH_Results={}
-#Page Not Found Redirect
+# Class Result ----------------------------------------------------------------------
+class ClassResult(View):
+    async def scrape_results_async(self, htno, semester):
+        # Create an instance of ResultScraper
+        jntuhresult = ResultScraper(htno.upper())
+        
+        # Scrape all the results asynchronously
+        result = await jntuhresult.scrape_all_results(semester)
+        
+        return result
 
-def page_not_found_view(request, exception):
-    return redirect('/api/single?htno=18E51A0479')
-    
-#Multi-----------------------------------------------------------------------------------------------------
-class multi(View):
-    async def gettingurl(self,htno,fro,to,code):
-        tasksi=[]
-        First_Index,Last_Index=Index_Keys.index(fro),Index_Keys.index(to)
-        Index_List=Index_Keys[First_Index:Last_Index+1]
-        for i in Index_List:
-            Result=Search_by_Roll_number.Results()
-            tasksi.append(asyncio.create_task(Result.getting_faster_Grades(htno+i,code)))
-        responses = asyncio.gather(*tasksi)
-        return await responses
+    async def get(self, request):
+        # Retrieve htnos and semester from the GET parameters
+        htnos = request.GET.get('htnos').split(",")
+        semester = request.GET.get('semester')
+        
+        # Print htnos for debugging
+        print(htnos)
 
-    def get(self,request):
-        global listi
-        try:
-            htno1=request.GET.get('from').upper()
-            htno2=request.GET.get('to').upper()
-            code=request.GET.get('code').upper()
-            return HttpResponse("currently this feature is not available")
-        except:
-            return HttpResponse("Pass from and to roll number as query")
-        if(code not in listi):
-            return HttpResponse("Please put down the correct code")
-        if(htno1[:8]!=htno2[:8]):
-            return HttpResponse("Please Maintain from roll number first and last numbers as same")
-        elif(htno1[8:]>htno2[8:]):
-            return HttpResponse("First Hall ticket should be greater")
-        elif(len(htno1)!=10 or len(htno2)!=10):
-            return HttpResponse("Please Enter the Roll Numbers correctly")
-        res=asyncio.run(self.gettingurl(htno1[:8],htno1[8:],htno2[8:],code))
-        response=list()
-        for i in res:
-            if(len(i['Results'][code])==0):
-                del i   
-            else:
-                response.append(i)
-        return JsonResponse(response,safe=False)
+        # Create a list to hold the tasks
+        tasks = []
+
+        # Add the tasks to the list
+        for htno in htnos:
+            # Create a task for scraping results asynchronously for each htno
+            task = asyncio.create_task(self.scrape_results_async(htno, semester))
+            tasks.append(task)
+
+        # Await all the tasks to complete
+        gathered_results = await asyncio.gather(*tasks)
+
+        # Filter out the empty results
+        filtered_results = [result for result in gathered_results if result["Details"]]
+
+        # Return the results as a JSON response
+        return JsonResponse(filtered_results, safe=False)
+
 #----------------------------------------------------------------------------------------------------------------
 
 
 
 #academicresult------------------------------------------------------------------------------------------------------------
 
-class academicResult(View):
+class AcademicResult(View):
     def get(self,request):
         starting =time.time()    
 

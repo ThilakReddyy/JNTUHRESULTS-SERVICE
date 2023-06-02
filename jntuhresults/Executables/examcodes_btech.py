@@ -19,7 +19,7 @@ def categorize_exam_code(result_text, exam_code):
         return "2-2"
     elif " III Year I " in result_text:
         return "3-1"
-    elif " III Year II " in result_text
+    elif " III Year II " in result_text:
         return "3-2"
     elif " IV Year I " in result_text:
         return "4-1"

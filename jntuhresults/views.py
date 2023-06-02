@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse,JsonResponse
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from django.views.generic import View
+from jntuhresults.Executables.notificationsretriever import get_notifications
 
 # Class Result ----------------------------------------------------------------------
 class ClassResult(View):
@@ -93,3 +94,9 @@ class AcademicResult(View):
             return HttpResponse(htno+" - 500 Internal Server Error")
            
 #------------------------------------------------------------------------------------------------------------------
+
+
+#- Notifications -------------------------------------------------------------------------------------------------
+class Notification(View):
+    def get(self,request):
+        return JsonResponse(get_notifications(),safe=False)

@@ -166,6 +166,8 @@ class ResultScraper:
                 payloads = self.payloads["bpharmacy"]
                 # Set the exam codes for bpharmacy
                 exam_codes = self.exam_codes["bpharmacy"]["R17"]
+            else:
+                return self.results
 
             # Check if the fourth character of the roll number is '5'
             if self.roll_number[4] == "5":
@@ -187,6 +189,7 @@ class ResultScraper:
                             task = asyncio.ensure_future(self.fetch_result(session, code, payload))
                             tasks[exam_code].append(task)
                         except Exception as e:
+                            pass
                             print(self.roll_number,e)
 
             # Wait for all the tasks to complete

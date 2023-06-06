@@ -1,2 +1,2 @@
-web: gunicorn jntuhresults.wsgi --log-file - --log-level debug --workers 4
+web: gunicorn jntuhresults.wsgi --log-file - --log-level debug --worker-class gevent --workers 4
 

@@ -5,7 +5,8 @@ from django.http import HttpResponse,JsonResponse
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from django.views.generic import View
 from jntuhresults.Executables.notificationsretriever import get_notifications
-import multiprocessing
+
+
 # Class Result ----------------------------------------------------------------------
 class ClassResult(View):
     async def scrape_results_async(self, htno, semester):

@@ -2,15 +2,20 @@
 <html>
 
 <head>
-    <title>JNTUH University Semester Results API Documentation</title>
+    <title>JNTUH RESULTS-SERVICE API Documentation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f1f1f1;
         }
 
         h1 {
             color: #333;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ccc;
+            background-color: #fff;
         }
 
         h2 {
@@ -19,12 +24,12 @@
         }
 
         p {
-            color: #777;
+            color: #555;
             line-height: 1.5;
         }
 
         ul {
-            color: #777;
+            color: #555;
             line-height: 1.5;
             list-style-type: disc;
             margin-left: 20px;
@@ -35,13 +40,41 @@
             padding: 10px;
             font-size: 14px;
             line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        section {
+            margin-bottom: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        section:not(:last-child) {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .example-request {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .example-request a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .example-request a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>JNTUH University Semester Results API Documentation</h1>
+        <h1>JNTUH Results - SERVICE API Documentation</h1>
     </header>
 
     <section>
@@ -53,42 +86,58 @@
 
     <section>
         <h2>Authentication</h2>
-        <p>The API uses token-based authentication. To access the API endpoints, you need to include an authentication
-            token in the request headers. Tokens can be obtained by registering an account and generating an API key.
-        </p>
+        <p>The API currently does not require any form of authentication. Make a request with a hall ticket, it
+            will provide the response.</p>
     </section>
 
     <section>
         <h2>API Endpoints</h2>
 
-        <h3>1. Get Student Results</h3>
-        <p><strong>Endpoint:</strong> /api/academicresult</p>
-        <p><strong>Method:</strong> GET</p>
-        <p><strong>Description:</strong> Retrieves the semester results for a specific student.</p>
-        <p><strong>Parameters:</strong></p>
-        <ul>
-            <li><strong>student_roll_number</strong> (required): The unique identifier of the student.</li>
-        </ul>
-        <p><strong>Example Request:</strong></p>
-        <pre>
-      GET <a href="/api/academicresult?htno=18E51A0479">/api/academicresult?htno=18E51A0479</a>
-    </pre>
+        <section>
+            <h3>1. Get Student Results</h3>
+            <p><strong>Endpoint:</strong> /api/academicresult</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieves the semester results for a specific student.</p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><strong>student_roll_number</strong> (required): The unique identifier of the student.</li>
+            </ul>
+            <p><strong>Example Request:</strong></p>
+            <pre class="example-request">
+GET <a href="/api/academicresult?htno=18E51A0479">/api/academicresult?htno=18E51A0479</a>
+            </pre>
+        </section>
 
-        <h3>2. Get Classmates Results</h3>
-        <p><strong>Endpoint:</strong> /api/classmates-results</p>
-        <p><strong>Method:</strong> GET</p>
-        <p><strong>Description:</strong> Retrieves the semester results for all the classmates of a specific student.
-        </p>
-        <p><strong>Parameters:</strong></p>
-        <ul>
-            <li><strong>student_id</strong> (required): The unique identifier of the student.</li>
-            <li><strong>semester</strong> (optional): The semester for which to retrieve the results. If not provided,
-                all semesters will be returned.</li>
-        </ul>
-        <p><strong>Example Request:</strong></p>
-        <pre>
-      GET /api/classresult?semester=1-1&htnos=18E51A0479,18E51A0...
-    </pre>
+        <section>
+            <h3>2. Get Classmates Results</h3>
+            <p><strong>Endpoint:</strong> /api/classresult</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieves the semester results for all the classmates of a specific
+                student.
+            </p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><strong>student_ids</strong> (required): The unique identifier of the student.</li>
+                <li><strong>semester</strong> (required): The semester for which to retrieve the results. If not
+                    provided,
+                    gives back an error</li>
+            </ul>
+            <p><strong>Example Request:</strong></p>
+            <pre class="example-request">
+GET /api/classresult?semester=1-1&htnos=18E51A0479,18E51A0...
+            </pre>
+        </section>
+
+        <section>
+            <h3>3. Notifications</h3>
+            <p><strong>Endpoint:</strong> /api/notifications</p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieves all the latest notifications of JNTUH.</p>
+            <p><strong>Example Request:</strong></p>
+            <pre class="example-request">
+                GET <a href="/api/notifications">/api/notifications</a>
+            </pre>
+        </section>
     </section>
 
     <section>
@@ -97,16 +146,14 @@
             returned along with a response containing an error message.</p>
         <p><strong>Example Error Response:</strong></p>
         <pre>
-      HTTP/1.1 500
-      Content-Type: application/json
-      
-      {
-        "error": "500 - Internal Server Error"
-      }
-    </pre>
+HTTP/1.1 500
+Content-Type: application/json
+
+{
+  "error": "500 - Internal Server Error"
+}
+        </pre>
     </section>
-
-
 </body>
 
 </html>

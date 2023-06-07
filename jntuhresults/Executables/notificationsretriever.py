@@ -7,10 +7,10 @@ import os
 from dotenv import load_dotenv
 
 def get_notifications():
-    
     # Load environment variables from .env file
     load_dotenv()
-    redis_client = redis.from_url(os.environ.get("REDIS_URL"))
+    redis_url=os.environ.get("REDIS_URL")
+    redis_client = redis.from_url(redis_url)
     redis_response = redis_client.get("notifications")
     if redis_response != None:
         data = json.loads(redis_response)

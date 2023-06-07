@@ -9,7 +9,7 @@ from dotenv import dotenv_values
 def get_notifications():
     # Load environment variables from .env
     env = dotenv_values()
-
+    print(env)
     redis_client = redis.from_url(env['REDIS_URL'])
     redis_response = redis_client.get("notifications")
     if redis_response != None:

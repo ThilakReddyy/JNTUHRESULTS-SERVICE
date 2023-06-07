@@ -15,8 +15,8 @@ The Backbone of <a href="https://github.com/ThilakReddyy/JNTUHRESULTS-WEB">JNTUH
 ## API
 Two API endpoints are available for fetching results:
 
-* https://jntuhresults.up.railway.app/api/single?htno={Roll_NO} - Fetches results for a single student using their roll number.
-* https://jntuhresults.up.railway.app/api/multi?from={from_roll_no}&to={To_roll_no}&code={code} - Fetches results for multiple students within a given range of roll numbers and code.
+* https://jntuhresults.up.railway.app/api/academicresult?htno={Roll_NO} - Fetches results for a single student using their roll number.
+* https://jntuhresults.up.railway.app/api/classresult?htnos={multiple_htnos_seperate_by_commas}&semester={code} - Fetches results for multiple students within a given range of roll numbers and code.
 
 
 ## Running Locally

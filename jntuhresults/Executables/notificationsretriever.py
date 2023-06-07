@@ -14,7 +14,7 @@ def get_notifications():
     redis_response = redis_client.get("notifications")
     if redis_response != None:
         data = json.loads(redis_response)
-        return data
+        return data["data"]
     
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
     #url="http://202.63.105.184/results/jsp/home.jsp"

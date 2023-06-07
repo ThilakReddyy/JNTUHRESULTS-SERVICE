@@ -100,7 +100,10 @@ class AcademicResult(View):
 #- Notifications -------------------------------------------------------------------------------------------------
 class Notification(View):
     def get(self,request):
-        return JsonResponse(get_notifications(),safe=False)
+        try:
+            return JsonResponse(get_notifications(),safe=False)
+        except Exception as e:
+            return HttpResponse(e)
     
 #---------------------------------------------------------------------------------------------------------------
 

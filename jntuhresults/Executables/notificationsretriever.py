@@ -1,21 +1,38 @@
 import requests
+import redis
+import json
 from bs4 import BeautifulSoup
+from datetime import timedelta
+from dotenv import dotenv_values
 
 
 def get_notifications():
+    # Load environment variables from .env
+    env = dotenv_values()
+
+    redis_client = redis.from_url(env['REDIS_URL'])
+    redis_response = redis_client.get("notifications")
+    if redis_response != None:
+        data = json.loads(redis_response)
+        return data
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
+    #url="http://202.63.105.184/results/jsp/home.jsp"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
-    btech_results = soup.find_all("table")[0].find_all("tr")
     results=[]
-    for result in btech_results:
-        result_link = result.find_all("td")[0].find_all("a")[0]["href"]
-        result_text = result.get_text()
-        result_text_index=result_text.find("Results")+7
-        json_appendded={
-            "Result_title":result_text[:result_text_index],
-            "Link":"http://results.jntuh.ac.in"+result_link,
-            "Date":result_text[result_text_index:]
-        }
-        results.append(json_appendded)  
+    for i in range(0,2):
+        jntuh_notifications = soup.find_all("table")[i].find_all("tr")
+        
+        for result in jntuh_notifications:
+            result_link = result.find_all("td")[0].find_all("a")[0]["href"]
+            result_text = result.get_text()
+            result_text_index=result_text.find("Results")+7
+            json_appendded={
+                "Result_title":result_text[:result_text_index],
+                "Link":"http://results.jntuh.ac.in"+result_link,
+                "Date":result_text[result_text_index:]
+            }
+            results.append(json_appendded)  
+    redis_client.set("notifications", json.dumps({"data": results}))
+    redis_client.expire("notifications", timedelta(minutes=15))
     return results

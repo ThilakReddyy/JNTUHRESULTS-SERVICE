@@ -1,6 +1,6 @@
 import asyncio
 import time
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from django.views.generic import View
@@ -101,3 +101,8 @@ class AcademicResult(View):
 class Notification(View):
     def get(self,request):
         return JsonResponse(get_notifications(),safe=False)
+    
+#---------------------------------------------------------------------------------------------------------------
+
+def homepage(request):
+    return render(request,'index.html')

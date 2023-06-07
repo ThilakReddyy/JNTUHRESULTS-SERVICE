@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JNTUH University Semester Results API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+            margin-top: 30px;
+        }
+
+        p {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        ul {
+            color: #777;
+            line-height: 1.5;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>JNTUH University Semester Results API Documentation</h1>
+    </header>
+
+    <section>
+        <h2>About</h2>
+        <p>This project aims to provide students of JNTUH University with an efficient way of accessing their own
+            semester results as well as those of their classmates. With just a single click, students will be able to
+            view their academic performance throughout the semesters.</p>
+    </section>
+
+    <section>
+        <h2>Authentication</h2>
+        <p>The API uses token-based authentication. To access the API endpoints, you need to include an authentication
+            token in the request headers. Tokens can be obtained by registering an account and generating an API key.
+        </p>
+    </section>
+
+    <section>
+        <h2>API Endpoints</h2>
+
+        <h3>1. Get Student Results</h3>
+        <p><strong>Endpoint:</strong> /api/academicresult</p>
+        <p><strong>Method:</strong> GET</p>
+        <p><strong>Description:</strong> Retrieves the semester results for a specific student.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>student_roll_number</strong> (required): The unique identifier of the student.</li>
+        </ul>
+        <p><strong>Example Request:</strong></p>
+        <pre>
+      GET <a href="/api/academicresult?htno=18E51A0479">/api/academicresult?htno=18E51A0479</a>
+    </pre>
+
+        <h3>2. Get Classmates Results</h3>
+        <p><strong>Endpoint:</strong> /api/classmates-results</p>
+        <p><strong>Method:</strong> GET</p>
+        <p><strong>Description:</strong> Retrieves the semester results for all the classmates of a specific student.
+        </p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>student_id</strong> (required): The unique identifier of the student.</li>
+            <li><strong>semester</strong> (optional): The semester for which to retrieve the results. If not provided,
+                all semesters will be returned.</li>
+        </ul>
+        <p><strong>Example Request:</strong></p>
+        <pre>
+      GET /api/classresult?semester=1-1&htnos=18E51A0479,18E51A0...
+    </pre>
+    </section>
+
+    <section>
+        <h2>Error Handling</h2>
+        <p>The API follows standard HTTP error status codes. In case of an error, an appropriate error code will be
+            returned along with a response containing an error message.</p>
+        <p><strong>Example Error Response:</strong></p>
+        <pre>
+      HTTP/1.1 500
+      Content-Type: application/json
+      
+      {
+        "error": "500 - Internal Server Error"
+      }
+    </pre>
+    </section>
+
+
+</body>
+
+</html>

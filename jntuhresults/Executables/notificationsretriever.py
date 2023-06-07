@@ -3,18 +3,19 @@ import redis
 import json
 from bs4 import BeautifulSoup
 from datetime import timedelta
-from dotenv import dotenv_values
-
+import os
+from dotenv import load_dotenv
 
 def get_notifications():
-    # Load environment variables from .env
-    env = dotenv_values()
-    print(env)
-    redis_client = redis.from_url(env['REDIS_URL'])
+    
+    # Load environment variables from .env file
+    load_dotenv()
+    redis_client = redis.from_url(os.environ.get("REDIS_URL"))
     redis_response = redis_client.get("notifications")
     if redis_response != None:
         data = json.loads(redis_response)
         return data
+    
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
     #url="http://202.63.105.184/results/jsp/home.jsp"
     response = requests.get(url)

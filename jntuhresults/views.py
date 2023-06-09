@@ -5,6 +5,16 @@ from django.http import HttpResponse,JsonResponse
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from django.views.generic import View
 from jntuhresults.Executables.notificationsretriever import get_notifications
+import os
+from dotenv import load_dotenv
+import redis
+import json
+from datetime import timedelta
+
+# Load environment variables from .env file
+load_dotenv()
+redis_url=os.environ.get("REDIS_URL")
+redis_client = redis.from_url(redis_url)
 
 
 # Class Result ----------------------------------------------------------------------
@@ -59,6 +69,11 @@ class AcademicResult(View):
         if len(htno) != 10:
             return HttpResponse(htno+" Invalid hall ticket number")
         try:
+                redis_response = redis_client.get(htno)
+                if redis_response != None:
+                    data = json.loads(redis_response)
+                    print(htno,"- Retrived from cache")
+                    return data["data"]
                 # Create an instance of ResultScraper
                 jntuhresult = ResultScraper(htno.upper())
 
@@ -86,6 +101,9 @@ class AcademicResult(View):
                 print(htno,result['Details']['NAME'],stopping-starting)
 
                 del jntuhresult
+
+                redis_client.set(htno, json.dumps({"data": result}))
+                redis_client.expire(htno, timedelta(minutes=45))
                 # Return the result
                 return JsonResponse(result,safe=False)
         
@@ -100,7 +118,10 @@ class AcademicResult(View):
 #- Notifications -------------------------------------------------------------------------------------------------
 class Notification(View):
     def get(self,request):
-        
+        redis_response = redis_client.get("notifications")
+        if redis_response != None:
+            data = json.loads(redis_response)
+            return JsonResponse(data["data"],safe=False)
         return JsonResponse(get_notifications(),safe=False)
     
 #---------------------------------------------------------------------------------------------------------------

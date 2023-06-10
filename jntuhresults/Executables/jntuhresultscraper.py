@@ -66,7 +66,7 @@ class ResultScraper:
         
         # Prepare the payload for the HTTP POST request
         payloaddata="?&examCode="+exam_code+payload+self.roll_number
- 
+        
         # Make the HTTP POST request and print the response text
         async with session.get(self.url+payloaddata) as response:
             return await response.text()
@@ -111,7 +111,7 @@ class ResultScraper:
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='F' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='Ab' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='-' and
-                    self.results["Results"][semester_code][subject_code]["subject_grade"]<subject_grade):
+                    self.grades_to_gpa[self.results["Results"][semester_code][subject_code]["subject_grade"]]>self.grades_to_gpa[subject_grade]):
                 continue
            
             # Store Subject details in results dictionary

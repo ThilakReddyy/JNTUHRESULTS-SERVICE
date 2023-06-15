@@ -91,6 +91,7 @@ class AcademicResult(View):
         
         except Exception as e:
             print(htno,e)
+            del jntuhresult
             # Catch any exceptions raised during scraping
             return HttpResponse(htno+" - 500 Internal Server Error")
            

@@ -36,6 +36,19 @@ def categorize_exam_code(result_text, exam_code):
         return None
 
 
+def categorize_masters_exam_code(result_text,exam_code):
+    # Categorize the masters exam code based on the result text
+    if " I Semester" in result_text:
+        return "1-1"
+    elif " II Semester" in result_text:
+        return "1-2"
+    elif " III Semester" in result_text:
+        return "2-1"
+    elif " IV Semester" in result_text:
+        return "2-2"
+    else:
+        return None
+    
 def get_exam_codes():
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
     response = requests.get(url)
@@ -49,10 +62,22 @@ def get_exam_codes():
         },
         "bpharmacy": {
             "R17": {}
+        },
+        "Mpharmacy":{
+            "R19":{},
+            "R22":{}
+        },
+        "MTech":{
+                "R19":{},
+                "R22":{}
+        },
+        "MBA":{
+            "R19":{},
+            "R22":{}
         }
     }
     degree=list(exam_codes.keys())
-    for table in range(0,2):
+    for table in range(0,5):
         results = soup.find_all("table")[table].find_all("tr")
         regulations=exam_codes[degree[table]].keys()
 
@@ -65,7 +90,10 @@ def get_exam_codes():
             for regulation in regulations:
                 if regulation in result_text:
                     exam_code = extract_exam_code(result_link)
-                    category = categorize_exam_code(result_text, exam_code)
+                    if(table<2):
+                        category = categorize_exam_code(result_text, exam_code)
+                    else:
+                        category = categorize_masters_exam_code(result_text,exam_code)
 
                     if category is not None:
                         exam_codes[degree[table]][regulation].setdefault(category, [])

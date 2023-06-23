@@ -19,3 +19,5 @@ jobs:
       uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        coverage run manage.py test && coverage report --fail-under=95

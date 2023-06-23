@@ -16,8 +16,9 @@ jobs:
 
     steps:
     - name: Upload coverage reports to Codecov
+      run: |
+        coverage run manage.py test && coverage report --fail-under=95
       uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      run: |
-        coverage run manage.py test && coverage report --fail-under=95
+

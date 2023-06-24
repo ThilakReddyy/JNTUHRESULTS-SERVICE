@@ -1,24 +1,22 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ThilakReddyy/JNTUHRESULTS-WEB/main/public/favicon-black.png#gh-dark-mode-only" alt="JNTUH B.TECH RESULTS" width="100">
-  <img src="https://raw.githubusercontent.com/ThilakReddyy/JNTUHRESULTS-WEB/main/public/favicon-light.png#gh-light-mode-only" alt="JNTUH B.TECH RESULTS" width="100">
-  <br>
-  django | python | BeautifulSoup 
-</p>
+# [JNTUH RESULTS](http://results.jntuh.ac.in/)  - SERVICE </h1>
 
-The Backbone of <a href="https://github.com/ThilakReddyy/JNTUHRESULTS-WEB">JNTUHRESULTS-WEB</a> where all the semester results of a student and the results of all the classmates are fetched
+[![Website](https://img.shields.io/badge/Website-Jntuh%20Results-blue?style=flat&logo=world&logoColor=white)](https://jntuhresults.up.railway.app/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/048b7d94dd064d56a4e6f3f64d65c7b8)](https://app.codacy.com/gh/ThilakReddyy/JNTUHRESULTS-SERVICE/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![License](https://img.shields.io/github/license/thilakreddyy/jntuhresults-service.svg)](https://github.com/ThilakReddyy/JNTUHRESULTS-SERVICE/blob/main/LICENSE)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thilakreddyy/jntuhresults-service.svg)
+
+This repository serves as the backbone for the [JNTUH RESULTS](https://github.com/ThilakReddyy/JNTUHRESULTS-WEB)  project. It fetches the semester results of a student and their classmates from the JNTUH website.
 
 ## HOW IT WORKS
 
-* The JNTUH website does not have an API, and it does not authenticate requests. Instead, it sends back the response of each request made
-* I made a request and received a response. Using Beautiful Soup, I parsed the HTML and obtained the results.
+The JNTUH website does not provide an API and does not require authentication for requests. Instead, it sends back the response for each request made. This service makes requests to the JNTUH website and parses the HTML response using Beautiful Soup to obtain the results.
 
-## API
-Two API endpoints are available for fetching results:
+## API'S
 
-* https://jntuhresults.up.railway.app/api/academicresult?htno={Roll_NO} - Fetches results for a single student using their roll number.
-* https://jntuhresults.up.railway.app/api/classresult?htnos={multiple_htnos_seperate_by_commas}&semester={code} - Fetches results for multiple students within a given range of roll numbers and code.
+There are two API endpoints available for fetching results:
 
-
+* `https://jntuhresults.up.railway.app/api/academicresult?htno={Roll_NO}` - Fetches results for a single student using their roll number.
+* `https://jntuhresults.up.railway.app/api/classresult?htnos={multiple_htnos_separate_by_commas}&semester={code}` - Fetches results for multiple students within a given range of roll numbers and code.
 ## Running Locally
 
 To run the code locally in development mode, follow these steps:
@@ -37,7 +35,8 @@ Found a bug ? Go ahead and [submit an issue](https://github.com/ThilakReddyy/JNT
 
 Also feel free to message me if you have any ideas for small website tools that you can't yet find online. Thanks!
 
-## Thanks
+# Acknowledgements
+This project relies on the following technologies:
 
 - [django](https://www.djangoproject.com/) a high-level Python web framework that encourages rapid development and clean, pragmatic design.
 - [python](https://www.python.org/)  a powerful and versatile programming language that is widely used in many fields.

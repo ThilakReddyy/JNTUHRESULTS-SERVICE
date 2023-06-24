@@ -9,6 +9,8 @@ The Backbone of <a href="https://github.com/ThilakReddyy/JNTUHRESULTS-WEB">JNTUH
 
 ## HOW IT WORKS
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aadfdfa66e2347d3974bce4230b81e1a)](https://app.codacy.com/gh/ThilakReddyy/JNTUHRESULTS-SERVICE?utm_source=github.com&utm_medium=referral&utm_content=ThilakReddyy/JNTUHRESULTS-SERVICE&utm_campaign=Badge_Grade)
+
 * The JNTUH website does not have an API, and it does not authenticate requests. Instead, it sends back the response of each request made
 * I made a request and received a response. Using Beautiful Soup, I parsed the HTML and obtained the results.
 

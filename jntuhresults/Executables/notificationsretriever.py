@@ -24,7 +24,7 @@ def get_notifications():
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     results=[]
-    for i in range(0,2):
+    for i in range(0,6):
         jntuh_notifications = soup.find_all("table")[i].find_all("tr")
         
         for result in jntuh_notifications:

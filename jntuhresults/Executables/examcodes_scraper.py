@@ -61,7 +61,8 @@ def get_exam_codes():
             "R22": {}
         },
         "bpharmacy": {
-            "R17": {}
+            "R17": {},
+            "R22":{}
         },
         "Mpharmacy":{
             "R19":{},

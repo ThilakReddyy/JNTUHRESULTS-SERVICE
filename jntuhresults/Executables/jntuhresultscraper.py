@@ -202,7 +202,7 @@ class ResultScraper:
                 # Set payloads to bpharmacy
                 payloads = self.payloads["bpharmacy"]
                 # Set the exam codes for bpharmacy
-                exam_codes = self.exam_codes["bpharmacy"]["R17"]
+                exam_codes = self.exam_codes["bpharmacy"]["R22" if self.roll_number[:2] == "22" else "R17"]
             
             elif self.roll_number[5]=="E":
                  # Set payloads to MBA

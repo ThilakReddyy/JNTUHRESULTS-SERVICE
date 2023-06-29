@@ -12,7 +12,7 @@ class ResultScraper:
         
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
-        # self.url="http://202.63.105.184/results/resultAction"
+        self.url="http://202.63.105.184/results/resultAction"
         
         self.roll_number = roll_number
         

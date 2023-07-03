@@ -139,12 +139,20 @@ class ResultScraper:
         subject_name_index = Results_column_names.index("SUBJECT NAME")
         subject_code_index = Results_column_names.index("SUBJECT CODE")
         subject_credits_index = Results_column_names.index("CREDITS(C)")
+        subject_internal_marks_index = Results_column_names.index("INTERNAL")
+        subject_external_marks_index = Results_column_names.index("EXTERNAL")
+        subject_total_marks_index = Results_column_names.index("TOTAL")
+        
+
 
         Results = Results[1:]
         for result_subject in Results:
             subject_name = result_subject.find_all("td")[subject_name_index].get_text()
             subject_code = result_subject.find_all("td")[subject_code_index].get_text()
             subject_grade = result_subject.find_all("td")[grade_index].get_text()
+            subject_internal_marks = result_subject.find_all("td")[subject_internal_marks_index].get_text()
+            subject_external_marks = result_subject.find_all("td")[subject_external_marks_index].get_text()
+            subject_total_marks = result_subject.find_all("td")[subject_total_marks_index].get_text()
             subject_credits = result_subject.find_all("td")[
                 subject_credits_index
             ].get_text()
@@ -161,6 +169,9 @@ class ResultScraper:
             self.results["Results"][semester_code][subject_code] = {}
             self.results["Results"][semester_code][subject_code]["subject_code"] = subject_code
             self.results["Results"][semester_code][subject_code]["subject_name"] = subject_name
+            self.results["Results"][semester_code][subject_code]["subject_internal"]=subject_internal_marks
+            self.results["Results"][semester_code][subject_code]["subject_external"]=subject_external_marks
+            self.results["Results"][semester_code][subject_code]["subject_total"]=subject_total_marks
             self.results["Results"][semester_code][subject_code]["subject_grade"] = subject_grade
             self.results["Results"][semester_code][subject_code][
                 "subject_credits"
@@ -255,7 +266,7 @@ class ResultScraper:
 
 
     def run(self):
-        timeout = 3.5  # Timeout value in seconds
+        timeout = 4  # Timeout value in seconds
         try:
             return asyncio.run(asyncio.wait_for(self.scrape_all_results(), timeout))
         except asyncio.TimeoutError:

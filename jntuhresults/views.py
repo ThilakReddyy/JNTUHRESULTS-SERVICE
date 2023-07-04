@@ -12,10 +12,10 @@ class ClassResult(View):
     async def scrape_results_async(self, htno, semester):
         # Create an instance of ResultScraper
         jntuhresult = ResultScraper(htno.upper())
-        
+
         # Scrape all the results asynchronously
         result = await jntuhresult.scrape_all_results(semester)
-        
+
         return result
 
     async def get(self, request):
@@ -52,8 +52,8 @@ class ClassResult(View):
 
 class AcademicResult(View):
     def get(self,request):
-        starting =time.time()    
-
+        starting =time.time()
+        
         htno=request.GET.get('htno').upper()
         # Check if the hall ticket number is valid
         if len(htno) != 10:

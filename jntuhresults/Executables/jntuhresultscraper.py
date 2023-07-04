@@ -1,8 +1,6 @@
 # Import necessary libraries
 import asyncio
 import aiohttp
-import time
-import json
 from bs4 import BeautifulSoup
 # from jntuh.Executables import jntuhresultscraper
 
@@ -57,7 +55,7 @@ class ResultScraper:
                         '1-2': ['328', '336', '344', '353', '368', '379', '387'],
                         '2-1': ['337', '350', '365', '376', '386'], 
                         '2-2': ['340', '374', '385']
-                    }, 
+                    },
                     'R22': 
                     {
                         '1-1': ['389']

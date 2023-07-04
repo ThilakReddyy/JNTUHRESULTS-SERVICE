@@ -9,7 +9,8 @@ def extract_exam_code(result_link):
     try:
         if(exam_code[3]=='&'):
             return exam_code[:3]
-    except:
+    except Exception as e:
+        print(e)
         return exam_code
     return exam_code
 
@@ -53,7 +54,6 @@ def get_exam_codes():
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
-    btech_results = soup.find_all("table")[0].find_all("tr")
 
     exam_codes = {
         "btech": {

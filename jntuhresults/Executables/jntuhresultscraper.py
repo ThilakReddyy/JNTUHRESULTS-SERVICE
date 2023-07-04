@@ -101,7 +101,7 @@ class ResultScraper:
         # Payloads for different types of result requests
         self.payloads={
                 "btech":["&degree=btech&etype=r17&result=null&grad=null&type=intgrade&htno=","&degree=btech&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="],
-                "bpharmacy":["&degree=bpharmacy&etype=r17&grad=null&result=null&type=regular&htno=","&degree=bpharmacy&etype=r17&grad=null&result=gradercrv&type=rcrvintgrade&htno="],
+                "bpharmacy":["&degree=bpharmacy&etype=r17&grad=null&result=null&type=intgrade&htno=","&degree=bpharmacy&etype=r17&grad=null&result=gradercrv&type=rcrvintgrade&htno="],
                 "mba":["&degree=mba&grad=pg&etype=null&result=grade17&type=intgrade&htno=","&degree=mba&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="]
                 }
 
@@ -131,28 +131,30 @@ class ResultScraper:
         self.results["Details"]["Roll_No"]=Htno
         self.results["Details"]["COLLEGE_CODE"]=College_Code
         self.results["Details"]["FATHER_NAME"]=Father_Name
-        
         Results = soup.find_all("table")[1].find_all("tr")
-
         Results_column_names = [content.text for content in Results[0].findAll("b")]
         grade_index = Results_column_names.index("GRADE")
         subject_name_index = Results_column_names.index("SUBJECT NAME")
         subject_code_index = Results_column_names.index("SUBJECT CODE")
         subject_credits_index = Results_column_names.index("CREDITS(C)")
-        subject_internal_marks_index = Results_column_names.index("INTERNAL")
-        subject_external_marks_index = Results_column_names.index("EXTERNAL")
-        subject_total_marks_index = Results_column_names.index("TOTAL")
-        
-
+        try:
+            subject_internal_marks_index = Results_column_names.index("INTERNAL")
+            subject_external_marks_index = Results_column_names.index("EXTERNAL")
+            subject_total_marks_index = Results_column_names.index("TOTAL")
+        except:
+           pass
 
         Results = Results[1:]
         for result_subject in Results:
             subject_name = result_subject.find_all("td")[subject_name_index].get_text()
             subject_code = result_subject.find_all("td")[subject_code_index].get_text()
             subject_grade = result_subject.find_all("td")[grade_index].get_text()
-            subject_internal_marks = result_subject.find_all("td")[subject_internal_marks_index].get_text()
-            subject_external_marks = result_subject.find_all("td")[subject_external_marks_index].get_text()
-            subject_total_marks = result_subject.find_all("td")[subject_total_marks_index].get_text()
+            try:
+                subject_internal_marks = result_subject.find_all("td")[subject_internal_marks_index].get_text()
+                subject_external_marks = result_subject.find_all("td")[subject_external_marks_index].get_text()
+                subject_total_marks = result_subject.find_all("td")[subject_total_marks_index].get_text()
+            except:
+                pass
             subject_credits = result_subject.find_all("td")[
                 subject_credits_index
             ].get_text()
@@ -169,9 +171,12 @@ class ResultScraper:
             self.results["Results"][semester_code][subject_code] = {}
             self.results["Results"][semester_code][subject_code]["subject_code"] = subject_code
             self.results["Results"][semester_code][subject_code]["subject_name"] = subject_name
-            self.results["Results"][semester_code][subject_code]["subject_internal"]=subject_internal_marks
-            self.results["Results"][semester_code][subject_code]["subject_external"]=subject_external_marks
-            self.results["Results"][semester_code][subject_code]["subject_total"]=subject_total_marks
+            try:
+                self.results["Results"][semester_code][subject_code]["subject_internal"]=subject_internal_marks
+                self.results["Results"][semester_code][subject_code]["subject_external"]=subject_external_marks
+                self.results["Results"][semester_code][subject_code]["subject_total"]=subject_total_marks
+            except:
+                pass
             self.results["Results"][semester_code][subject_code]["subject_grade"] = subject_grade
             self.results["Results"][semester_code][subject_code][
                 "subject_credits"

@@ -141,8 +141,8 @@ class ResultScraper:
             subject_internal_marks_index = Results_column_names.index("INTERNAL")
             subject_external_marks_index = Results_column_names.index("EXTERNAL")
             subject_total_marks_index = Results_column_names.index("TOTAL")
-        except:
-           pass
+        except Exception as e:
+            print(self.roll_number,e)
 
         Results = Results[1:]
         for result_subject in Results:
@@ -153,8 +153,8 @@ class ResultScraper:
                 subject_internal_marks = result_subject.find_all("td")[subject_internal_marks_index].get_text()
                 subject_external_marks = result_subject.find_all("td")[subject_external_marks_index].get_text()
                 subject_total_marks = result_subject.find_all("td")[subject_total_marks_index].get_text()
-            except:
-                pass
+            except Exception as e:
+                print(self.roll_number,e)
             subject_credits = result_subject.find_all("td")[
                 subject_credits_index
             ].get_text()
@@ -175,8 +175,8 @@ class ResultScraper:
                 self.results["Results"][semester_code][subject_code]["subject_internal"]=subject_internal_marks
                 self.results["Results"][semester_code][subject_code]["subject_external"]=subject_external_marks
                 self.results["Results"][semester_code][subject_code]["subject_total"]=subject_total_marks
-            except:
-                pass
+            except Exception as e:
+                print(self.roll_number,e)
             self.results["Results"][semester_code][subject_code]["subject_grade"] = subject_grade
             self.results["Results"][semester_code][subject_code][
                 "subject_credits"
@@ -250,7 +250,6 @@ class ResultScraper:
                             task = asyncio.ensure_future(self.fetch_result(session, code, payload))
                             tasks[exam_code].append(task)
                         except Exception as e:
-                            pass
                             print(self.roll_number,e)
 
             # Wait for all the tasks to complete

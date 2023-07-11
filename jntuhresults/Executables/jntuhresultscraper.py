@@ -213,13 +213,13 @@ class ResultScraper:
                 # Set payloads to btech
                 payloads = self.payloads["btech"]
                 # Determine the exam codes based on the roll number prefix
-                exam_codes = self.exam_codes["btech"]["R22" if self.roll_number[:2] == "22" else "R18"]
+                exam_codes = self.exam_codes["btech"]["R22" if (self.roll_number[:2] == "22" and self.roll_number[4]!="5" ) else "R18"]
 
             elif self.roll_number[5] == "R":
                 # Set payloads to bpharmacy
                 payloads = self.payloads["bpharmacy"]
                 # Set the exam codes for bpharmacy
-                exam_codes = self.exam_codes["bpharmacy"]["R22" if self.roll_number[:2] == "22" else "R17"]
+                exam_codes = self.exam_codes["bpharmacy"]["R22" if (self.roll_number[:2] == "22" and self.roll_number[4]!="5" ) else "R17"]
             
             elif self.roll_number[5]=="E":
                  # Set payloads to MBA

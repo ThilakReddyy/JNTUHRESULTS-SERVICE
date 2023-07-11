@@ -36,7 +36,7 @@ def get_notifications():
                 "Link":"http://results.jntuh.ac.in"+result_link,
                 "Date":result_text[result_text_index:]
             }
-            results.append(json_appendded)  
+            results.append(json_appendded)
     redis_client.set("notifications", json.dumps({"data": results}))
     redis_client.expire("notifications", timedelta(minutes=15))
     return results

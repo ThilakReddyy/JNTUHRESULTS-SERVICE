@@ -110,4 +110,5 @@ def get_exam_codes():
 
 exam_codes=get_exam_codes()
 
+
 print(exam_codes)

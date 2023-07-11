@@ -48,7 +48,7 @@ class ResultScraper:
                         '1-1': ['859']
                     }
                 },
-                'mpharmacy': {
+                'mtech': {
                     'R19': 
                     {
                         '1-1': ['319', '332', '347', '356', '371', '382', '388'], 
@@ -61,7 +61,7 @@ class ResultScraper:
                         '1-1': ['389']
                     }
                 }, 
-                'mTech': {
+                'mpharmacy': {
                     'R19': 
                     {
                         '1-1': ['161', '177', '185', '198', '209', '215'], 
@@ -100,7 +100,10 @@ class ResultScraper:
         self.payloads={
                 "btech":["&degree=btech&etype=r17&result=null&grad=null&type=intgrade&htno=","&degree=btech&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="],
                 "bpharmacy":["&degree=bpharmacy&etype=r17&grad=null&result=null&type=intgrade&htno=","&degree=bpharmacy&etype=r17&grad=null&result=gradercrv&type=rcrvintgrade&htno="],
-                "mba":["&degree=mba&grad=pg&etype=null&result=grade17&type=intgrade&htno=","&degree=mba&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="]
+                "mba":["&degree=mba&grad=pg&etype=null&result=grade17&type=intgrade&htno=","&degree=mba&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="],
+                "mpharmacy":["&degree=mpharmacy&etype=r17&grad=pg&result=null&type=intgrade&htno=","&degree=mpharmacy&etype=r17&grad=pg&result=gradercrv&type=rcrvintgrade&htno="],
+                "mtech":["&degree=mtech&grad=pg&etype=null&result=grade17&type=intgrade&htno=","&degree=mtech&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="],
+
                 }
 
     async def fetch_result(self, session, exam_code, payload):
@@ -225,9 +228,20 @@ class ResultScraper:
                 # Determine the exam codes based on the roll number prefix
                 exam_codes = self.exam_codes["mba"]["R22" if self.roll_number[:2] == "22" else "R19"]
                 
+            elif self.roll_number[5]=='D':
+                payloads = self.payloads["mtech"]
+                
+                # Determine the exam codes based on the roll number prefix
+                exam_codes = self.exam_codes["mtech"]["R22" if self.roll_number[:2] == "22" else "R19"]
+
+            elif self.roll_number[5]=='S':
+                payloads = self.payloads["mpharmacy"]
+                
+                # Determine the exam codes based on the roll number prefix
+                exam_codes = self.exam_codes["mpharmacy"]["R22" if self.roll_number[:2] == "22" else "R19"]
             else:
                 return self.results
-
+            
             # Check if the fourth character of the roll number is '5'
             if self.roll_number[4] == "5":
                 # Remove specific exam codes from the exam_codes dictionary

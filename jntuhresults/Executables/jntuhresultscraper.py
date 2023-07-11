@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 # Define a class for scraping JNTUH results
 class ResultScraper:
     def __init__(self, roll_number):
-        
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
         # self.url="http://202.63.105.184/results/resultAction"
@@ -60,7 +59,7 @@ class ResultScraper:
                     {
                         '1-1': ['389']
                     }
-                }, 
+                },
                 'mpharmacy': {
                     'R19': 
                     {
@@ -161,7 +160,7 @@ class ResultScraper:
             ].get_text()
 
             # Skip subjects with lower grades if already stored
-            if(subject_code in self.results["Results"][semester_code] and 
+            if (subject_code in self.results["Results"][semester_code] and 
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='F' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='Ab' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='-' and
@@ -222,7 +221,7 @@ class ResultScraper:
                 exam_codes = self.exam_codes["bpharmacy"]["R22" if (self.roll_number[:2] == "22" and self.roll_number[4]!="5" ) else "R17"]
             
             elif self.roll_number[5]=="E":
-                 # Set payloads to MBA
+                # Set payloads to MBA
                 payloads = self.payloads["mba"]
                 
                 # Determine the exam codes based on the roll number prefix

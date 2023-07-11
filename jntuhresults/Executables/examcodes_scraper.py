@@ -49,7 +49,8 @@ def categorize_masters_exam_code(result_text,exam_code):
         return "2-2"
     else:
         return None
-    
+
+
 def get_exam_codes():
     url = "http://results.jntuh.ac.in/jsp/home.jsp"
     response = requests.get(url)
@@ -107,6 +108,7 @@ def get_exam_codes():
                 exam_codes[degree[table]][regulation][category] = sorted(codes)
             exam_codes[degree[table]][regulation] = dict(sorted(exam_codes[degree[table]][regulation].items(), key=lambda x: x[0]))
     return exam_codes
+
 
 exam_codes=get_exam_codes()
 

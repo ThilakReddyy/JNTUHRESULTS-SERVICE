@@ -22,7 +22,7 @@ class ClassResult(View):
         # Retrieve htnos and semester from the GET parameters
         htnos = request.GET.get('htnos').split(",")
         semester = request.GET.get('semester')
-          
+        
         # Print htnos for debugging
         print(htnos)
 

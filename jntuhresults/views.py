@@ -59,39 +59,38 @@ class AcademicResult(View):
         if len(htno) != 10:
             return HttpResponse(htno+" Invalid hall ticket number")
         try:
-                # Create an instance of ResultScraper
-                jntuhresult = ResultScraper(htno.upper())
+            # Create an instance of ResultScraper
+            jntuhresult = ResultScraper(htno.upper())
 
-                # Run the scraper and return the result
-                result = jntuhresult.run()
+            # Run the scraper and return the result
+            result = jntuhresult.run()
                 
-                # Calculate the total marks and credits
-                total_credits = 0  # Variable to store the total credits
-                total = 0  # Variable to store the total marks
-                failed = False  # Flag to indicate if any value is missing 'total' key
+            # Calculate the total marks and credits
+            total_credits = 0  # Variable to store the total credits
+            total = 0  # Variable to store the total marks
+            failed = False  # Flag to indicate if any value is missing 'total' key
 
-                # Iterate over the values in result["Results"] dictionary
-                for value in result["Results"].values():
-                    if 'total' in value.keys():  # Check if the current value has 'total' key
-                        total += value['total']  # Add the 'total' value to the total marks
-                        total_credits += value['credits']  # Add the 'credits' value to the total credits
-                    else:
-                        failed = True  # Set the flag to indicate missing 'total' key
+            # Iterate over the values in result["Results"] dictionary
+            for value in result["Results"].values():
+                if 'total' in value.keys():  # Check if the current value has 'total' key
+                    total += value['total']  # Add the 'total' value to the total marks
+                    total_credits += value['credits']  # Add the 'credits' value to the total credits
+                else:
+                    failed = True  # Set the flag to indicate missing 'total' key
 
-                # Calculate the CGPA if there are non-zero credits
-                if not failed:
-                    result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
+            # Calculate the CGPA if there are non-zero credits
+            if not failed:
+                result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
 
-                stopping=time.time()
-                print(htno,result['Details']['NAME'],stopping-starting)
+            stopping=time.time()
+            print(htno,result['Details']['NAME'],stopping-starting)
 
-                del jntuhresult
-                # Return the result
-                return JsonResponse(result,safe=False)
+            del jntuhresult
+            # Return the result
+            return JsonResponse(result,safe=False)
         
         except Exception as e:
             print(htno,e)
-            del jntuhresult
             # Catch any exceptions raised during scraping
             return HttpResponse(htno+" - 500 Internal Server Error")
            

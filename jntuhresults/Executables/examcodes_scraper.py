@@ -7,7 +7,7 @@ def extract_exam_code(result_link):
     # Extract the exam code from the result link
     exam_code = result_link[exam_code_index + 9:exam_code_index + 13]
     try:
-        if(exam_code[3]=='&'):
+        if (exam_code[3]=='&'):
             return exam_code[:3]
     except Exception as e:
         print(e)
@@ -82,7 +82,7 @@ def get_exam_codes():
         results = soup.find_all("table")[table].find_all("tr")
         regulations=exam_codes[degree[table]].keys()
 
-         # Iterate through each result in the B.Tech results table
+        # Iterate through each result in the B.Tech results table
         for result in results:
             result_link =result.find_all("td")[0].find_all("a")[0]["href"]
             result_text=result.get_text()
@@ -91,7 +91,7 @@ def get_exam_codes():
             for regulation in regulations:
                 if regulation in result_text:
                     exam_code = extract_exam_code(result_link)
-                    if(table<2):
+                    if (table<2):
                         category = categorize_exam_code(result_text, exam_code)
                     else:
                         category = categorize_masters_exam_code(result_text,exam_code)
@@ -109,4 +109,5 @@ def get_exam_codes():
     return exam_codes
 
 exam_codes=get_exam_codes()
+
 print(exam_codes)

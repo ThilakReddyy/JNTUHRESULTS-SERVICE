@@ -10,9 +10,7 @@ class ResultScraper:
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
         # self.url="http://202.63.105.184/results/resultAction"
-        
         self.roll_number = roll_number
-        
         self.results = {"Details": {}, "Results": {}}
         
         # Exam codes for different regulations and semesters
@@ -67,7 +65,7 @@ class ResultScraper:
                         '1-2': ['157', '165', '174', '182', '195', '206', '214'], 
                         '2-1': ['166', '180', '194', '204', '213'], 
                         '2-2': ['169', '203', '212']
-                    }, 
+                    },
                     'R22': 
                     {
                         '1-1': ['216']
@@ -80,7 +78,7 @@ class ResultScraper:
                         '1-2': ['122', '293', '302', '313', '320', '347', '359', '367'], 
                         '2-1': ['303', '310', '344', '356', '366'], 
                         '2-2': ['120', '307', '341', '353', '365']
-                    }, 
+                    },
                     'R22': 
                     {
                         '1-1': ['369']
@@ -97,11 +95,16 @@ class ResultScraper:
         
         # Payloads for different types of result requests
         self.payloads={
-                "btech":["&degree=btech&etype=r17&result=null&grad=null&type=intgrade&htno=","&degree=btech&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="],
-                "bpharmacy":["&degree=bpharmacy&etype=r17&grad=null&result=null&type=intgrade&htno=","&degree=bpharmacy&etype=r17&grad=null&result=gradercrv&type=rcrvintgrade&htno="],
-                "mba":["&degree=mba&grad=pg&etype=null&result=grade17&type=intgrade&htno=","&degree=mba&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="],
-                "mpharmacy":["&degree=mpharmacy&etype=r17&grad=pg&result=null&type=intgrade&htno=","&degree=mpharmacy&etype=r17&grad=pg&result=gradercrv&type=rcrvintgrade&htno="],
-                "mtech":["&degree=mtech&grad=pg&etype=null&result=grade17&type=intgrade&htno=","&degree=mtech&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="],
+                "btech":["&degree=btech&etype=r17&result=null&grad=null&type=intgrade&htno=",
+                         "&degree=btech&etype=r17&result=gradercrv&grad=null&type=rcrvintgrade&htno="],
+                "bpharmacy":["&degree=bpharmacy&etype=r17&grad=null&result=null&type=intgrade&htno=",
+                             "&degree=bpharmacy&etype=r17&grad=null&result=gradercrv&type=rcrvintgrade&htno="],
+                "mba":["&degree=mba&grad=pg&etype=null&result=grade17&type=intgrade&htno=",
+                       "&degree=mba&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="],
+                "mpharmacy":["&degree=mpharmacy&etype=r17&grad=pg&result=null&type=intgrade&htno=",
+                             "&degree=mpharmacy&etype=r17&grad=pg&result=gradercrv&type=rcrvintgrade&htno="],
+                "mtech":["&degree=mtech&grad=pg&etype=null&result=grade17&type=intgrade&htno=",
+                         "&degree=mtech&grad=pg&etype=r16&result=gradercrv&type=rcrvintgrade&htno="],
 
                 }
 
@@ -160,7 +163,7 @@ class ResultScraper:
             ].get_text()
 
             # Skip subjects with lower grades if already stored
-            if (subject_code in self.results["Results"][semester_code] and 
+            if (subject_code in self.results["Results"][semester_code] and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='F' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='Ab' and
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='-' and

@@ -15,7 +15,7 @@ def get_notifications():
     # Load environment variables from .env file
 
     redis_response = redis_client.get("notifications")
-    if redis_response != None:
+    if redis_response is not None:
         data = json.loads(redis_response)
         return data["data"]
     

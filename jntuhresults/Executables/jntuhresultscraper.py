@@ -12,7 +12,6 @@ class ResultScraper:
         # self.url="http://202.63.105.184/results/resultAction"
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
-        
         # Exam codes for different regulations and semesters
         self.exam_codes={
                 'btech': {
@@ -66,20 +65,20 @@ class ResultScraper:
                         '2-1': ['166', '180', '194', '204', '213'], 
                         '2-2': ['169', '203', '212']
                     },
-                    'R22': 
+                    'R22':
                     {
                         '1-1': ['216']
                     }
-                }, 
+                },
                 'mba': {
-                    'R19': 
+                    'R19':
                     {
                         '1-1': ['297', '316', '323', '350', '362', '368'], 
                         '1-2': ['122', '293', '302', '313', '320', '347', '359', '367'], 
                         '2-1': ['303', '310', '344', '356', '366'], 
                         '2-2': ['120', '307', '341', '353', '365']
                     },
-                    'R22': 
+                    'R22':
                     {
                         '1-1': ['369']
                     }

@@ -106,7 +106,7 @@ class AcademicResult(View):
             del jntuhresult
 
             redis_client.set(htno, json.dumps({"data": result}))
-            redis_client.expire(htno, timedelta(minutes=120))
+            redis_client.expire(htno, timedelta(minutes=60))
 
             # Return the result
             return JsonResponse(result,safe=False)

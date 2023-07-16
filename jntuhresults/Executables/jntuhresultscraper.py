@@ -283,7 +283,7 @@ class ResultScraper:
 
 
     def run(self):
-        timeout = 4  # Timeout value in seconds
+        timeout = 30  # Timeout value in seconds
         try:
             return asyncio.run(asyncio.wait_for(self.scrape_all_results(), timeout))
         except asyncio.TimeoutError:

@@ -5,7 +5,16 @@ from django.http import HttpResponse,JsonResponse
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
 from django.views.generic import View
 from jntuhresults.Executables.notificationsretriever import get_notifications
+import redis
+import json
+from datetime import timedelta
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
+redis_url=os.environ.get("REDIS_URL")
+redis_client = redis.from_url(redis_url)
 
 # Class Result ----------------------------------------------------------------------
 class ClassResult(View):
@@ -55,6 +64,13 @@ class AcademicResult(View):
         starting =time.time()
         
         htno=request.GET.get('htno').upper()
+
+        redis_response = redis_client.get(htno)
+        
+        if redis_response is not None:
+            data = json.loads(redis_response)
+            return JsonResponse(data["data"],safe=False)
+        
         # Check if the hall ticket number is valid
         if len(htno) != 10:
             return HttpResponse(htno+" Invalid hall ticket number")
@@ -86,6 +102,10 @@ class AcademicResult(View):
             print(htno,result['Details']['NAME'],stopping-starting)
 
             del jntuhresult
+
+            redis_client.set(htno, json.dumps({"data": result}))
+            redis_client.expire(htno, timedelta(minutes=120))
+
             # Return the result
             return JsonResponse(result,safe=False)
         

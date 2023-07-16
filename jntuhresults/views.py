@@ -69,6 +69,8 @@ class AcademicResult(View):
         
         if redis_response is not None:
             data = json.loads(redis_response)
+            stopping=time.time()
+            print(htno,data["data"]['Details']['NAME'],stopping-starting)
             return JsonResponse(data["data"],safe=False)
         
         # Check if the hall ticket number is valid

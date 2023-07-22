@@ -61,16 +61,28 @@ class ClassResult(View):
 
 class AcademicResult(View):
     def get(self,request):
+
+        # Record the current time as the starting time
         starting =time.time()
-        
+
+        # Get the 'htno' parameter from the request and convert it to uppercase
         htno=request.GET.get('htno').upper()
 
+        # Retrieve data from Redis cache using the 'htno' as the key
         redis_response = redis_client.get(htno)
         
+        # Check if data exists in the Redis cache
         if redis_response is not None:
+            # If data exists, parse the JSON response
             data = json.loads(redis_response)
+
+            # Record the current time as the stopping time
             stopping=time.time()
+
+            # Print relevant details (e.g., 'htno', student name, and execution time)
             print(htno,data["data"]['Details']['NAME'],stopping-starting)
+
+            # Return the data as a JSON response to the client
             return JsonResponse(data["data"],safe=False)
         
         # Check if the hall ticket number is valid
@@ -99,14 +111,21 @@ class AcademicResult(View):
             # Calculate the CGPA if there are non-zero credits
             if not failed:
                 result["Results"]["Total"] = "{0:.2f}".format(round(total/total_credits,2))
-
+            
+            # Record the current time as the stopping time
             stopping=time.time()
+
+            # Print relevant details (e.g., 'htno', student name, and execution time)
             print(htno,result['Details']['NAME'],stopping-starting)
 
+            # Delete the variable 'jntuhresult' from memory
             del jntuhresult
 
+            # Store the 'result' data in the Redis cache with the 'htno' as the key.
             redis_client.set(htno, json.dumps({"data": result}))
-            redis_client.expire(htno, timedelta(minutes=240))
+
+            # Set an expiration time of 4 hours for the cached data associated with 'htno'.
+            redis_client.expire(htno, timedelta(hours=4))
 
             # Return the result
             return JsonResponse(result,safe=False)

@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lusitana">
+    <link rel="stylesheet" type="text/css" href="test.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            background: white;
+        }
+
+        .text-label {
+            font-family: "Bungee", sans-serif;
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: separate;
+            border-spacing: 2px;
+            width: 100%;
+            border-bottom-width: 1px;
+
+        }
+
+        th {
+            border: 1px solid black;
+            border-collapse: separate;
+            border-spacing: 2px;
+            height: 20px;
+        }
+
+        .text-label2 {
+            font-family: "Lusitana", sans-serif;
+        }
+
+        .table {
+
+            border: 1px solid black;
+            margin: 10px;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid black;
+            padding: 10px 20px 10px 20px;
+        }
+
+        .table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section {
+            padding: 10px 20px 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="m-2 text-[45%] sm:text-[60%] md:text-[80%] lg:text-[100%] ">
+        <table class="w-[100%] my-2">
+            <tbody>
+                <tr class="w-max bg-gray-200 md:bg-gray-300">
+                    <th>NAME</th>
+                    <th>Roll_No</th>
+                    <th>COLLEGE_CODE</th>
+                    <th>FATHER_NAME</th>
+                </tr>
+                <tr>
+                    <th>POTHUGANTI THILAK REDDY</th>
+                    <th>18E51A0479</th>
+                    <th>E5</th>
+                    <th>POTHUGANTI NARASIMHA REDDY</th>
+                </tr>
+            </tbody>
+        </table>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>1-1 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15102</th>
+                            <th>PROGRAMMING FOR PROBLEM SOLVING LAB</th>
+                            <th>A</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15103</th>
+                            <th>ENVIRONMENTAL SCIENCE</th>
+                            <th>A</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>15104</th>
+                            <th>APPLIED PHYSICS LAB</th>
+                            <th>A+</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>151AA</th>
+                            <th>MATHEMATICS - I</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>151AC</th>
+                            <th>PROGRAMMING FOR PROBLEM SOLVING</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>151AD</th>
+                            <th>ENGINEERING GRAPHICS</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>151AE</th>
+                            <th>APPLIED PHYSICS</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15102</th>
+                            <th>PROGRAMMING FOR PROBLEM SOLVING LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15103</th>
+                            <th>ENVIRONMENTAL SCIENCE</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>15104</th>
+                            <th>APPLIED PHYSICS LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A+</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>151AA</th>
+                            <th>MATHEMATICS - I</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>151AC</th>
+                            <th>PROGRAMMING FOR PROBLEM SOLVING</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>151AD</th>
+                            <th>ENGINEERING GRAPHICS</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>151AE</th>
+                            <th>APPLIED PHYSICS</th>
+                            <th>14</th>
+                            <th>26</th>
+                            <th>40</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>5.97</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>1-2 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15201</th>
+                            <th>ENGINEERING WORKSHOP</th>
+                            <th>A+</th>
+                            <th>2.5</th>
+                        </tr>
+                        <tr>
+                            <th>15202</th>
+                            <th>ENGINEERING CHEMISTRY LAB</th>
+                            <th>A+</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15203</th>
+                            <th>ENGLISH LANGUAGE AND COMMUNICATION SKILLS LAB</th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15204</th>
+                            <th>BASIC ELECTRICAL ENGINEERING LAB</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>152AA</th>
+                            <th>MATHEMATICS - II</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>152AB</th>
+                            <th>CHEMISTRY</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>152AC</th>
+                            <th>BASIC ELECTRICAL ENGINEERING</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>152AD</th>
+                            <th>ENGLISH</th>
+                            <th>B+</th>
+                            <th>2</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15201</th>
+                            <th>ENGINEERING WORKSHOP</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A+</th>
+                            <th>2.5</th>
+                        </tr>
+                        <tr>
+                            <th>15202</th>
+                            <th>ENGINEERING CHEMISTRY LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A+</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15203</th>
+                            <th>ENGLISH LANGUAGE AND COMMUNICATION SKILLS LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15204</th>
+                            <th>BASIC ELECTRICAL ENGINEERING LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>152AA</th>
+                            <th>MATHEMATICS - II</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>152AB</th>
+                            <th>CHEMISTRY</th>
+                            <th>16</th>
+                            <th>32</th>
+                            <th>48</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>152AC</th>
+                            <th>BASIC ELECTRICAL ENGINEERING</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>152AD</th>
+                            <th>ENGLISH</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>B+</th>
+                            <th>2</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>6.53</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>2-1 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15305</th>
+                            <th>BASIC SIMULATION LAB</th>
+                            <th>B+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15308</th>
+                            <th>DIGITAL SYSTEM DESIGN LAB</th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15311</th>
+                            <th>ELECTRONIC DEVICES AND CIRCUITS LAB</th>
+                            <th>A</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15331</th>
+                            <th>CONSTITUTION OF INDIA</th>
+                            <th>A+</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>153AN</th>
+                            <th>DIGITAL SYSTEM DESIGN</th>
+                            <th>B+</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>153AT</th>
+                            <th>ELECTRONIC DEVICES AND CIRCUITS</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>153BH</th>
+                            <th>NETWORK ANALYSIS AND TRANSMISSION LINES</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>153BQ</th>
+                            <th>PROBABILITY THEORY AND STOCHASTIC PROCESSES</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>153BT</th>
+                            <th>SIGNALS AND SYSTEMS</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15305</th>
+                            <th>BASIC SIMULATION LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>B+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15308</th>
+                            <th>DIGITAL SYSTEM DESIGN LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15311</th>
+                            <th>ELECTRONIC DEVICES AND CIRCUITS LAB</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15331</th>
+                            <th>CONSTITUTION OF INDIA</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A+</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>153AN</th>
+                            <th>DIGITAL SYSTEM DESIGN</th>
+                            <th>17</th>
+                            <th>50</th>
+                            <th>67</th>
+                            <th>B+</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>153AT</th>
+                            <th>ELECTRONIC DEVICES AND CIRCUITS</th>
+                            <th>20</th>
+                            <th>26</th>
+                            <th>46</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>153BH</th>
+                            <th>NETWORK ANALYSIS AND TRANSMISSION LINES</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>153BQ</th>
+                            <th>PROBABILITY THEORY AND STOCHASTIC PROCESSES</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>153BT</th>
+                            <th>SIGNALS AND SYSTEMS</th>
+                            <th>13</th>
+                            <th>41</th>
+                            <th>54</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>6.14</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>2-2 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15404</th>
+                            <th>ANALOG AND DIGITAL COMMUNICATIONS LAB</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15412</th>
+                            <th>ELECTRONIC CIRCUIT ANALYSIS LAB</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15416</th>
+                            <th>IC APPLICATIONS LAB</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15428</th>
+                            <th>GENDER SENSITIZATION LAB</th>
+                            <th>A+</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>154AC</th>
+                            <th>ANALOG AND DIGITAL COMMUNICATIONS</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>154AV</th>
+                            <th>ELECTROMAGNETIC FIELDS AND WAVES</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>154AW</th>
+                            <th>ELECTRONIC CIRCUIT ANALYSIS</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>154BG</th>
+                            <th>LAPLACE TRANSFORMS, NUMERICAL METHODS &amp; COMPLEX VARIABLES</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>154BH</th>
+                            <th>LINEAR IC APPLICATIONS</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15404</th>
+                            <th>ANALOG AND DIGITAL COMMUNICATIONS LAB</th>
+                            <th>25</th>
+                            <th>67</th>
+                            <th>92</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15412</th>
+                            <th>ELECTRONIC CIRCUIT ANALYSIS LAB</th>
+                            <th>25</th>
+                            <th>75</th>
+                            <th>100</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15416</th>
+                            <th>IC APPLICATIONS LAB</th>
+                            <th>24</th>
+                            <th>66</th>
+                            <th>90</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15428</th>
+                            <th>GENDER SENSITIZATION LAB</th>
+                            <th>85</th>
+                            <th>0</th>
+                            <th>85</th>
+                            <th>A+</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>154AC</th>
+                            <th>ANALOG AND DIGITAL COMMUNICATIONS</th>
+                            <th>21</th>
+                            <th>26</th>
+                            <th>47</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>154AV</th>
+                            <th>ELECTROMAGNETIC FIELDS AND WAVES</th>
+                            <th>17</th>
+                            <th>26</th>
+                            <th>43</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>154AW</th>
+                            <th>ELECTRONIC CIRCUIT ANALYSIS</th>
+                            <th>23</th>
+                            <th>26</th>
+                            <th>49</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>154BG</th>
+                            <th>LAPLACE TRANSFORMS, NUMERICAL METHODS &amp; COMPLEX VARIABLES</th>
+                            <th>18</th>
+                            <th>29</th>
+                            <th>47</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>154BH</th>
+                            <th>LINEAR IC APPLICATIONS</th>
+                            <th>23</th>
+                            <th>31</th>
+                            <th>54</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>6.10</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>3-1 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15501</th>
+                            <th>ADVANCED COMMUNICATION SKILLS LAB</th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15507</th>
+                            <th>DATA COMMUNICATIONS AND NETWORKS LAB</th>
+                            <th>A+</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15522</th>
+                            <th>MICROPROCESSORS &amp; MICROCONTROLLERS LAB</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15531</th>
+                            <th>INTELLECTUAL PROPERTY RIGHTS</th>
+                            <th>C</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>15533</th>
+                            <th>CYBER SECURITY</th>
+                            <th>O</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>155AG</th>
+                            <th>BUSINESS ECONOMICS &amp; FINANCIAL ANALYSIS</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>155AP</th>
+                            <th>COMPUTER ORGANIZATION &amp; OPERATING SYSTEMS</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>155AR</th>
+                            <th>CONTROL SYSTEMS</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>155AV</th>
+                            <th>DATA COMMUNICATIONS AND NETWORKS</th>
+                            <th>B+</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>155CF</th>
+                            <th>MICROPROCESSORS &amp; MICROCONTROLLERS</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15501</th>
+                            <th>ADVANCED COMMUNICATION SKILLS LAB</th>
+                            <th>20</th>
+                            <th>64</th>
+                            <th>84</th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15507</th>
+                            <th>DATA COMMUNICATIONS AND NETWORKS LAB</th>
+                            <th>19</th>
+                            <th>69</th>
+                            <th>88</th>
+                            <th>A+</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15522</th>
+                            <th>MICROPROCESSORS &amp; MICROCONTROLLERS LAB</th>
+                            <th>24</th>
+                            <th>68</th>
+                            <th>92</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15531</th>
+                            <th>INTELLECTUAL PROPERTY RIGHTS</th>
+                            <th>46</th>
+                            <th>0</th>
+                            <th>46</th>
+                            <th>C</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>15533</th>
+                            <th>CYBER SECURITY</th>
+                            <th>93</th>
+                            <th>0</th>
+                            <th>93</th>
+                            <th>O</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>155AG</th>
+                            <th>BUSINESS ECONOMICS &amp; FINANCIAL ANALYSIS</th>
+                            <th>22</th>
+                            <th>31</th>
+                            <th>53</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>155AP</th>
+                            <th>COMPUTER ORGANIZATION &amp; OPERATING SYSTEMS</th>
+                            <th>23</th>
+                            <th>29</th>
+                            <th>52</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>155AR</th>
+                            <th>CONTROL SYSTEMS</th>
+                            <th>19</th>
+                            <th>26</th>
+                            <th>45</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>155AV</th>
+                            <th>DATA COMMUNICATIONS AND NETWORKS</th>
+                            <th>21</th>
+                            <th>44</th>
+                            <th>65</th>
+                            <th>B+</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>155CF</th>
+                            <th>MICROPROCESSORS &amp; MICROCONTROLLERS</th>
+                            <th>20</th>
+                            <th>35</th>
+                            <th>55</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>6.61</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>3-2 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15610</th>
+                            <th>DIGITAL SIGNAL PROCESSING LAB</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15611</th>
+                            <th>E-CAD LAB</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15629</th>
+                            <th>SCRIPTING LANGUAGES LAB</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15633</th>
+                            <th>ARTIFICIAL INTELLIGENCE</th>
+                            <th>A+</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>156AF</th>
+                            <th>ANTENNAS AND PROPAGATION</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>156AR</th>
+                            <th>DIGITAL SIGNAL PROCESSING</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>156AV</th>
+                            <th>EMBEDDED SYSTEM DESIGN</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>156DF</th>
+                            <th>VLSI DESIGN</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>156DQ</th>
+                            <th>ENTREPRENEURSHIP</th>
+                            <th>A</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15610</th>
+                            <th>DIGITAL SIGNAL PROCESSING LAB</th>
+                            <th>23</th>
+                            <th>71</th>
+                            <th>94</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15611</th>
+                            <th>E-CAD LAB</th>
+                            <th>25</th>
+                            <th>70</th>
+                            <th>95</th>
+                            <th>O</th>
+                            <th>1.5</th>
+                        </tr>
+                        <tr>
+                            <th>15629</th>
+                            <th>SCRIPTING LANGUAGES LAB</th>
+                            <th>24</th>
+                            <th>67</th>
+                            <th>91</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15633</th>
+                            <th>ARTIFICIAL INTELLIGENCE</th>
+                            <th>87</th>
+                            <th>0</th>
+                            <th>87</th>
+                            <th>A+</th>
+                            <th>0</th>
+                        </tr>
+                        <tr>
+                            <th>156AF</th>
+                            <th>ANTENNAS AND PROPAGATION</th>
+                            <th>21</th>
+                            <th>26</th>
+                            <th>47</th>
+                            <th>C</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>156AR</th>
+                            <th>DIGITAL SIGNAL PROCESSING</th>
+                            <th>16</th>
+                            <th>39</th>
+                            <th>55</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>156AV</th>
+                            <th>EMBEDDED SYSTEM DESIGN</th>
+                            <th>21</th>
+                            <th>26</th>
+                            <th>47</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>156DF</th>
+                            <th>VLSI DESIGN</th>
+                            <th>23</th>
+                            <th>27</th>
+                            <th>50</th>
+                            <th>B</th>
+                            <th>4</th>
+                        </tr>
+                        <tr>
+                            <th>156DQ</th>
+                            <th>ENTREPRENEURSHIP</th>
+                            <th>21</th>
+                            <th>55</th>
+                            <th>76</th>
+                            <th>A</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>6.68</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>4-1 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15705</th>
+                            <th>MICROWAVE AND OPTICAL COMMUNICATIONS LAB</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15709</th>
+                            <th>SEMINAR</th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15721</th>
+                            <th>INDUSTRIAL ORIENTED MINI PROJECT SUMMER INTERNSHIP</th>
+                            <th>A+</th>
+                            <th>2</th>
+                        </tr>
+                        <tr>
+                            <th>15733</th>
+                            <th>PROJECT STAGE - I</th>
+                            <th>O</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157AN</th>
+                            <th>ARTIFICIAL NEURAL NETWORKS</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157BD</th>
+                            <th>DATABASE MANAGEMENT SYSTEMS</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157CM</th>
+                            <th>MICROWAVE AND OPTICAL COMMUNICATIONS</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157DH</th>
+                            <th>PROFESSIONAL PRACTICE, LAW &amp; ETHICS</th>
+                            <th>C</th>
+                            <th>2</th>
+                        </tr>
+                        <tr>
+                            <th>157EP</th>
+                            <th>ENGINEERING MATERIALS</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15705</th>
+                            <th>MICROWAVE AND OPTICAL COMMUNICATIONS LAB</th>
+                            <th>25</th>
+                            <th>69</th>
+                            <th>94</th>
+                            <th>O</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15709</th>
+                            <th>SEMINAR</th>
+                            <th>84</th>
+                            <th>0</th>
+                            <th>84</th>
+                            <th>A+</th>
+                            <th>1</th>
+                        </tr>
+                        <tr>
+                            <th>15721</th>
+                            <th>INDUSTRIAL ORIENTED MINI PROJECT SUMMER INTERNSHIP</th>
+                            <th>0</th>
+                            <th>83</th>
+                            <th>83</th>
+                            <th>A+</th>
+                            <th>2</th>
+                        </tr>
+                        <tr>
+                            <th>15733</th>
+                            <th>PROJECT STAGE - I</th>
+                            <th>23</th>
+                            <th>72</th>
+                            <th>95</th>
+                            <th>O</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157AN</th>
+                            <th>ARTIFICIAL NEURAL NETWORKS</th>
+                            <th>20</th>
+                            <th>26</th>
+                            <th>46</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157BD</th>
+                            <th>DATABASE MANAGEMENT SYSTEMS</th>
+                            <th>15</th>
+                            <th>26</th>
+                            <th>41</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157CM</th>
+                            <th>MICROWAVE AND OPTICAL COMMUNICATIONS</th>
+                            <th>18</th>
+                            <th>26</th>
+                            <th>44</th>
+                            <th>C</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>157DH</th>
+                            <th>PROFESSIONAL PRACTICE, LAW &amp; ETHICS</th>
+                            <th>18</th>
+                            <th>28</th>
+                            <th>46</th>
+                            <th>C</th>
+                            <th>2</th>
+                        </tr>
+                        <tr>
+                            <th>157EP</th>
+                            <th>ENGINEERING MATERIALS</th>
+                            <th>22</th>
+                            <th>29</th>
+                            <th>51</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>6.67</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div id="1">
+            <table class="w-[100%]">
+                <tbody>
+                    <tr class="bg-gray-400 md:bg-white">
+                        <th>4-2 Results</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="block sm:hidden">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15804</th>
+                            <th>PROJECT STAGE II</th>
+                            <th>O</th>
+                            <th>7</th>
+                        </tr>
+                        <tr>
+                            <th>158CT</th>
+                            <th>SYSTEM ON CHIP ARCHITECTURE</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>158CZ</th>
+                            <th>WIRELESS SENSOR NETWORKS</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>158DR</th>
+                            <th>NON CONVENTIONAL SOURCES OF ENERGY</th>
+                            <th>B+</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden sm:block">
+                <table>
+                    <tbody>
+                        <tr class="w-max bg-gray-200 md:bg-gray-300">
+                            <th>SUBJECT_CODE</th>
+                            <th>SUBJECT_NAME</th>
+                            <th>INTERNAL</th>
+                            <th>EXTERNAL</th>
+                            <th>TOTAL</th>
+                            <th>GRADE</th>
+                            <th>CREDITS</th>
+                        </tr>
+                        <tr>
+                            <th>15804</th>
+                            <th>PROJECT STAGE II</th>
+                            <th>25</th>
+                            <th>74</th>
+                            <th>99</th>
+                            <th>O</th>
+                            <th>7</th>
+                        </tr>
+                        <tr>
+                            <th>158CT</th>
+                            <th>SYSTEM ON CHIP ARCHITECTURE</th>
+                            <th>21</th>
+                            <th>36</th>
+                            <th>57</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>158CZ</th>
+                            <th>WIRELESS SENSOR NETWORKS</th>
+                            <th>23</th>
+                            <th>29</th>
+                            <th>52</th>
+                            <th>B</th>
+                            <th>3</th>
+                        </tr>
+                        <tr>
+                            <th>158DR</th>
+                            <th>NON CONVENTIONAL SOURCES OF ENERGY</th>
+                            <th>21</th>
+                            <th>40</th>
+                            <th>61</th>
+                            <th>B+</th>
+                            <th>3</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="width: 75%;">CGPA</th>
+                        <th>7.94</th>
+                    </tr>
+                </tbody>
+            </table><br>
+        </div>
+        <div class="Total">
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="py-2" style="width: 75%;">Total CGPA</th>
+                        <th>6.55</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

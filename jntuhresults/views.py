@@ -75,7 +75,7 @@ class AcademicResult(View):
         if redis_response is not None:
             # If data exists, parse the JSON response
             data = json.loads(redis_response)
-
+            # redis_client.expire(htno, timedelta(seconds=1))
             # Record the current time as the stopping time
             stopping=time.time()
 

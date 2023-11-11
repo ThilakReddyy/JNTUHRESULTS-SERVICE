@@ -45,7 +45,7 @@ class ResultScraper:
                         '1-1': ['859']
                     }
                 },
-                'mtech': {
+                'mpharmacy': {
                     'R19': 
                     {
                         '1-1': ['319', '332', '347', '356', '371', '382', '388','395'], 
@@ -59,7 +59,7 @@ class ResultScraper:
                         '1-2': ['392']
                     }
                 },
-                'mpharmacy': {
+                'mtech': {
                     'R19': 
                     {
                         '1-1': ['161', '177', '185', '198', '209', '215','222'], 
@@ -212,38 +212,36 @@ class ResultScraper:
     async def scrape_all_results(self, exam_code="all"):
         async with aiohttp.ClientSession() as session:
             tasks = {}
+            graduationStart=int(self.roll_number[:2])
 
             # Check the roll number's fifth character to identify the degree
             if self.roll_number[5] == "A":
                 # Set payloads to btech
                 payloads = self.payloads["btech"]
                 # Determine the exam codes based on the roll number prefix
-                exam_codes = self.exam_codes["btech"]["R22" if (self.roll_number[:2] == "22" and self.roll_number[4]!="5" ) else "R18"]
+                exam_codes = self.exam_codes["btech"]["R22" if (graduationStart >= 22 and self.roll_number[4]!="5" ) else "R18"]
 
             elif self.roll_number[5] == "R":
                 # Set payloads to bpharmacy
                 payloads = self.payloads["bpharmacy"]
                 # Set the exam codes for bpharmacy
-                exam_codes = self.exam_codes["bpharmacy"]["R22" if (self.roll_number[:2] == "22" and self.roll_number[4]!="5" ) else "R17"]
+                exam_codes = self.exam_codes["bpharmacy"]["R22" if (graduationStart >= 22 and self.roll_number[4]!="5" ) else "R17"]
             
             elif self.roll_number[5]=="E":
                 # Set payloads to MBA
                 payloads = self.payloads["mba"]
-                
                 # Determine the exam codes based on the roll number prefix
-                exam_codes = self.exam_codes["mba"]["R22" if self.roll_number[:2] == "22" else "R19"]
+                exam_codes = self.exam_codes["mba"]["R22" if graduationStart >= 22 else "R19"]
                 
             elif self.roll_number[5]=='D':
                 payloads = self.payloads["mtech"]
-                
                 # Determine the exam codes based on the roll number prefix
-                exam_codes = self.exam_codes["mtech"]["R22" if self.roll_number[:2] == "22" else "R19"]
+                exam_codes = self.exam_codes["mtech"]["R22" if graduationStart >= 22 else "R19"]
 
             elif self.roll_number[5]=='S':
                 payloads = self.payloads["mpharmacy"]
-                
                 # Determine the exam codes based on the roll number prefix
-                exam_codes = self.exam_codes["mpharmacy"]["R22" if self.roll_number[:2] == "22" else "R19"]
+                exam_codes = self.exam_codes["mpharmacy"]["R22" if graduationStart>=22 else "R19"]
             else:
                 return self.results
             

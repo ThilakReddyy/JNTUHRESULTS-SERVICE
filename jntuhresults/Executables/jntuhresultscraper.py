@@ -10,7 +10,7 @@ class ResultScraper:
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
         # self.url="http://202.63.105.184/results/resultAction"
-        
+
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
         # Exam codes for different regulations and semesters
@@ -43,7 +43,8 @@ class ResultScraper:
                     '4-2': ['678', '700', '789', '809','861', '878']
                     },
                     'R22': {
-                        '1-1': ['859','892']
+                        '1-1': ['859','892'],
+                        '1-2': ['898']
                     }
                 },
                 'mpharmacy': {

@@ -9,7 +9,7 @@ class ResultScraper:
     def __init__(self, roll_number):
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
-        self.url="http://202.63.105.184/results/resultAction"
+        # self.url="http://202.63.105.184/results/resultAction"
 
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
@@ -17,14 +17,14 @@ class ResultScraper:
         self.exam_codes={
                 'btech': {
                     'R18': {
-                    '1-1': ['1323', '1358', '1404', '1430', '1467', '1504', '1572', '1615', '1658','1700'],
-                    '1-2': ['1356', '1363', '1381', '1435', '1448', '1481', '1503', '1570', '1620', '1622', '1656','1705'],
-                    '2-1': ['1391', '1425', '1449', '1496', '1560', '1610', '1628', '1667','1671','1707'],
-                    '2-2': ['1437', '1447', '1476', '1501', '1565', '1605', '1627', '1663','1711','1715'],
-                    '3-1': ['1454', '1491', '1550', '1590', '1626', '1639', '1645', '1655','1686', '1697'],
-                    '3-2': ['1502', '1555', '1595', '1625', '1638', '1649', '1654','1682','1690','1696'],
-                    '4-1': ['1545', '1585', '1624', '1640', '1644', '1653', '1678','1695'],
-                    '4-2': ['1580', '1600', '1623','1672', '1673','1677','1691','1698']
+                    '1-1': ['1323', '1358', '1404', '1430', '1467', '1504', '1572', '1615', '1658','1700','1732'],
+                    '1-2': ['1356', '1363', '1381', '1435', '1448', '1481', '1503', '1570', '1620', '1622', '1656','1705','1730'],
+                    '2-1': ['1391', '1425', '1449', '1496', '1560', '1610', '1628', '1667','1671','1707','1728'],
+                    '2-2': ['1437', '1447', '1476', '1501', '1565', '1605', '1627', '1663','1711','1715','1725'],
+                    '3-1': ['1454', '1491', '1550', '1590', '1626', '1639', '1645', '1655','1686', '1697','1722'],
+                    '3-2': ['1502', '1555', '1595', '1625', '1638', '1649', '1654','1682','1690','1696','1719'],
+                    '4-1': ['1545', '1585', '1624', '1640', '1644', '1653', '1678','1695','1717'],
+                    '4-2': ['1580', '1600', '1623','1672', '1673','1677','1691','1698','1716']
                     },
                     'R22': {
                     '1-1': ['1662','1699'],
@@ -48,11 +48,11 @@ class ResultScraper:
                     }
                 },
                 'mpharmacy': {
-                    'R19': 
+                    'R19':
                     {
-                        '1-1': ['319', '332', '347', '356', '371', '382', '388','395'], 
+                        '1-1': ['319', '332', '347', '356', '371', '382', '388','395'],
                         '1-2': ['328', '336', '344', '353', '368', '379', '387','393'],
-                        '2-1': ['337', '350', '365', '376', '386','391'], 
+                        '2-1': ['337', '350', '365', '376', '386','391'],
                         '2-2': ['340', '374', '385','390']
                     },
                     'R22':
@@ -62,11 +62,11 @@ class ResultScraper:
                     }
                 },
                 'mtech': {
-                    'R19': 
+                    'R19':
                     {
-                        '1-1': ['161', '177', '185', '198', '209', '215','222'], 
-                        '1-2': ['157', '165', '174', '182', '195', '206', '214','220'], 
-                        '2-1': ['166', '180', '194', '204', '213','218'], 
+                        '1-1': ['161', '177', '185', '198', '209', '215','222'],
+                        '1-2': ['157', '165', '174', '182', '195', '206', '214','220'],
+                        '2-1': ['166', '180', '194', '204', '213','218'],
                         '2-2': ['169', '203', '212','217']
                     },
                     'R22':
@@ -78,9 +78,9 @@ class ResultScraper:
                 'mba': {
                     'R19':
                     {
-                        '1-1': ['297', '316', '323', '350', '362', '368','374'], 
-                        '1-2': ['122', '293', '302', '313', '320', '347', '359', '367','372'], 
-                        '2-1': ['303', '310', '344', '356', '366','376'], 
+                        '1-1': ['297', '316', '323', '350', '362', '368','374'],
+                        '1-2': ['122', '293', '302', '313', '320', '347', '359', '367','372'],
+                        '2-1': ['303', '310', '344', '356', '366','376'],
                         '2-2': ['120', '307', '341', '353', '365','375']
                     },
                     'R22':
@@ -97,7 +97,7 @@ class ResultScraper:
 
         # GPA conversion table
         self.grades_to_gpa = {'O': 10, 'A+': 9, 'A': 8, 'B+': 7, 'B': 6, 'C': 5, 'F': 0, 'Ab': 0, '-': 0}
-        
+
         # Payloads for different types of result requests
         self.payloads={
                 "btech":["&degree=btech&etype=r17&result=null&grad=null&type=intgrade&htno=",
@@ -114,16 +114,16 @@ class ResultScraper:
                 }
 
     async def fetch_result(self, session, exam_code, payload):
-        
+
         # Prepare the payload for the HTTP POST request
         payloaddata="?&examCode="+exam_code+payload+self.roll_number
-        
+
         # Make the HTTP POST request and print the response text
         async with session.get(self.url+payloaddata) as response:
             return await response.text()
 
     def scrape_results(self, semester_code, response):
-        
+
         # Parse the response HTML using BeautifulSoup
         soup = BeautifulSoup(response, "lxml")
 
@@ -133,7 +133,7 @@ class ResultScraper:
         Name = Details[0].find_all("td")[3].get_text()
         Father_Name = Details[1].find_all("td")[1].get_text()
         College_Code = Details[1].find_all("td")[3].get_text()
-        
+
         # Store student details in the results dictionary
         self.results["Details"]["NAME"]=Name
         self.results["Details"]["Roll_No"]=Htno
@@ -174,7 +174,7 @@ class ResultScraper:
                     self.results["Results"][semester_code][subject_code]["subject_grade"]!='-' and
                     self.grades_to_gpa[self.results["Results"][semester_code][subject_code]["subject_grade"]]>self.grades_to_gpa[subject_grade]):
                 continue
-           
+
             # Store Subject details in results dictionary
             self.results["Results"][semester_code][subject_code] = {}
             self.results["Results"][semester_code][subject_code]["subject_code"] = subject_code
@@ -189,7 +189,7 @@ class ResultScraper:
             self.results["Results"][semester_code][subject_code][
                 "subject_credits"
             ] = subject_credits
-    
+
     # Calculate the total cgpa of each semester
     def total_grade_calculator(self, code, value):
         total = 0
@@ -228,13 +228,13 @@ class ResultScraper:
                 payloads = self.payloads["bpharmacy"]
                 # Set the exam codes for bpharmacy
                 exam_codes = self.exam_codes["bpharmacy"]["R22" if (graduationStart >= 22 and self.roll_number[4]!="5" ) else "R17"]
-            
+
             elif self.roll_number[5]=="E":
                 # Set payloads to MBA
                 payloads = self.payloads["mba"]
                 # Determine the exam codes based on the roll number prefix
                 exam_codes = self.exam_codes["mba"]["R22" if graduationStart >= 22 else "R19"]
-                
+
             elif self.roll_number[5]=='D':
                 payloads = self.payloads["mtech"]
                 # Determine the exam codes based on the roll number prefix
@@ -246,7 +246,7 @@ class ResultScraper:
                 exam_codes = self.exam_codes["mpharmacy"]["R22" if graduationStart>=22 else "R19"]
             else:
                 return self.results
-            
+
             # Check if the fourth character of the roll number is '5'
             if self.roll_number[4] == "5":
                 # Remove specific exam codes from the exam_codes dictionary

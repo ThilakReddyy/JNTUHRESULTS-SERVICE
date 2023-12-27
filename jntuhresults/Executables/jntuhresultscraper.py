@@ -10,7 +10,7 @@ class ResultScraper:
     def __init__(self, roll_number):
         # Initialize instance variables
         self.url = "http://results.jntuh.ac.in/resultAction"
-        # self.url = "http://202.63.105.184/results/resultAction"
+        self.url = "http://202.63.105.184/results/resultAction"
 
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}

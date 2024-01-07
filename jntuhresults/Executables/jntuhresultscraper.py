@@ -7,13 +7,16 @@ from bs4 import BeautifulSoup
 
 # Define a class for scraping JNTUH results
 class ResultScraper:
-    def __init__(self, roll_number):
+    def __init__(self, roll_number, index=0):
         # Initialize instance variables
-        self.url = "http://results.jntuh.ac.in/resultAction"
-        self.url = "http://202.63.105.184/results/resultAction"
-
+        urls = [
+            "http://results.jntuh.ac.in/resultAction",
+            "http://202.63.105.184/resultAction",
+        ]
+        self.url = urls[index]
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
+
         # Exam codes for different regulations and semesters
         self.exam_codes = {
             "btech": {

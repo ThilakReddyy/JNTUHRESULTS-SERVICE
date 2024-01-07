@@ -110,14 +110,6 @@ class AcademicResult(View):
         if len(htno) != 10:
             return HttpResponse(htno + " Invalid hall ticket number")
         try:
-            index = -1
-            if check_url(1) == 200:
-                index = 1
-            elif check_url(0) == 200:
-                index = 0
-            if index == -1:
-                return HttpResponse(htno + " - 500 Internal Server Error")
-
             # Create an instance of ResultScraper
             jntuhresult = ResultScraper(htno.upper())
 

@@ -13,7 +13,7 @@ class ResultScraper:
             "http://results.jntuh.ac.in/resultAction",
             "http://202.63.105.184/resultAction",
         ]
-        self.url = urls[1]
+        self.url = urls[0]
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
 

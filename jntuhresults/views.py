@@ -67,14 +67,14 @@ def check_url(index):
             "http://results.jntuh.ac.in/resultAction",
             "http://202.63.105.184/results/resultAction",
         ]
-        response = requests.get(urls[index], timeout=1)
-        return response.status_code
+        response = requests.get(urls[index], timeout=2)
+        return response.status_code == 200
     except requests.exceptions.Timeout:
         print(f"Requests to {index} timeout ")
-        return None
+        return False
     except requests.exceptions.RequestException as e:
         print(f"Requests to {index} failed: {e}")
-        return None
+        return False
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -85,6 +85,12 @@ class AcademicResult(View):
     def get(self, request):
         # Record the current time as the starting time
         starting = time.time()
+        url_index = 0
+        if check_url(0) is not True:
+            if check_url(1) is not True:
+                return HttpResponse(" 500 Internal Server Error")
+            else:
+                url_index = 1
 
         # Get the 'htno' parameter from the request and convert it to uppercase
         htno = request.GET.get("htno").upper()
@@ -111,7 +117,7 @@ class AcademicResult(View):
             return HttpResponse(htno + " Invalid hall ticket number")
         try:
             # Create an instance of ResultScraper
-            jntuhresult = ResultScraper(htno.upper())
+            jntuhresult = ResultScraper(htno.upper(), url_index)
 
             # Run the scraper and return the result
             result = jntuhresult.run()

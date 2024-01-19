@@ -88,7 +88,7 @@ class AcademicResult(View):
         url_index = 0
         if check_url(0) is not True:
             if check_url(1) is not True:
-                return HttpResponse(" 500 Internal Server Error")
+                return HttpResponse("JNTUH Servers are down!!!", status_code=422)
             else:
                 url_index = 1
 

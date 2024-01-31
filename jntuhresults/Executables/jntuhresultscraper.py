@@ -391,13 +391,13 @@ class ResultScraper:
     def total_grade_calculator(self, code, value):
         total = 0
         credits = 0
-
+        fail = False
         for data in value:
             if "DETAILS" in data:
                 continue
 
             if value[data]["subject_grade"] in ("F", "Ab", "-"):
-                return ""
+                fail = True
 
             # important formulae
             total += int(self.grades_to_gpa[value[data]["subject_grade"]]) * float(
@@ -407,6 +407,8 @@ class ResultScraper:
 
         self.results["Results"][code]["total"] = total
         self.results["Results"][code]["credits"] = credits
+        if fail:
+            return ""
         self.results["Results"][code]["CGPA"] = "{0:.2f}".format(
             round(total / credits, 2)
         )

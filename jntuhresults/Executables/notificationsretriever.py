@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 redis_url = os.environ.get("REDIS_URL")
-redis_client = redis.from_url(redis_url)
+redis_client = redis.from_url(str(redis_url))
 
 
 def get_notifications():

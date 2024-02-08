@@ -68,6 +68,7 @@ def check_url(index):
             "http://202.63.105.184/results/resultAction",
         ]
         response = requests.get(urls[index], timeout=2)
+        print(response)
         return response.status_code == 200
     except requests.exceptions.Timeout:
         print(f"Requests to {index} timeout ")
@@ -88,7 +89,7 @@ class AcademicResult(View):
         url_index = 0
         if check_url(0) is not True:
             if check_url(1) is not True:
-                return HttpResponse("JNTUH Servers are down!!!", status=422)
+                return HttpResponse(b"JNTUH Servers are down!!!", status=422)
             else:
                 url_index = 1
 
@@ -97,7 +98,6 @@ class AcademicResult(View):
 
         # Retrieve data from Redis cache using the 'htno' as the key
         redis_response = REDIS_CLIENT.get(htno)
-
         # Check if data exists in the Redis cache
         if redis_response is not None:
             # If data exists, parse the JSON response
@@ -162,7 +162,7 @@ class AcademicResult(View):
             REDIS_CLIENT.set(htno, json.dumps({"data": result}))
 
             # Set an expiration time of 4 hours for the cached data associated with 'htno'.
-            REDIS_CLIENT.expire(htno, timedelta(hours=4))
+            REDIS_CLIENT.expire(htno, timedelta(hours=1))
 
             # Return the result
             return JsonResponse(result, safe=False)
@@ -179,7 +179,8 @@ class AcademicResult(View):
 # - Notifications -------------------------------------------------------------------------------------------------
 class Notification(View):
     def get(self, request):
-        return JsonResponse(get_notifications(), safe=False)
+        get_notifications()
+        return JsonResponse({"data": "Notifications have been fetched"}, safe=False)
 
 
 # ---------------------------------------------------------------------------------------------------------------

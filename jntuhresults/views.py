@@ -86,12 +86,12 @@ class AcademicResult(View):
     def get(self, request):
         # Record the current time as the starting time
         starting = time.time()
-        url_index = 1
-        if check_url(1) is not True:
-            if check_url(0) is not True:
+        url_index = 0
+        if check_url(url_index) is not True:
+            if check_url(1) is not True:
                 return HttpResponse(b"JNTUH Servers are down!!!", status=422)
             else:
-                url_index = 0
+                url_index = 1
 
         # Get the 'htno' parameter from the request and convert it to uppercase
         htno = request.GET.get("htno").upper()

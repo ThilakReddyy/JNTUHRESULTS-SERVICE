@@ -88,6 +88,7 @@ class AcademicResult(View):
         starting = time.time()
         url_index = 0
         if check_url(0) is not True:
+            return HttpResponse(b"JNTUH Servers are down!!!", status=422)
             if check_url(1) is not True:
                 return HttpResponse(b"JNTUH Servers are down!!!", status=422)
             else:

@@ -162,7 +162,7 @@ class AcademicResult(View):
             REDIS_CLIENT.set(htno, json.dumps({"data": result}))
 
             # Set an expiration time of 4 hours for the cached data associated with 'htno'.
-            REDIS_CLIENT.expire(htno, timedelta(hours=1))
+            REDIS_CLIENT.expire(htno, timedelta(hours=4))
 
             # Return the result
             return JsonResponse(result, safe=False)

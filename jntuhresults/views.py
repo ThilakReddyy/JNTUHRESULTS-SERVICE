@@ -98,6 +98,7 @@ class AcademicResult(View):
 
         # Retrieve data from Redis cache using the 'htno' as the key
         redis_response = REDIS_CLIENT.get(htno)
+
         # Check if data exists in the Redis cache
         if redis_response is not None:
             # If data exists, parse the JSON response
@@ -179,7 +180,7 @@ class AcademicResult(View):
 # - Notifications -------------------------------------------------------------------------------------------------
 class Notification(View):
     def get(self, request):
-        get_notifications()
+        notifications = get_notifications()
         return JsonResponse({"data": "Notifications have been fetched"}, safe=False)
 
 

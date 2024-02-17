@@ -20,6 +20,7 @@ for rcrv in rcrvs:
         }
 
         results.append(result)
-    except:
+    except Exception as e:
+        print(e)
         print(rcrv.get_text().split(" ")[1].split("(")[1].split(")")[0])
 print(results)

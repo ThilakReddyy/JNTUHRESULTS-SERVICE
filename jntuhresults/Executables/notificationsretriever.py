@@ -21,11 +21,11 @@ def get_notifications():
     #    return data["data"]
     try:
         url = "http://results.jntuh.ac.in/jsp/home.jsp"
-        # url="http://202.63.105.184/results/jsp/home.jsp"
+        # url = "http://202.63.105.184/results/jsp/home.jsp"
         response = requests.get(url)
         soup = BeautifulSoup(response.content, "html.parser")
         results = []
-        for i in range(0, 6):
+        for i in range(0, 8):
             jntuh_notifications = soup.find_all("table")[i].find_all("tr")
 
             for result in jntuh_notifications:
@@ -62,7 +62,7 @@ def get_notifications():
                 result["formatted_date"] = formatted_date.strftime("%Y-%m-%d")
                 new_results.append(result)
             except Exception as e:
-                print(e)
+                print(result, e)
         results = new_results
         results.sort(key=lambda x: x["formatted_date"], reverse=True)
         redis_client.set("notifications", json.dumps({"data": results}))

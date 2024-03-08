@@ -9,6 +9,7 @@ This repository serves as the backbone for the [JNTUH RESULTS](https://github.co
 
 ## HOW IT WORKS
 
+
 The JNTUH website does not provide an API and does not require authentication for requests. Instead, it sends back the response for each request made. This service makes requests to the JNTUH website and parses the HTML response using Beautiful Soup to obtain the results.
 
 ## API'S

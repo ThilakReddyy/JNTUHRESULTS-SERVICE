@@ -61,14 +61,14 @@ class ClassResult(View):
 # check which url is working ------------------------------------------------
 
 
-def check_url(index):
+def check_url(index, roll_number):
     try:
         urls = [
             "http://results.jntuh.ac.in/resultAction",
             "http://202.63.105.184/results/resultAction",
         ]
         response = requests.get(urls[index], timeout=2)
-        print(response)
+        print(response, roll_number)
         return response.status_code == 200
     except requests.exceptions.Timeout:
         print(f"Requests to {index} timeout ")
@@ -86,12 +86,6 @@ class AcademicResult(View):
     def get(self, request):
         # Record the current time as the starting time
         starting = time.time()
-        url_index = 0
-        if check_url(url_index) is not True:
-            if check_url(1) is not True:
-                return HttpResponse(b"JNTUH Servers are down!!!", status=422)
-            else:
-                url_index = 1
 
         # Get the 'htno' parameter from the request and convert it to uppercase
         htno = request.GET.get("htno").upper()
@@ -113,6 +107,12 @@ class AcademicResult(View):
             # Return the data as a JSON response to the client
             return JsonResponse(data["data"], safe=False)
 
+        url_index = 0
+        if check_url(url_index, htno) is not True:
+            if check_url(1, htno) is not True:
+                return HttpResponse(b"JNTUH Servers are down!!!", status=422)
+            else:
+                url_index = 1
         # Check if the hall ticket number is valid
         if len(htno) != 10:
             return HttpResponse(htno + " Invalid hall ticket number")
@@ -181,6 +181,7 @@ class AcademicResult(View):
 class Notification(View):
     def get(self, request):
         notifications = get_notifications()
+        return JsonResponse({"data": notifications}, safe=False)
         return JsonResponse({"data": "Notifications have been fetched"}, safe=False)
 
 

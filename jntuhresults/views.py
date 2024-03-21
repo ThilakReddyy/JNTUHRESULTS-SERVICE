@@ -181,7 +181,7 @@ class AcademicResult(View):
 class Notification(View):
     def get(self, request):
         notifications = get_notifications()
-        return JsonResponse({"data": notifications}, safe=False)
+        # return JsonResponse({"data": notifications}, safe=False)
         return JsonResponse({"data": "Notifications have been fetched"}, safe=False)
 
 

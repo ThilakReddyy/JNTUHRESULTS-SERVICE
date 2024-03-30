@@ -10,8 +10,8 @@ class ResultScraper:
     def __init__(self, roll_number, url_index=0):
         # Initialize instance variables
         urls = [
-            "http://results.jntuh.ac.in/resultAction",
             "http://202.63.105.184/resultAction",
+            "http://results.jntuh.ac.in/resultAction",
         ]
         self.url = urls[url_index]
         self.roll_number = roll_number
@@ -366,12 +366,12 @@ class ResultScraper:
 
             # Store Subject details in results dictionary
             self.results["Results"][semester_code][subject_code] = {}
-            self.results["Results"][semester_code][subject_code][
-                "subject_code"
-            ] = subject_code
-            self.results["Results"][semester_code][subject_code][
-                "subject_name"
-            ] = subject_name
+            self.results["Results"][semester_code][subject_code]["subject_code"] = (
+                subject_code
+            )
+            self.results["Results"][semester_code][subject_code]["subject_name"] = (
+                subject_name
+            )
             try:
                 self.results["Results"][semester_code][subject_code][
                     "subject_internal"
@@ -384,12 +384,12 @@ class ResultScraper:
                 ] = subject_total_marks
             except Exception as e:
                 print(self.roll_number, e)
-            self.results["Results"][semester_code][subject_code][
-                "subject_grade"
-            ] = subject_grade
-            self.results["Results"][semester_code][subject_code][
-                "subject_credits"
-            ] = subject_credits
+            self.results["Results"][semester_code][subject_code]["subject_grade"] = (
+                subject_grade
+            )
+            self.results["Results"][semester_code][subject_code]["subject_credits"] = (
+                subject_credits
+            )
 
     # Calculate the total cgpa of each semester
     def total_grade_calculator(self, code, value):

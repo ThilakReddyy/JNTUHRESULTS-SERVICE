@@ -64,8 +64,8 @@ class ClassResult(View):
 def check_url(index, roll_number):
     try:
         urls = [
-            "http://results.jntuh.ac.in/resultAction",
             "http://202.63.105.184/results/resultAction",
+            "http://results.jntuh.ac.in/resultAction",
         ]
         response = requests.get(urls[index], timeout=2)
         print(response, roll_number)

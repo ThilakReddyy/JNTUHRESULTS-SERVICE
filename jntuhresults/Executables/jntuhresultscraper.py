@@ -435,7 +435,8 @@ class ResultScraper:
                 # Determine the exam codes based on the roll number prefix
                 exam_codes = self.exam_codes["btech"][
                     "R22"
-                    if (graduationStart >= 22 and self.roll_number[4] != "5")
+                    if graduationStart >= 23
+                    or (graduationStart == 22 and self.roll_number[4] != "5")
                     else "R18"
                 ]
 
@@ -445,7 +446,8 @@ class ResultScraper:
                 # Set the exam codes for bpharmacy
                 exam_codes = self.exam_codes["bpharmacy"][
                     "R22"
-                    if (graduationStart >= 22 and self.roll_number[4] != "5")
+                    if graduationStart >= 23
+                    or (graduationStart == 22 and self.roll_number[4] != "5")
                     else "R17"
                 ]
 

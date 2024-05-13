@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+import json
 def extract_exam_code(result_link):
     # Find the index of "examCode" in the result link
     exam_code_index = result_link.find("examCode")
@@ -112,5 +112,5 @@ def get_exam_codes():
 
 exam_codes=get_exam_codes()
 
-
-print(exam_codes)
+json_str = json.dumps(exam_codes, indent=4)
+print(json_str)

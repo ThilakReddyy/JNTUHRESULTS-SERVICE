@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import requests
 from jntuhresults.Executables.jntuhresultscraper import ResultScraper
+from jntuhresults.Executables.jntuhallresultsscraper import ResultScraperr
 from django.views.generic import View
 from jntuhresults.Executables.notificationsretriever import get_notifications
 import redis
@@ -188,8 +189,14 @@ class Notification(View):
 # ---------------------------------------------------------------------------------------------------------------
 
 
-def homepage(request):
-    return render(request, "index.html")
+class AcademicAllResults(View):
+    def get(self, request):
+        htno = request.GET.get("htno").upper()
+        jntuhresult = ResultScraperr(htno.upper(), 0)
+
+        # Run the scraper and return the result
+        result = jntuhresult.run()
+        return JsonResponse({"data": result}, safe=False)
 
 
 def test(request):

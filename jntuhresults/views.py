@@ -196,7 +196,11 @@ class AcademicAllResults(View):
 
         # Run the scraper and return the result
         result = jntuhresult.run()
-        return JsonResponse({"data": result}, safe=False)
+        if result is not None:
+            if result["Details"]:
+                return JsonResponse({"data": result}, safe=False)
+
+        return HttpResponse(htno + " - 500 Internal Server Error")
 
 
 def homepage(request):

@@ -563,8 +563,9 @@ class ResultScraperr:
                         results[exam_code][exam_code_result] = exam_code_results[
                             exam_code_result
                         ]
+        self.results["Results"] = results
 
-        return results
+        return self.results
 
     def run(self):
         try:

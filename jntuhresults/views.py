@@ -199,5 +199,9 @@ class AcademicAllResults(View):
         return JsonResponse({"data": result}, safe=False)
 
 
+def homepage(request):
+    return render(request, "index.html")
+
+
 def test(request):
     return render(request, "test.html")

@@ -1,179 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-
-
-
-    <meta charset="utf-8">
-
-    <title>JNTUH Results RESTAPI </title>
-    <meta name="description"
-        content="This website provides a REST API for retrieving JNTUH results. You can use this API to get the results of any JNTUH student by providing their hall ticket number">
-    <meta name="keywords"
-        content="JNTUH results,jntuh results rest api, jntuh results api,jntuh results REST API, railway">
-    <link rel="canonical" href="https://jntuhresults.up.railway.app/">
-    <meta property="og:title" content="JNTUH Results RESTAPI">
-    <meta property="og:description"
-        content="This website provides a REST API for retrieving JNTUH results. You can use this API to get the results of any JNTUH student by providing their hall ticket number">
-    <meta property="og:image" content="https://example.com/image.jpg">
-    <meta property="twitter:title" content="JNTUH Results API">
-    <meta property="twitter:description"
-        content="This website provides a REST API for retrieving JNTUH results. You can use this API to get the results of any JNTUH student by providing their hall ticket number">
-    <meta name="google-site-verification" content="q-pQQ9FF-EzVUhr-EP77scKj-2S9b0ml0yGtBq0SArM" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>JNTUH Results RESTAPI</title>
+    <meta
+      name="description"
+      content="This website provides a REST API for retrieving JNTUH results. You can use this API to get the results of any JNTUH student by providing their hall ticket number"
+    />
+    <meta
+      name="keywords"
+      content="JNTUH results,jntuh results rest api, jntuh results api,jntuh results REST API, railway"
+    />
+    <link rel="canonical" href="https://jntuhresults.up.railway.app/" />
+    <meta property="og:title" content="JNTUH Results RESTAPI" />
+    <meta
+      property="og:description"
+      content="This website provides a REST API for retrieving JNTUH results. You can use this API to get the results of any JNTUH student by providing their hall ticket number"
+    />
+    <meta property="og:image" content="https://example.com/image.jpg" />
+    <meta property="twitter:title" content="JNTUH Results API" />
+    <meta
+      property="twitter:description"
+      content="This website provides a REST API for retrieving JNTUH results. You can use this API to get the results of any JNTUH student by providing their hall ticket number"
+    />
+    <meta
+      name="google-site-verification"
+      content="q-pQQ9FF-EzVUhr-EP77scKj-2S9b0ml0yGtBq0SArM"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f1f1f1;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f1f1f1;
+      }
 
-        h1 {
-            color: #333;
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #ccc;
-            background-color: #fff;
-        }
+      h1 {
+        color: #333;
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+        background-color: #fff;
+      }
 
-        h2 {
-            color: #666;
-            margin-top: 30px;
-        }
+      h2 {
+        color: #666;
+        margin-top: 30px;
+      }
 
-        p {
-            color: #555;
-            line-height: 1.5;
-        }
+      p {
+        color: #555;
+        line-height: 1.5;
+      }
 
-        ul {
-            color: #555;
-            line-height: 1.5;
-            list-style-type: disc;
-            margin-left: 20px;
-        }
+      ul {
+        color: #555;
+        line-height: 1.5;
+        list-style-type: disc;
+        margin-left: 20px;
+      }
 
-        pre {
-            background-color: #f5f5f5;
-            padding: 10px;
-            font-size: 14px;
-            line-height: 1.5;
-            overflow-x: auto;
-        }
+      pre {
+        background-color: #f5f5f5;
+        padding: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow-x: auto;
+      }
 
-        section {
-            margin-bottom: 40px;
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 20px;
-        }
+      section {
+        margin-bottom: 40px;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+      }
 
-        section:not(:last-child) {
-            border-bottom: 1px solid #ccc;
-        }
+      section:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+      }
 
-        .example-request {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+      .example-request {
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
 
-        .example-request a {
-            color: #007bff;
-            text-decoration: none;
-        }
+      .example-request a {
+        color: #007bff;
+        text-decoration: none;
+      }
 
-        .example-request a:hover {
-            text-decoration: underline;
-        }
+      .example-request a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>JNTUH Results - SERVICE API Documentation</h1>
+      <h1>JNTUH Results - SERVICE API Documentation</h1>
     </header>
 
     <section>
-        <h2>About</h2>
-        <p>This project aims to provide students of JNTUH University with an efficient way of accessing their own
-            semester results as well as those of their classmates. With just a single click, students will be able to
-            view their academic performance throughout the semesters.</p>
+      <h2>About</h2>
+      <p>
+        This project aims to provide students of JNTUH University with an
+        efficient way of accessing their own semester results as well as those
+        of their classmates. With just a single click, students will be able to
+        view their academic performance throughout the semesters.
+      </p>
     </section>
 
     <section>
-        <h2>Authentication</h2>
-        <p>The API currently does not require any form of authentication. Make a request with a hall ticket, it
-            will provide the response.</p>
+      <h2>Authentication</h2>
+      <p>
+        The API currently does not require any form of authentication. Make a
+        request with a hall ticket, it will provide the response.
+      </p>
     </section>
 
     <section>
-        <h2>API Endpoints</h2>
+      <h2>API Endpoints</h2>
 
-        <section>
-            <h3>1. Get Student Results</h3>
-            <p><strong>Endpoint:</strong> /api/academicresult</p>
-            <p><strong>Method:</strong> GET</p>
-            <p><strong>Description:</strong> Retrieves the semester results for a specific student.</p>
-            <p><strong>Parameters:</strong></p>
-            <ul>
-                <li><strong>student_roll_number</strong> (required): The unique identifier of the student.</li>
-            </ul>
-            <p><strong>Example Request:</strong></p>
-            <pre class="example-request">
+      <section>
+        <h3>1. Get Student Results</h3>
+        <p><strong>Endpoint:</strong> /api/academicresult</p>
+        <p><strong>Method:</strong> GET</p>
+        <p>
+          <strong>Description:</strong> Retrieves the semester results for a
+          specific student.
+        </p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+          <li>
+            <strong>student_roll_number</strong> (required): The unique
+            identifier of the student.
+          </li>
+        </ul>
+        <p><strong>Example Request:</strong></p>
+        <pre class="example-request">
 GET <a href="/api/academicresult?htno=18E51A0479">/api/academicresult?htno=18E51A0479</a>
             </pre>
-        </section>
-
-        <section>
-            <h3>2. Get Classmates Results</h3>
-            <p><strong>Endpoint:</strong> /api/classresult</p>
-            <p><strong>Method:</strong> GET</p>
-            <p><strong>Description:</strong> Retrieves the semester results for all the classmates of a specific
-                student.
-            </p>
-            <p><strong>Parameters:</strong></p>
-            <ul>
-                <li><strong>student_ids</strong> (required): The unique identifier of the student.</li>
-                <li><strong>semester</strong> (required): The semester for which to retrieve the results. If not
-                    provided,
-                    gives back an error</li>
-            </ul>
-            <p><strong>Example Request:</strong></p>
-            <pre class="example-request">
-GET /api/classresult?semester=1-1&htnos=18E51A0479,18E51A0...
+      </section>
+      <section>
+        <h3>1. Get Student All Individual Exam Results</h3>
+        <p><strong>Endpoint:</strong> /api/academicallresult</p>
+        <p><strong>Method:</strong> GET</p>
+        <p>
+          <strong>Description:</strong> Retrieves the semester results for a
+          specific student.
+        </p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+          <li>
+            <strong>student_roll_number</strong> (required): The unique
+            identifier of the student.
+          </li>
+        </ul>
+        <p><strong>Example Request:</strong></p>
+        <pre class="example-request">
+GET <a href="/api/academicallresult?htno=18E51A0479">/api/academicallresult?htno=18E51A0479</a>
             </pre>
-        </section>
+      </section>
 
-        <section>
-            <h3>3. Notifications</h3>
-            <p><strong>Endpoint:</strong> /api/notifications</p>
-            <p><strong>Method:</strong> GET</p>
-            <p><strong>Description:</strong> Retrieves all the latest notifications of JNTUH.</p>
-            <p><strong>Example Request:</strong></p>
-            <pre class="example-request">
+      <section>
+        <h3>2. Get Classmates Results</h3>
+        <p><strong>Endpoint:</strong> /api/classresult</p>
+        <p><strong>Method:</strong> GET</p>
+        <p>
+          <strong>Description:</strong> Retrieves the semester results for all
+          the classmates of a specific student.
+        </p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+          <li>
+            <strong>student_ids</strong> (required): The unique identifier of
+            the student.
+          </li>
+          <li>
+            <strong>semester</strong> (required): The semester for which to
+            retrieve the results. If not provided, gives back an error
+          </li>
+        </ul>
+        <p><strong>Example Request:</strong></p>
+        <pre class="example-request">
+GET /api/classresult?semester=1-1&htnos=18E51A0479,18E51A0...
+            </pre
+        >
+      </section>
+
+      <section>
+        <h3>3. Notifications</h3>
+        <p><strong>Endpoint:</strong> /api/notifications</p>
+        <p><strong>Method:</strong> GET</p>
+        <p>
+          <strong>Description:</strong> Retrieves all the latest notifications
+          of JNTUH.
+        </p>
+        <p><strong>Example Request:</strong></p>
+        <pre class="example-request">
                 GET <a href="/api/notifications">/api/notifications</a>
             </pre>
-        </section>
+      </section>
     </section>
 
     <section>
-        <h2>Error Handling</h2>
-        <p>The API follows standard HTTP error status codes. In case of an error, an appropriate error code will be
-            returned along with a response containing an error message.</p>
-        <p><strong>Example Error Response:</strong></p>
-        <pre>
+      <h2>Error Handling</h2>
+      <p>
+        The API follows standard HTTP error status codes. In case of an error,
+        an appropriate error code will be returned along with a response
+        containing an error message.
+      </p>
+      <p><strong>Example Error Response:</strong></p>
+      <pre>
 HTTP/1.1 500
 Content-Type: application/json
 
 {
   "error": "500 - Internal Server Error"
 }
-        </pre>
+        </pre
+      >
     </section>
-</body>
-
+  </body>
 </html>

@@ -226,7 +226,7 @@ class ResultScraperr:
                         "924",
                     ],
                     "4-1": ["663", "705", "754", "794", "832", "836", "865", "920"],
-                    "4-2": ["678", "700", "789", "809", "861", "878"],
+                    "4-2": ["678", "700", "789", "809", "861", "878", "949"],
                 },
                 "R22": {
                     "1-1": ["859", "892", "935"],
@@ -394,10 +394,20 @@ class ResultScraperr:
             print(self.roll_number, e)
 
         Results = Results[1:]
+        result = {}
         for result_subject in Results:
             subject_name = result_subject.find_all("td")[subject_name_index].get_text()
             subject_code = result_subject.find_all("td")[subject_code_index].get_text()
             subject_grade = result_subject.find_all("td")[grade_index].get_text()
+
+            # default values
+            subject_internal_marks_index = -1
+            subject_external_marks_index = -1
+            subject_total_marks_index = -1
+            subject_internal_marks = ""
+            subject_total_marks = ""
+            subject_external_marks = ""
+
             try:
                 subject_internal_marks = result_subject.find_all("td")[
                     subject_internal_marks_index
@@ -415,31 +425,18 @@ class ResultScraperr:
             ].get_text()
 
             # Store Subject details in results dictionary
-            self.results["Results"][semester_code][subject_code] = {}
-            self.results["Results"][semester_code][subject_code]["subject_code"] = (
-                subject_code
-            )
-            self.results["Results"][semester_code][subject_code]["subject_name"] = (
-                subject_name
-            )
+            result[subject_code] = {}
+            result[subject_code]["subject_code"] = subject_code
+            result[subject_code]["subject_name"] = subject_name
             try:
-                self.results["Results"][semester_code][subject_code][
-                    "subject_internal"
-                ] = subject_internal_marks
-                self.results["Results"][semester_code][subject_code][
-                    "subject_external"
-                ] = subject_external_marks
-                self.results["Results"][semester_code][subject_code][
-                    "subject_total"
-                ] = subject_total_marks
+                result[subject_code]["subject_internal"] = subject_internal_marks
+                result[subject_code]["subject_external"] = subject_external_marks
+                result[subject_code]["subject_total"] = subject_total_marks
             except Exception as e:
                 print(self.roll_number, e)
-            self.results["Results"][semester_code][subject_code]["subject_grade"] = (
-                subject_grade
-            )
-            self.results["Results"][semester_code][subject_code]["subject_credits"] = (
-                subject_credits
-            )
+            result[subject_code]["subject_grade"] = subject_grade
+            result[subject_code]["subject_credits"] = subject_credits
+        self.results["Results"][semester_code].append(result)
 
     # Calculate the total cgpa of each semester
     def total_grade_calculator(self, code, value):
@@ -545,7 +542,7 @@ class ResultScraperr:
 
             # Wait for all the tasks to complete
             for exam_code, exam_tasks in tasks.items():
-                self.results["Results"][exam_code] = {}
+                self.results["Results"][exam_code] = []
                 try:
                     for result in await asyncio.gather(*exam_tasks):
                         if "Enter HallTicket Number" not in result:

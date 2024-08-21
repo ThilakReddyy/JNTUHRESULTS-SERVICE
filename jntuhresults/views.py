@@ -192,12 +192,15 @@ class Notification(View):
 class AcademicAllResults(View):
     def get(self, request):
         htno = request.GET.get("htno").upper()
-        jntuhresult = ResultScraperr(htno.upper(), 0)
+        jntuhresult = ResultScraperr(htno.upper(), 1)
 
         # Run the scraper and return the result
         result = jntuhresult.run()
         if result is not None:
             if result["Details"]:
+                REDIS_CLIENT.set(htno + "ALL", json.dumps({"data": result}))
+                REDIS_CLIENT.expire(htno + "ALL", timedelta(hours=1))
+
                 return JsonResponse({"data": result}, safe=False)
 
         return HttpResponse(htno + " - 500 Internal Server Error")

@@ -182,6 +182,9 @@ class AcademicResult(View):
 class Notification(View):
     def get(self, request):
         notifications = get_notifications()
+        REDIS_CLIENT.set("notifications", json.dumps({"data": notifications}))
+        REDIS_CLIENT.expire("notifications", timedelta(hours=1))
+
         return JsonResponse({"data": notifications}, safe=False)
         # return JsonResponse({"data": "Notifications have been fetched"}, safe=False)
 

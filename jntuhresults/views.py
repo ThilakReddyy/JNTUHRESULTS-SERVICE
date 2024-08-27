@@ -93,6 +93,7 @@ class AcademicResult(View):
 
         # Retrieve data from Redis cache using the 'htno' as the key
         redis_response = REDIS_CLIENT.get(htno)
+        redis_response = None
 
         # Check if data exists in the Redis cache
         if redis_response is not None:
@@ -108,9 +109,9 @@ class AcademicResult(View):
             # Return the data as a JSON response to the client
             return JsonResponse(data["data"], safe=False)
 
-        url_index = 1
+        url_index = 0
         if check_url(url_index, htno) is not True:
-            if check_url(0, htno) is not True:
+            if check_url(1, htno) is not True:
                 return HttpResponse(b"JNTUH Servers are down!!!", status=422)
             else:
                 url_index = 0

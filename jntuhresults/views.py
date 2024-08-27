@@ -93,7 +93,6 @@ class AcademicResult(View):
 
         # Retrieve data from Redis cache using the 'htno' as the key
         redis_response = REDIS_CLIENT.get(htno)
-        redis_response = None
 
         # Check if data exists in the Redis cache
         if redis_response is not None:

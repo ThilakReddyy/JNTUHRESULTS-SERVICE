@@ -16,6 +16,7 @@ class ResultScraperr:
         self.url = urls[url_index]
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
+        self.failed_exam_codes = []
 
         # Exam codes for different regulations and semesters
         self.exam_codes = {
@@ -380,78 +381,86 @@ class ResultScraperr:
             return await response.text()
 
     def scrape_results(self, semester_code, response):
-        # Parse the response HTML using BeautifulSoup
-        soup = BeautifulSoup(response, "lxml")
-
-        # Get student details
-        Details = soup.find_all("table")[0].find_all("tr")
-        Htno = Details[0].find_all("td")[1].get_text()
-        Name = Details[0].find_all("td")[3].get_text()
-        Father_Name = Details[1].find_all("td")[1].get_text()
-        College_Code = Details[1].find_all("td")[3].get_text()
-
-        # Store student details in the results dictionary
-        self.results["Details"]["NAME"] = Name
-        self.results["Details"]["Roll_No"] = Htno
-        self.results["Details"]["COLLEGE_CODE"] = College_Code
-        self.results["Details"]["FATHER_NAME"] = Father_Name
-        Results = soup.find_all("table")[1].find_all("tr")
-        Results_column_names = [content.text for content in Results[0].findAll("b")]
-        grade_index = Results_column_names.index("GRADE")
-        subject_name_index = Results_column_names.index("SUBJECT NAME")
-        subject_code_index = Results_column_names.index("SUBJECT CODE")
-        subject_credits_index = Results_column_names.index("CREDITS(C)")
         try:
-            subject_internal_marks_index = Results_column_names.index("INTERNAL")
-            subject_external_marks_index = Results_column_names.index("EXTERNAL")
-            subject_total_marks_index = Results_column_names.index("TOTAL")
+            # Parse the response HTML using BeautifulSoup
+            soup = BeautifulSoup(response, "lxml")
+
+            # Get student details
+            Details = soup.find_all("table")[0].find_all("tr")
+            Htno = Details[0].find_all("td")[1].get_text()
+            Name = Details[0].find_all("td")[3].get_text()
+            Father_Name = Details[1].find_all("td")[1].get_text()
+            College_Code = Details[1].find_all("td")[3].get_text()
+
+            # Store student details in the results dictionary
+            self.results["Details"]["NAME"] = Name
+            self.results["Details"]["Roll_No"] = Htno
+            self.results["Details"]["COLLEGE_CODE"] = College_Code
+            self.results["Details"]["FATHER_NAME"] = Father_Name
+            Results = soup.find_all("table")[1].find_all("tr")
+            Results_column_names = [content.text for content in Results[0].findAll("b")]
+            grade_index = Results_column_names.index("GRADE")
+            subject_name_index = Results_column_names.index("SUBJECT NAME")
+            subject_code_index = Results_column_names.index("SUBJECT CODE")
+            subject_credits_index = Results_column_names.index("CREDITS(C)")
+            try:
+                subject_internal_marks_index = Results_column_names.index("INTERNAL")
+                subject_external_marks_index = Results_column_names.index("EXTERNAL")
+                subject_total_marks_index = Results_column_names.index("TOTAL")
+            except Exception as e:
+                print(self.roll_number, e)
+
+            Results = Results[1:]
+            result = {}
+            for result_subject in Results:
+                subject_name = result_subject.find_all("td")[
+                    subject_name_index
+                ].get_text()
+                subject_code = result_subject.find_all("td")[
+                    subject_code_index
+                ].get_text()
+                subject_grade = result_subject.find_all("td")[grade_index].get_text()
+
+                # default values
+                subject_internal_marks_index = -1
+                subject_external_marks_index = -1
+                subject_total_marks_index = -1
+                subject_internal_marks = ""
+                subject_total_marks = ""
+                subject_external_marks = ""
+
+                try:
+                    subject_internal_marks = result_subject.find_all("td")[
+                        subject_internal_marks_index
+                    ].get_text()
+                    subject_external_marks = result_subject.find_all("td")[
+                        subject_external_marks_index
+                    ].get_text()
+                    subject_total_marks = result_subject.find_all("td")[
+                        subject_total_marks_index
+                    ].get_text()
+                except Exception as e:
+                    print(self.roll_number, e)
+                subject_credits = result_subject.find_all("td")[
+                    subject_credits_index
+                ].get_text()
+
+                # Store Subject details in results dictionary
+                result[subject_code] = {}
+                result[subject_code]["subject_code"] = subject_code
+                result[subject_code]["subject_name"] = subject_name
+                try:
+                    result[subject_code]["subject_internal"] = subject_internal_marks
+                    result[subject_code]["subject_external"] = subject_external_marks
+                    result[subject_code]["subject_total"] = subject_total_marks
+                except Exception as e:
+                    print(self.roll_number, e)
+                result[subject_code]["subject_grade"] = subject_grade
+                result[subject_code]["subject_credits"] = subject_credits
+            self.results["Results"][semester_code].append(result)
         except Exception as e:
-            print(self.roll_number, e)
-
-        Results = Results[1:]
-        result = {}
-        for result_subject in Results:
-            subject_name = result_subject.find_all("td")[subject_name_index].get_text()
-            subject_code = result_subject.find_all("td")[subject_code_index].get_text()
-            subject_grade = result_subject.find_all("td")[grade_index].get_text()
-
-            # default values
-            subject_internal_marks_index = -1
-            subject_external_marks_index = -1
-            subject_total_marks_index = -1
-            subject_internal_marks = ""
-            subject_total_marks = ""
-            subject_external_marks = ""
-
-            try:
-                subject_internal_marks = result_subject.find_all("td")[
-                    subject_internal_marks_index
-                ].get_text()
-                subject_external_marks = result_subject.find_all("td")[
-                    subject_external_marks_index
-                ].get_text()
-                subject_total_marks = result_subject.find_all("td")[
-                    subject_total_marks_index
-                ].get_text()
-            except Exception as e:
-                print(self.roll_number, e)
-            subject_credits = result_subject.find_all("td")[
-                subject_credits_index
-            ].get_text()
-
-            # Store Subject details in results dictionary
-            result[subject_code] = {}
-            result[subject_code]["subject_code"] = subject_code
-            result[subject_code]["subject_name"] = subject_name
-            try:
-                result[subject_code]["subject_internal"] = subject_internal_marks
-                result[subject_code]["subject_external"] = subject_external_marks
-                result[subject_code]["subject_total"] = subject_total_marks
-            except Exception as e:
-                print(self.roll_number, e)
-            result[subject_code]["subject_grade"] = subject_grade
-            result[subject_code]["subject_credits"] = subject_credits
-        self.results["Results"][semester_code].append(result)
+            self.failed_exam_codes.append(semester_code)
+            print(self.roll_number, e, "Fetching error which scraping results")
 
     # Calculate the total cgpa of each semester
     def total_grade_calculator(self, code, value):
@@ -479,7 +488,7 @@ class ResultScraperr:
             round(total / credits, 2)
         )
 
-    async def scrape_all_results(self, exam_code="all"):
+    async def scrape_all_results(self, failed_exam_codes=[]):
         async with aiohttp.ClientSession() as session:
             tasks = {}
             graduationStart = int(self.roll_number[:2])
@@ -538,22 +547,32 @@ class ResultScraperr:
                 exam_codes.pop("1-2", None)
 
             # Check if exam_codes should include all codes
-            if exam_code != "all":
-                exam_codes = {exam_code: exam_codes[exam_code]}
-
-            for exam_code in exam_codes.keys():
-                # Create a task for each exam code
-
-                for code in exam_codes[exam_code]:
-                    tasks[code] = []
+            print(len(failed_exam_codes))
+            if len(failed_exam_codes) != 0:
+                for failed_exam_code in failed_exam_codes:
+                    tasks[failed_exam_code] = []
                     for payload in payloads:
                         try:
                             task = asyncio.ensure_future(
-                                self.fetch_result(session, code, payload)
+                                self.fetch_result(session, failed_exam_code, payload)
                             )
-                            tasks[code].append(task)
+                            tasks[failed_exam_code].append(task)
                         except Exception as e:
                             print(self.roll_number, e)
+            else:
+                for exam_code in exam_codes.keys():
+                    # Create a task for each exam code
+
+                    for code in exam_codes[exam_code]:
+                        tasks[code] = []
+                        for payload in payloads:
+                            try:
+                                task = asyncio.ensure_future(
+                                    self.fetch_result(session, code, payload)
+                                )
+                                tasks[code].append(task)
+                            except Exception as e:
+                                print(self.roll_number, e)
 
             # Wait for all the tasks to complete
             for exam_code, exam_tasks in tasks.items():
@@ -583,7 +602,14 @@ class ResultScraperr:
 
     def run(self):
         try:
-            return asyncio.run(self.scrape_all_results())
+            asyncio.run(self.scrape_all_results())
+            while len(self.failed_exam_codes) > 0 and True:
+                failed_exam_codes = list(set(self.failed_exam_codes))
+                self.failed_exam_codes = failed_exam_codes
+                self.failed_exam_codes = []
+                asyncio.run(self.scrape_all_results(failed_exam_codes))
+                print(self.failed_exam_codes)
+            return self.results
         except Exception as e:
             print(e)
             return None

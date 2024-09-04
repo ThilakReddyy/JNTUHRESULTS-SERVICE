@@ -108,12 +108,12 @@ class AcademicResult(View):
             # Return the data as a JSON response to the client
             return JsonResponse(data["data"], safe=False)
 
-        url_index = 0
+        url_index = 1
         if check_url(url_index, htno) is not True:
-            if check_url(1, htno) is not True:
+            if check_url(0, htno) is not True:
                 return HttpResponse(b"JNTUH Servers are down!!!", status=422)
             else:
-                url_index = 0
+                url_index = 1
         # Check if the hall ticket number is valid
         if len(htno) != 10:
             return HttpResponse(htno + " Invalid hall ticket number")

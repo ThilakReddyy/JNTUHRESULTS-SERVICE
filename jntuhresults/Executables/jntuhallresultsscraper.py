@@ -16,6 +16,7 @@ class ResultScraperr:
         self.url = urls[url_index]
         self.roll_number = roll_number
         self.results = {"Details": {}, "Results": {}}
+        self.exam_code_results = {}
         self.failed_exam_codes = []
 
         # Exam codes for different regulations and semesters
@@ -457,7 +458,7 @@ class ResultScraperr:
                     print(self.roll_number, e)
                 result[subject_code]["subject_grade"] = subject_grade
                 result[subject_code]["subject_credits"] = subject_credits
-            self.results["Results"][semester_code].append(result)
+            self.exam_code_results[semester_code].append(result)
         except Exception as e:
             self.failed_exam_codes.append(semester_code)
             print(self.roll_number, e, "Fetching error which scraping results")
@@ -576,18 +577,18 @@ class ResultScraperr:
 
             # Wait for all the tasks to complete
             for exam_code, exam_tasks in tasks.items():
-                self.results["Results"][exam_code] = []
+                self.exam_code_results[exam_code] = []
                 try:
                     for result in await asyncio.gather(*exam_tasks):
                         if "Enter HallTicket Number" not in result:
                             self.scrape_results(exam_code, result)
 
-                    if not bool(self.results["Results"][exam_code]):
-                        del self.results["Results"][exam_code]
+                    if not bool(self.exam_code_results[exam_code]):
+                        del self.exam_code_results[exam_code]
                 except Exception as e:
                     print(self.roll_number, e)
-            exam_code_results = self.results["Results"]
-            results = {}
+            exam_code_results = self.exam_code_results
+            results = self.results["Results"]
             for exam_code_result in exam_code_results:
                 for exam_code in exam_codes:
                     if exam_code_result in exam_codes[exam_code]:
@@ -598,17 +599,16 @@ class ResultScraperr:
                         ]
         self.results["Results"] = results
 
-        return self.results
-
     def run(self):
         try:
             asyncio.run(self.scrape_all_results())
             while len(self.failed_exam_codes) > 0 and True:
                 failed_exam_codes = list(set(self.failed_exam_codes))
-                self.failed_exam_codes = failed_exam_codes
                 self.failed_exam_codes = []
                 asyncio.run(self.scrape_all_results(failed_exam_codes))
                 print(self.failed_exam_codes)
+            print(self.failed_exam_codes)
+
             return self.results
         except Exception as e:
             print(e)

@@ -201,6 +201,13 @@ class AcademicAllResults(View):
         result = jntuhresult.run()
         if result is not None:
             if result["Details"]:
+                results = result["Results"]
+                sorted_results = {
+                    outer_key: dict(sorted(inner_dict.items()))
+                    for outer_key, inner_dict in sorted(results.items())
+                }
+                result["Results"] = sorted_results
+
                 REDIS_CLIENT.set(htno + "ALL", json.dumps({"data": result}))
                 REDIS_CLIENT.expire(htno + "ALL", timedelta(hours=1))
 

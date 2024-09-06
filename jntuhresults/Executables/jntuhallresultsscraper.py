@@ -416,7 +416,10 @@ class ResultScraperr:
                 print(self.roll_number, e)
             Results = Results[1:]
             result = {}
+            rcrv = False
             for result_subject in Results:
+                if "Change in Grade" in result_subject.find_all("td")[-1].get_text():
+                    rcrv = True
                 subject_name = result_subject.find_all("td")[
                     subject_name_index
                 ].get_text()
@@ -458,6 +461,7 @@ class ResultScraperr:
                     print(self.roll_number, e)
                 result[subject_code]["subject_grade"] = subject_grade
                 result[subject_code]["subject_credits"] = subject_credits
+                result[subject_code]["rcrv"] = rcrv
             self.exam_code_results[semester_code].append(result)
         except Exception as e:
             self.failed_exam_codes.append(semester_code)

@@ -404,13 +404,16 @@ class ResultScraperr:
             subject_name_index = Results_column_names.index("SUBJECT NAME")
             subject_code_index = Results_column_names.index("SUBJECT CODE")
             subject_credits_index = Results_column_names.index("CREDITS(C)")
+            subject_internal_marks_index = -1
+            subject_external_marks_index = -1
+            subject_total_marks_index = -1
+
             try:
                 subject_internal_marks_index = Results_column_names.index("INTERNAL")
                 subject_external_marks_index = Results_column_names.index("EXTERNAL")
                 subject_total_marks_index = Results_column_names.index("TOTAL")
             except Exception as e:
                 print(self.roll_number, e)
-
             Results = Results[1:]
             result = {}
             for result_subject in Results:
@@ -423,9 +426,6 @@ class ResultScraperr:
                 subject_grade = result_subject.find_all("td")[grade_index].get_text()
 
                 # default values
-                subject_internal_marks_index = -1
-                subject_external_marks_index = -1
-                subject_total_marks_index = -1
                 subject_internal_marks = ""
                 subject_total_marks = ""
                 subject_external_marks = ""

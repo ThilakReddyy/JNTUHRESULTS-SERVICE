@@ -180,7 +180,7 @@ class AcademicResult(View):
 
 # - Notifications -------------------------------------------------------------------------------------------------
 class Notification(View):
-    def get(self, request):
+    def get(self):
         notifications = get_notifications()
         REDIS_CLIENT.set("notifications", json.dumps({"data": notifications}))
         REDIS_CLIENT.expire("notifications", timedelta(hours=1))
@@ -194,8 +194,24 @@ class Notification(View):
 
 class AcademicAllResults(View):
     def get(self, request):
+        starting = time.time()
         htno = request.GET.get("htno").upper()
         jntuhresult = ResultScraperr(htno.upper(), 1)
+        redis_response = REDIS_CLIENT.get(htno + "ALL")
+
+        # Check if data exists in the Redis cache
+        if redis_response is not None:
+            # If data exists, parse the JSON response
+            data = json.loads(redis_response)
+            # redis_client.expire(htno, timedelta(seconds=1))
+            # Record the current time as the stopping time
+            stopping = time.time()
+
+            # Print relevant details (e.g., 'htno', student name, and execution time)
+            print(htno, data["data"]["Details"]["NAME"], stopping - starting)
+
+            # Return the data as a JSON response to the client
+            return JsonResponse(data["data"], safe=False)
 
         # Run the scraper and return the result
         result = jntuhresult.run()
@@ -209,10 +225,15 @@ class AcademicAllResults(View):
                 result["Results"] = sorted_results
 
                 REDIS_CLIENT.set(htno + "ALL", json.dumps({"data": result}))
-                REDIS_CLIENT.expire(htno + "ALL", timedelta(hours=1))
+                REDIS_CLIENT.expire(htno + "ALL", timedelta(minutes=31))
+
+                stopping = time.time()
+                print(htno, result["Details"]["NAME"], stopping - starting)
 
                 return JsonResponse({"data": result}, safe=False)
 
+        stopping = time.time()
+        print(htno, stopping - starting, "Failed")
         return HttpResponse(htno + " - 500 Internal Server Error")
 
 

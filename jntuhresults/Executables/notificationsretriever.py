@@ -21,7 +21,7 @@ def get_notifications():
     #    return data["data"]
     try:
         url = "http://results.jntuh.ac.in/jsp/home.jsp"
-        url = "http://202.63.105.184/results/jsp/home.jsp"
+        # url = "http://202.63.105.184/results/jsp/home.jsp"
         response = requests.get(url)
         soup = BeautifulSoup(response.content, "html.parser")
         results = []

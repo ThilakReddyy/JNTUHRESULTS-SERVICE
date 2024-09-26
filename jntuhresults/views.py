@@ -225,7 +225,7 @@ class AcademicAllResults(View):
                 result["Results"] = sorted_results
 
                 REDIS_CLIENT.set(htno + "ALL", json.dumps({"data": result}))
-                REDIS_CLIENT.expire(htno + "ALL", timedelta(minutes=31))
+                REDIS_CLIENT.expire(htno + "ALL", timedelta(hours=6))
 
                 stopping = time.time()
                 print(htno, result["Details"]["NAME"], stopping - starting)

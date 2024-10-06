@@ -180,7 +180,7 @@ class AcademicResult(View):
 
 # - Notifications -------------------------------------------------------------------------------------------------
 class Notification(View):
-    def get(self):
+    def get(self, request):
         notifications = get_notifications()
         REDIS_CLIENT.set("notifications", json.dumps({"data": notifications}))
         REDIS_CLIENT.expire("notifications", timedelta(hours=1))

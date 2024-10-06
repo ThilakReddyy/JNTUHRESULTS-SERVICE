@@ -616,10 +616,14 @@ class ResultScraperr:
     def run(self):
         try:
             asyncio.run(self.scrape_all_results())
+            loop = 0
             while len(self.failed_exam_codes) > 0 and True:
+                if loop > 6:
+                    return None
                 failed_exam_codes = list(set(self.failed_exam_codes))
                 self.failed_exam_codes = []
                 asyncio.run(self.scrape_all_results(failed_exam_codes))
+                loop += 1
                 print(self.failed_exam_codes)
             print(self.failed_exam_codes)
 

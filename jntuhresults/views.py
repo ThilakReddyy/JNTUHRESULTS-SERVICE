@@ -22,6 +22,11 @@ REDIS_CLIENT = redis.from_url(str(REDIS_URL))
 # Class Result ----------------------------------------------------------------------
 class ClassResult(View):
     async def scrape_results_async(self, htno, semester):
+        HTTP_REFERER = request.META.get("HTTP_REFERER")
+        if HTTP_REFERER is None:
+            return HttpResponse(" meta data error")
+        print(HTTP_REFERER)
+
         # Create an instance of ResultScraper
         jntuhresult = ResultScraper(htno.upper())
 
@@ -36,6 +41,7 @@ class ClassResult(View):
         semester = request.GET.get("semester")
 
         # Print htnos for debugging
+
         print(htnos)
 
         # Create a list to hold the tasks

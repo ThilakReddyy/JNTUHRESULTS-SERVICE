@@ -202,7 +202,7 @@ class AcademicAllResults(View):
     def get(self, request):
         starting = time.time()
         htno = request.GET.get("htno").upper()
-        jntuhresult = ResultScraperr(htno.upper(), 0)
+        jntuhresult = ResultScraperr(htno.upper(), 1)
         redis_response = REDIS_CLIENT.get(htno + "ALL")
 
         # Check if data exists in the Redis cache

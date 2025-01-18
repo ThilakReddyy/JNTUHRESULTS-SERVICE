@@ -660,5 +660,5 @@ class ResultScraperr:
 
             return self.results
         except Exception as e:
-            print(e)
+            print(e, "shit")
             return None

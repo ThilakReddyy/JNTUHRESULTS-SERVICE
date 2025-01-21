@@ -202,11 +202,12 @@ class AcademicAllResults(View):
     def get(self, request):
         starting = time.time()
         htno = request.GET.get("htno").upper()
-        index = 1
-        if check_url(0, htno):
-            index = 0
-        elif not check_url(1, htno):
-            return HttpResponse(htno + " - Server Busy")
+        index = 0
+        # if check_url(0, htno):
+        #     index = 0
+        # elif not check_url(1, htno):
+        #     return HttpResponse(htno + " - Server Busy")
+        print(index)
         jntuhresult = ResultScraperr(htno.upper(), index)
         redis_response = REDIS_CLIENT.get(htno + "ALL")
         redis_response = None

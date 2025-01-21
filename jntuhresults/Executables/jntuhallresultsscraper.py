@@ -12,6 +12,7 @@ class ResultScraperr:
         urls = [
             "http://202.63.105.184/resultAction",
             "http://results.jntuh.ac.in/resultAction",
+            "http://184-105-63-202.southernonline.net/resultAction",
         ]
         self.url = urls[url_index]
         self.roll_number = roll_number

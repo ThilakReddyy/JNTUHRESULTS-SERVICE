@@ -202,7 +202,7 @@ class AcademicAllResults(View):
     def get(self, request):
         starting = time.time()
         htno = request.GET.get("htno").upper()
-        index = 0
+        index = 2
         # if check_url(0, htno):
         #     index = 0
         # elif not check_url(1, htno):

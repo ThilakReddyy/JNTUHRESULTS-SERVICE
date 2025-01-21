@@ -205,7 +205,7 @@ class AcademicAllResults(View):
         index = 1
         if check_url(0, htno):
             index = 0
-        elif check_url(1, htno):
+        elif not check_url(1, htno):
             return HttpResponse(htno + " - Server Busy")
         jntuhresult = ResultScraperr(htno.upper(), index)
         redis_response = REDIS_CLIENT.get(htno + "ALL")

@@ -202,6 +202,7 @@ class AcademicAllResults(View):
     def get(self, request):
         starting = time.time()
         htno = request.GET.get("htno").upper()
+        return HttpResponse(b"JNTUH Servers are down!!!", status=422)
         index = 1
         # if check_url(0, htno):
         #     index = 0

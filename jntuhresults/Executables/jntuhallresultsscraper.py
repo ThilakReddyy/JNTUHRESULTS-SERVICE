@@ -535,7 +535,8 @@ class ResultScraperr:
         )
 
     async def scrape_all_results(self, failed_exam_codes=[]):
-        async with aiohttp.ClientSession(trust_env=True) as session:
+        conn = aiohttp.TCPConnector(limit_per_host=5)
+        async with aiohttp.ClientSession(connector=conn) as session:
             tasks = {}
             graduationStart = int(self.roll_number[:2])
 

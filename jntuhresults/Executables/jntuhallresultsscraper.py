@@ -419,7 +419,7 @@ class ResultScraperr:
         payloaddata = "?&examCode=" + exam_code + payload + self.roll_number
 
         # Make the HTTP POST request and print the response text
-        async with session.get(self.url + payloaddata) as response:
+        async with session.get(self.url + payloaddata, ssl=False) as response:
             return await response.text()
 
     def scrape_results(self, semester_code, response):

@@ -22,7 +22,7 @@ REDIS_CLIENT = redis.from_url(str(REDIS_URL))
 # Class Result ----------------------------------------------------------------------
 class ClassResult(View):
     async def scrape_results_async(self, htno, semester):
-        HTTP_REFERER = request.META.get("HTTP_REFERER")
+        HTTP_REFERER = requests.META.get("HTTP_REFERER")
         if HTTP_REFERER is None:
             return HttpResponse(" meta data error")
         print(HTTP_REFERER)
@@ -202,8 +202,9 @@ class AcademicAllResults(View):
     def get(self, request):
         starting = time.time()
         htno = request.GET.get("htno").upper()
-        jntuhresult = ResultScraperr(htno.upper(), 1)
+        jntuhresult = ResultScraperr(htno.upper(), 0)
         redis_response = REDIS_CLIENT.get(htno + "ALL")
+        redis_response = None
 
         # Check if data exists in the Redis cache
         if redis_response is not None:
@@ -228,8 +229,8 @@ class AcademicAllResults(View):
                     outer_key: dict(sorted(inner_dict.items()))
                     for outer_key, inner_dict in sorted(results.items())
                 }
-                result["Results"] = sorted_results
 
+                result["Results"] = sorted_results
                 REDIS_CLIENT.set(htno + "ALL", json.dumps({"data": result}))
                 REDIS_CLIENT.expire(htno + "ALL", timedelta(hours=6))
 

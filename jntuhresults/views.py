@@ -75,7 +75,7 @@ def check_url(index, roll_number):
             "http://results.jntuh.ac.in/resultAction",
         ]
         response = requests.get(urls[index], timeout=2)
-        print(response, roll_number)
+        print(response.status_code, roll_number)
         return response.status_code == 200
     except requests.exceptions.Timeout:
         print(f"Requests to {index} timeout ")
@@ -202,7 +202,12 @@ class AcademicAllResults(View):
     def get(self, request):
         starting = time.time()
         htno = request.GET.get("htno").upper()
-        jntuhresult = ResultScraperr(htno.upper(), 0)
+        index = 1
+        if check_url(0, htno):
+            index = 0
+        elif check_url(1, htno):
+            return HttpResponse(htno + " - Server Busy")
+        jntuhresult = ResultScraperr(htno.upper(), index)
         redis_response = REDIS_CLIENT.get(htno + "ALL")
         redis_response = None
 

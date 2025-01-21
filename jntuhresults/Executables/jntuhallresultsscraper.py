@@ -12,7 +12,6 @@ class ResultScraperr:
         urls = [
             "http://202.63.105.184/resultAction",
             "http://results.jntuh.ac.in/resultAction",
-            "http://184-105-63-202.southernonline.net/resultAction",
         ]
         self.url = urls[url_index]
         self.roll_number = roll_number
@@ -418,10 +417,22 @@ class ResultScraperr:
     async def fetch_result(self, session, exam_code, payload):
         # Prepare the payload for the HTTP POST request
         payloaddata = "?&examCode=" + exam_code + payload + self.roll_number
+        url = "http://202.63.105.184/results/resultAction"
+        headers = {
+            "Upgrade-Insecure-Requests": "1",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        }
+
+        async with session.post(
+            url, data=payloaddata, headers=headers, ssl=False
+        ) as response:
+            return await response.text()
 
         # Make the HTTP POST request and print the response text
-        async with session.get(self.url + payloaddata, ssl=False) as response:
-            return await response.text()
+        # async with session.get(self.url + payloaddata, ssl=False) as response:
+        #     return await response.text()
+        #
 
     def scrape_results(self, semester_code, response):
         try:

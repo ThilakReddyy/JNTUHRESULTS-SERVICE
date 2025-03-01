@@ -203,6 +203,8 @@ class AcademicAllResults(View):
         starting = time.time()
         htno = request.GET.get("htno").upper()
         index = 1
+
+        return HttpResponse(htno + " - 500 Internal Server Error")
         # if check_url(0, htno):
         #     index = 0
         # if not check_url(index, htno):
